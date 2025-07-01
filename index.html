@@ -3,43 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calorie Calculator</title>
   <title>Calorie & Macro Calculator - By Mohab</title>
-<meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
-<meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
-<meta name="author" content="Mohab">
-<meta name="robots" content="index, follow">
+  <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
+  <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
+  <meta name="author" content="Mohab">
+  <meta name="robots" content="index, follow">
 
   <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --form-bg: #1f1f1f;
+      --accent-color: #00ffd5;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --form-bg: #f0f0f0;
+      --accent-color: #00bfa5;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+    }
+
     body {
-      background-color: #121212;
-      color: #eee;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     h1 {
-      color: #00ffd5;
+      color: var(--accent-color);
       margin-bottom: 30px;
     }
 
     form {
-      background-color: #1f1f1f;
+      background-color: var(--form-bg);
       padding: 25px;
       border-radius: 12px;
       max-width: 400px;
       margin: 0 auto;
       box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
       text-align: right;
+      transition: background-color 0.3s;
     }
 
     label {
       display: block;
       margin: 12px 0 6px 0;
       font-weight: bold;
-      color: #00ffd5;
+      color: var(--accent-color);
     }
 
     input, select {
@@ -48,16 +68,17 @@
       border-radius: 8px;
       border: none;
       font-size: 16px;
-      background-color: #333;
-      color: #eee;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    button {
+    button[type="submit"] {
       margin-top: 20px;
       width: 100%;
       padding: 12px;
       font-size: 18px;
-      background-color: #00ffd5;
+      background-color: var(--accent-color);
       color: #000;
       border: none;
       border-radius: 10px;
@@ -66,57 +87,170 @@
       font-weight: bold;
     }
 
-    button:hover {
+    button[type="submit"]:hover {
       background-color: #00c9a3;
     }
 
     footer {
       margin-top: 40px;
       font-size: 12px;
-      color: black;
-      background-color: #00ffd5;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
       padding: 6px;
       border-radius: 6px;
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #toggle-theme, #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    #toggle-theme {
+      right: 10px;
+    }
+    #toggle-theme:hover {
+      background-color: #00c9a3;
+    }
+
+    #toggle-language {
+      right: 130px;
+    }
+    #toggle-language:hover {
+      background-color: #00c9a3;
     }
   </style>
 </head>
 <body>
-  <h1>Calorie Calculator</h1>
-  <form action="result.html" method="get">
-    <label for="weight">Weight (kg):</label>
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <h1 id="title">Calorie Calculator</h1>
+  <form action="result.html" method="get" id="calc-form">
+    <label for="weight" id="label-weight">Weight (kg):</label>
     <input type="number" id="weight" name="weight" min="1" max="300" required />
 
-    <label for="height">Height (cm):</label>
+    <label for="height" id="label-height">Height (cm):</label>
     <input type="number" id="height" name="height" min="50" max="250" required />
 
-    <label for="age">Age (years):</label>
+    <label for="age" id="label-age">Age (years):</label>
     <input type="number" id="age" name="age" min="5" max="120" required />
 
-    <label for="gender">Gender:</label>
+    <label for="gender" id="label-gender">Gender:</label>
     <select id="gender" name="gender" required>
-      <option value="" disabled selected>Select gender</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
+      <option value="" disabled selected id="opt-select-gender">Select gender</option>
+      <option value="male" id="opt-male">Male</option>
+      <option value="female" id="opt-female">Female</option>
     </select>
 
-    <label for="activity">Activity Level:</label>
+    <label for="activity" id="label-activity">Activity Level:</label>
     <select id="activity" name="activity" required>
-      <option value="" disabled selected>Select activity</option>
-      <option value="sedentary">Sedentary (0-1 days/week)</option>
-      <option value="light">Light (1-2 days/week)</option>
-      <option value="moderate">Moderate (3-4 days/week)</option>
-      <option value="active">Active (5-6 days/week)</option>
-      <option value="very_active">Very Active (7 days/week)</option>
+      <option value="" disabled selected id="opt-select-activity">Select activity</option>
+      <option value="sedentary" id="opt-sedentary">Sedentary (0-1 days/week)</option>
+      <option value="light" id="opt-light">Light (1-2 days/week)</option>
+      <option value="moderate" id="opt-moderate">Moderate (3-4 days/week)</option>
+      <option value="active" id="opt-active">Active (5-6 days/week)</option>
+      <option value="very_active" id="opt-very-active">Very Active (7 days/week)</option>
     </select>
 
-    <button type="submit">Calculate</button>
+    <button type="submit" id="btn-calculate">Calculate</button>
   </form>
 
   <footer>
     Made by Mohab (Instagram: r4_ce)
   </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    const texts = {
+      en: {
+        title: "Calorie Calculator",
+        labels: {
+          weight: "Weight (kg):",
+          height: "Height (cm):",
+          age: "Age (years):",
+          gender: "Gender:",
+          activity: "Activity Level:",
+          selectGender: "Select gender",
+          male: "Male",
+          female: "Female",
+          selectActivity: "Select activity",
+          sedentary: "Sedentary (0-1 days/week)",
+          light: "Light (1-2 days/week)",
+          moderate: "Moderate (3-4 days/week)",
+          active: "Active (5-6 days/week)",
+          veryActive: "Very Active (7 days/week)",
+          calculateBtn: "Calculate"
+        }
+      },
+      ar: {
+        title: "حاسبة السعرات",
+        labels: {
+          weight: "الوزن (كجم):",
+          height: "الطول (سم):",
+          age: "العمر (سنوات):",
+          gender: "النوع:",
+          activity: "مستوى النشاط:",
+          selectGender: "اختر النوع",
+          male: "ذكر",
+          female: "أنثى",
+          selectActivity: "اختر النشاط",
+          sedentary: "قليل النشاط (0-1 يوم/أسبوع)",
+          light: "نشاط خفيف (1-2 يوم/أسبوع)",
+          moderate: "نشاط متوسط (3-4 أيام/أسبوع)",
+          active: "نشاط نشط (5-6 أيام/أسبوع)",
+          veryActive: "نشاط عالي (7 أيام/أسبوع)",
+          calculateBtn: "احسب"
+        }
+      }
+    };
+
+    let currentLang = 'en';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+
+      const t = texts[currentLang];
+
+      document.getElementById('title').textContent = t.title;
+
+      document.getElementById('label-weight').textContent = t.labels.weight;
+      document.getElementById('label-height').textContent = t.labels.height;
+      document.getElementById('label-age').textContent = t.labels.age;
+      document.getElementById('label-gender').textContent = t.labels.gender;
+      document.getElementById('label-activity').textContent = t.labels.activity;
+
+      document.getElementById('opt-select-gender').textContent = t.labels.selectGender;
+      document.getElementById('opt-male').textContent = t.labels.male;
+      document.getElementById('opt-female').textContent = t.labels.female;
+
+      document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
+      document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
+      document.getElementById('opt-light').textContent = t.labels.light;
+      document.getElementById('opt-moderate').textContent = t.labels.moderate;
+      document.getElementById('opt-active').textContent = t.labels.active;
+      document.getElementById('opt-very-active').textContent = t.labels.veryActive;
+
+      document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
+
+      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    }
+  </script>
 </body>
 </html>
