@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calorie Calculator - Input</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px;
+      direction: rtl;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #00ffd5;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px #00ffd5;
+    }
+
+    form {
+      background-color: rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
+      max-width: 350px;
+      width: 100%;
+      text-align: right;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #a0f4e9;
+      text-shadow: 0 0 4px #00ffd5;
+    }
+
+    select,
+    input {
+      margin-top: 8px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      background-color: #203a43;
+      color: #fff;
+      box-shadow: inset 0 0 6px #00ffd5;
+      transition: 0.3s;
+    }
+
+    select:hover,
+    input:hover,
+    select:focus,
+    input:focus {
+      background-color: #2c5364;
+      outline: none;
+      box-shadow: 0 0 10px #00ffd5;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #00ffd5;
+      color: #000;
+      border: none;
+      padding: 12px 0;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 0 15px #00ffd5;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00c4aa;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calorie & Macro Calculator</h1>
+
+  <form onsubmit="goToResult(event)">
+    <label for="gender">الجنس:</label>
+    <select id="gender" required>
+      <option value="male">ذكر</option>
+      <option value="female">أنثى</option>
+    </select>
+
+    <label for="weight">الوزن (كجم):</label>
+    <input type="number" id="weight" required min="1" />
+
+    <label for="height">الطول (سم):</label>
+    <input type="number" id="height" required min="1" />
+
+    <label for="age">العمر:</label>
+    <input type="number" id="age" required min="1" />
+
+    <label for="activity">عدد أيام التمرين أسبوعيًا:</label>
+    <select id="activity" required>
+      <option value="1.2">ما بتمرّنش</option>
+      <option value="1.375">1 - 2 أيام</option>
+      <option value="1.55">3 - 4 أيام</option>
+      <option value="1.725">5 - 6 أيام</option>
+      <option value="1.9">كل يوم تمرين</option>
+    </select>
+
+    <button type="submit">احسب السعرات</button>
+  </form>
+
+  <div class="footer">Made by Mohab (Instagram: r4_ce)</div>
+
+  <script>
+    function goToResult(e) {
+      e.preventDefault();
+      const gender = document.getElementById('gender').value;
+      const weight = document.getElementById('weight').value;
+      const height = document.getElementById('height').value;
+      const age = document.getElementById('age').value;
+      const activity = document.getElementById('activity').value;
+
+      const params = new URLSearchParams({
+        gender, weight, height, age, activity
+      });
+
+      window.location.href = `result.html?${params.toString()}`;
+    }
+  </script>
+</body>
+</html>

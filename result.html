@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calorie Results</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px;
+      direction: rtl;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #00ffd5;
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px #00ffd5;
+    }
+
+    .result-box {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      text-align: right;
+      width: 350px;
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
+    }
+
+    .result-box h3 {
+      border-bottom: 1px solid #00ffd5;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .result-box p {
+      margin: 12px 0;
+      font-size: 16px;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .result-box button {
+      margin-left: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background: #00ffd5;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .result-box button:hover {
+      background: #00c4aa;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calorie & Macro Results</h1>
+
+  <div class="result-box" id="results"></div>
+
+  <div class="footer">Made by Mohab (Instagram: r4_ce)</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const gender = params.get("gender");
+    const weight = parseFloat(params.get("weight"));
+    const height = parseFloat(params.get("height"));
+    const age = parseFloat(params.get("age"));
+    const activity = parseFloat(params.get("activity"));
+
+    if (!gender || !weight || !height || !age || !activity) {
+      document.getElementById("results").innerHTML = "<p>Please enter all required data!</p>";
+    } else {
+      let BMR;
+      if (gender === "male") {
+        BMR = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        BMR = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      const TDEE = BMR * activity;
+
+      // التنشيف (Cutting) بمستويات مختلفة
+      const cutLight = TDEE * 0.9;
+      const cutMedium = TDEE * 0.8;
+      const cutAggressive = TDEE * 0.7;
+
+      // التضخيم (Bulking) بمستويات مختلفة
+      const bulkLight = TDEE * 1.05;
+      const bulkMedium = TDEE * 1.15;
+      const bulkAggressive = TDEE * 1.25;
+
+      // حساب معدل نزول و زيادة الوزن أسبوعيًا (السعرات - 7700 كالوري لكل 1 كجم)
+      const fatLossLight = ((TDEE - cutLight) * 7) / 7700;
+      const fatLossMedium = ((TDEE - cutMedium) * 7) / 7700;
+      const fatLossAggressive = ((TDEE - cutAggressive) * 7) / 7700;
+
+      const gainLight = ((bulkLight - TDEE) * 7) / 7700;
+      const gainMedium = ((bulkMedium - TDEE) * 7) / 7700;
+      const gainAggressive = ((bulkAggressive - TDEE) * 7) / 7700;
+
+      function goToMacros(calories) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('calories', calories);
+        window.location.href = `macros.html?${params.toString()}`;
+      }
+
+      document.getElementById("results").innerHTML = `
+        <h3>Maintenance Calories</h3>
+        <p>⚖️ <strong>${TDEE.toFixed(0)}</strong> kcal/day</p>
+
+        <h3>Cutting Options</h3>
+        <p>🟢 Light Cut (90%): <strong>${cutLight.toFixed(0)}</strong> kcal/day ~ <strong>${fatLossLight.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${cutLight.toFixed(0)})">Show Macros</button>
+        </p>
+        <p>🟡 Moderate Cut (80%): <strong>${cutMedium.toFixed(0)}</strong> kcal/day ~ <strong>${fatLossMedium.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${cutMedium.toFixed(0)})">Show Macros</button>
+        </p>
+        <p>🔴 Aggressive Cut (70%): <strong>${cutAggressive.toFixed(0)}</strong> kcal/day ~ <strong>${fatLossAggressive.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${cutAggressive.toFixed(0)})">Show Macros</button>
+        </p>
+
+        <h3>Bulking Options</h3>
+        <p>🟢 Light Bulk (105%): <strong>${bulkLight.toFixed(0)}</strong> kcal/day ~ <strong>${gainLight.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${bulkLight.toFixed(0)})">Show Macros</button>
+        </p>
+        <p>🟡 Moderate Bulk (115%): <strong>${bulkMedium.toFixed(0)}</strong> kcal/day ~ <strong>${gainMedium.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${bulkMedium.toFixed(0)})">Show Macros</button>
+        </p>
+        <p>🔴 Aggressive Bulk (125%): <strong>${bulkAggressive.toFixed(0)}</strong> kcal/day ~ <strong>${gainAggressive.toFixed(2)} kg/week</strong>
+          <button onclick="goToMacros(${bulkAggressive.toFixed(0)})">Show Macros</button>
+        </p>
+      `;
+    }
+  </script>
+</body>
+</html>

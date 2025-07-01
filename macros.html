@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Macro Breakdown</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #000814, #001d3d, #003566);
+      color: #00ffd5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px;
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px #00ffd5;
+    }
+
+    .box {
+      background-color: rgba(0, 0, 0, 0.75);
+      display: inline-block;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffd5;
+      max-width: 400px;
+      width: 100%;
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #c4fff9;
+    }
+
+    .macro-item {
+      margin: 15px 0;
+      padding: 12px;
+      border-radius: 10px;
+      background: #002e4d;
+      box-shadow: inset 0 0 10px #00ffd5;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #000;
+    }
+
+    button.back-btn {
+      margin-top: 25px;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      background-color: #00ffd5;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00ffd5;
+      transition: background-color 0.3s ease;
+    }
+
+    button.back-btn:hover {
+      background-color: #00c4aa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Recommended Macros Breakdown</h1>
+
+  <div class="box" id="macroResults">
+    <!-- النتائج هتتحط هنا -->
+  </div>
+
+  <button class="back-btn" onclick="goBack()">Back to Results</button>
+
+  <div class="footer">Made by Mohab (Instagram: r4_ce)</div>
+
+  <script>
+    // تجيب البيانات من الرابط
+    const params = new URLSearchParams(window.location.search);
+    const calories = parseFloat(params.get('calories'));
+    const weight = parseFloat(params.get('weight'));
+    const gender = params.get('gender');
+    const height = parseFloat(params.get('height'));
+    const age = parseFloat(params.get('age'));
+    const activity = parseFloat(params.get('activity'));
+
+    if (!calories || !weight) {
+      document.getElementById('macroResults').innerHTML = '<p>Missing or invalid data.</p>';
+    } else {
+      // حساب الماكروز:  
+      // بروتين: 2 جرام لكل كجم وزن  
+      // دهون: 25% من السعرات  
+      // كارب: باقي السعرات
+      const proteinGrams = weight * 2;
+      const proteinCals = proteinGrams * 4;
+
+      const fatCals = calories * 0.25;
+      const fatGrams = fatCals / 9;
+
+      const carbCals = calories - (proteinCals + fatCals);
+      const carbGrams = carbCals / 4;
+
+      document.getElementById('macroResults').innerHTML = `
+        <p>🔥 <strong>Total Calories:</strong> ${calories.toFixed(0)} kcal/day</p>
+        <div class="macro-item">🥩 Protein: <strong>${proteinGrams.toFixed(0)} g</strong></div>
+        <div class="macro-item">🥑 Fat: <strong>${fatGrams.toFixed(0)} g</strong></div>
+        <div class="macro-item">🍞 Carbs: <strong>${carbGrams.toFixed(0)} g</strong></div>
+      `;
+    }
+
+    function goBack() {
+      history.back();
+    }
+  </script>
+
+</body>
+</html>
