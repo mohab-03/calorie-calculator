@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nutrition Education</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Educate Yourself</title>
   <style>
     :root {
-      --bg-color: #0e0e0e;
-      --text-color: white;
-      --box-bg: #1f1f1f;
+      --bg-color: #121212;
+      --text-color: #eee;
       --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
       --footer-bg: #00ffd5;
       --footer-text: black;
     }
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
-      --box-bg: #f0f0f0;
       --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
       --footer-bg: #dddddd;
       --footer-text: #000000;
     }
@@ -26,41 +26,34 @@
       color: var(--text-color);
       font-family: Arial, sans-serif;
       padding: 20px;
+      text-align: center;
       transition: background-color 0.3s, color 0.3s;
-      max-width: 700px;
-      margin: 0 auto;
     }
     h1 {
       color: var(--accent-color);
-      text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-    .content {
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 400px;
+      margin: 0 auto 40px;
+    }
+    .link-list a {
       background-color: var(--box-bg);
-      padding: 20px;
+      color: var(--text-color);
+      padding: 15px;
       border-radius: 10px;
-      line-height: 1.6;
+      text-decoration: none;
       font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 0 12px rgba(0, 255, 213, 0.2);
+      transition: background-color 0.3s;
     }
-    .content p {
-      margin-bottom: 15px;
-    }
-    #toggle-language, #toggle-theme {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 6px 10px;
+    .link-list a:hover {
       background-color: var(--accent-color);
       color: #000;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 999;
-      font-size: 14px;
-      margin-left: 10px;
-    }
-    #toggle-language {
-      right: 110px;
     }
     footer {
       margin-top: 40px;
@@ -72,27 +65,46 @@
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
-      text-align: center;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #00c9a3;
     }
   </style>
 </head>
 <body>
-  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
-  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
 
-  <h1 id="title">Nutrition Education 🍎</h1>
-
-  <div class="content" id="content">
-    <p>🔥 <strong>Calories:</strong> Calories fuel your body. To lose fat, eat fewer calories. To gain muscle, eat more!</p>
-    <p>💪 <strong>Protein:</strong> Essential for muscle repair and growth. Aim for about 1.6-2.2g per kg of body weight.</p>
-    <p>🥦 <strong>Carbohydrates:</strong> Your body's energy source. Include whole grains, fruits & veggies.</p>
-    <p>🥑 <strong>Fats:</strong> Important for hormones & brain health. Don’t fear healthy fats!</p>
-    <p>⏰ <strong>Consistency:</strong> The key to progress. Stick to your plan and be patient.</p>
-    <hr>
-    <p>📊 <strong>BMR (Basal Metabolic Rate):</strong> This is the amount of energy your body needs at rest to keep vital functions running.</p>
-    <p>⚡ <strong>TDEE (Total Daily Energy Expenditure):</strong> This includes your BMR plus all physical activities and exercise — it’s your total daily calorie burn.</p>
-    <p>⚖️ <strong>Calorie Deficit:</strong> Eating fewer calories than your TDEE to lose fat.</p>
-    <p>➕ <strong>Calorie Surplus:</strong> Eating more calories than your TDEE to gain muscle.</p>
+  <h1 id="main-title">Educate Yourself</h1>
+  <div class="link-list">
+    <a href="macro-guide.html" id="link1">Macro Nutrition Guide</a>
+    <a href="bmr.html" id="link2">What is BMR?</a>
+    <a href="tdee.html" id="link3">What is TDEE?</a>
+    <a href="meal-plan.html" id="link4">How to Build a Meal Plan</a>
+    <a href="food-list.html" id="link5">Ultimate Food List</a>
+    <a href="supplements.html" id="link6">Supplements Explained</a>
   </div>
 
   <footer>
@@ -100,50 +112,22 @@
   </footer>
 
   <script>
+    let isArabic = false;
+
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
     }
 
-    const texts = {
-      en: {
-        title: "Nutrition Education 🍎",
-        content: `
-          <p>🔥 <strong>Calories:</strong> Calories fuel your body. To lose fat, eat fewer calories. To gain muscle, eat more!</p>
-          <p>💪 <strong>Protein:</strong> Essential for muscle repair and growth. Aim for about 1.6-2.2g per kg of body weight.</p>
-          <p>🥦 <strong>Carbohydrates:</strong> Your body's energy source. Include whole grains, fruits & veggies.</p>
-          <p>🥑 <strong>Fats:</strong> Important for hormones & brain health. Don’t fear healthy fats!</p>
-          <p>⏰ <strong>Consistency:</strong> The key to progress. Stick to your plan and be patient.</p>
-          <hr>
-          <p>📊 <strong>BMR (Basal Metabolic Rate):</strong> This is the amount of energy your body needs at rest to keep vital functions running.</p>
-          <p>⚡ <strong>TDEE (Total Daily Energy Expenditure):</strong> This includes your BMR plus all physical activities and exercise — it’s your total daily calorie burn.</p>
-          <p>⚖️ <strong>Calorie Deficit:</strong> Eating fewer calories than your TDEE to lose fat.</p>
-          <p>➕ <strong>Calorie Surplus:</strong> Eating more calories than your TDEE to gain muscle.</p>
-        `
-      },
-      ar: {
-        title: "تعليمات التغذية 🍎",
-        content: `
-          <p>🔥 <strong>السعرات الحرارية:</strong> السعرات هي وقود جسمك. عشان تخس، كل سعرات أقل. عشان تكسب عضل، كل سعرات أكتر!</p>
-          <p>💪 <strong>البروتين:</strong> مهم لإصلاح ونمو العضلات. استهدف حوالي 1.6-2.2 جم لكل كيلو من وزنك.</p>
-          <p>🥦 <strong>الكربوهيدرات:</strong> مصدر الطاقة لجسمك. ضمّن الحبوب الكاملة، الفواكه والخضار.</p>
-          <p>🥑 <strong>الدهون:</strong> ضرورية للهرمونات وصحة الدماغ. ماتخافش من الدهون الصحية!</p>
-          <p>⏰ <strong>الثبات:</strong> مفتاح التقدم. التزم بخطتك وكن صبورًا.</p>
-          <hr>
-          <p>📊 <strong>BMR (معدل الأيض الأساسي):</strong> كمية الطاقة التي يحتاجها جسمك في الراحة للحفاظ على وظائفه الحيوية.</p>
-          <p>⚡ <strong>TDEE (إجمالي الإنفاق اليومي للطاقة):</strong> يشمل الـ BMR بالإضافة إلى جميع نشاطاتك وحركاتك اليومية — وهو إجمالي السعرات التي تحرقها يوميًا.</p>
-          <p>⚖️ <strong>العجز في السعرات:</strong> تناول سعرات أقل من الـ TDEE لتخسيس الدهون.</p>
-          <p>➕ <strong>الزيادة في السعرات:</strong> تناول سعرات أكثر من الـ TDEE لبناء العضلات.</p>
-        `
-      }
-    };
-
-    let currentLang = 'en';
-
     function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
-      document.getElementById('title').innerHTML = texts[currentLang].title;
-      document.getElementById('content').innerHTML = texts[currentLang].content;
-      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      isArabic = !isArabic;
+
+      document.getElementById('main-title').textContent = isArabic ? 'علّم نفسك' : 'Educate Yourself';
+      document.getElementById('link1').textContent = isArabic ? 'دليل المغذيات الكبرى' : 'Macro Nutrition Guide';
+      document.getElementById('link2').textContent = isArabic ? 'ما هو معدل الأيض الأساسي (BMR)?' : 'What is BMR?';
+      document.getElementById('link3').textContent = isArabic ? 'ما هو TDEE؟' : 'What is TDEE?';
+      document.getElementById('link4').textContent = isArabic ? 'كيف تصمم خطة وجبات؟' : 'How to Build a Meal Plan';
+      document.getElementById('link5').textContent = isArabic ? 'قائمة الأطعمة النهائية' : 'Ultimate Food List';
+      document.getElementById('link6').textContent = isArabic ? 'شرح المكملات الغذائية' : 'Supplements Explained';
     }
   </script>
 </body>

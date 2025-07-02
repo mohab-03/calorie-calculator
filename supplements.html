@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supplements Guide</title>
+  <style>
+    :root {
+      --bg-color: #0e0e0e;
+      --text-color: #ffffff;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      text-align: center;
+      color: var(--accent-color);
+    }
+    .section {
+      background-color: var(--box-bg);
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
+    }
+    h2 {
+      color: var(--accent-color);
+    }
+    ul {
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+  <h1 id="main-title">Supplements Explained</h1>
+
+  <div class="section" id="basics">
+    <h2>Essential Supplements 💊</h2>
+    <ul id="basic-list">
+      <li><strong>Protein Powder:</strong> Helps meet daily protein needs easily.</li>
+      <li><strong>Creatine Monohydrate:</strong> Boosts strength and muscle mass. Safe and well-researched.</li>
+      <li><strong>Omega-3 (Fish Oil):</strong> Supports heart, brain, and joints.</li>
+      <li><strong>Multivitamin:</strong> Covers daily micronutrient gaps.</li>
+      <li><strong>Vitamin D3:</strong> Especially important if you don’t get enough sun.</li>
+      <li><strong>Magnesium:</strong> Helps with sleep, muscle recovery, and energy production.</li>
+      <li><strong>Zinc:</strong> Supports immunity and hormone health.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="optional">
+    <h2>Optional but Helpful 🚀</h2>
+    <ul id="optional-list">
+      <li><strong>Pre-Workout:</strong> Enhances focus and energy before training.</li>
+      <li><strong>BCAAs / EAAs:</strong> May support recovery during intense sessions (less needed if total protein is high).</li>
+      <li><strong>Ashwagandha:</strong> May reduce stress and improve performance.</li>
+      <li><strong>Collagen:</strong> Supports joint, skin, and tendon health.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+
+  <script>
+    let isArabic = false;
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+    function toggleLanguage() {
+      isArabic = !isArabic;
+      document.getElementById("main-title").innerText = isArabic ? "شرح المكملات الغذائية" : "Supplements Explained";
+      document.getElementById("basics").querySelector("h2").innerText = isArabic ? "المكملات الأساسية 💊" : "Essential Supplements 💊";
+      document.getElementById("optional").querySelector("h2").innerText = isArabic ? "مكملات اختيارية لكنها مفيدة 🚀" : "Optional but Helpful 🚀";
+
+      const basics = [
+        isArabic ? "بروتين باودر: يساعدك في تلبية احتياجاتك اليومية من البروتين بسهولة." : "Protein Powder: Helps meet daily protein needs easily.",
+        isArabic ? "كرياتين مونوهيدرات: يزيد من القوة والكتلة العضلية. آمن ومدروس علميًا." : "Creatine Monohydrate: Boosts strength and muscle mass. Safe and well-researched.",
+        isArabic ? "أوميغا-3 (زيت السمك): يدعم القلب والمخ والمفاصل." : "Omega-3 (Fish Oil): Supports heart, brain, and joints.",
+        isArabic ? "فيتامينات متعددة: تغطي نقص الفيتامينات والمعادن اليومية." : "Multivitamin: Covers daily micronutrient gaps.",
+        isArabic ? "فيتامين D3: مهم جدًا إذا كنت لا تتعرض لأشعة الشمس." : "Vitamin D3: Especially important if you don’t get enough sun.",
+        isArabic ? "مغنيسيوم: يساعد في النوم والتعافي وإنتاج الطاقة." : "Magnesium: Helps with sleep, muscle recovery, and energy production.",
+        isArabic ? "زنك: يعزز المناعة وصحة الهرمونات." : "Zinc: Supports immunity and hormone health."
+      ];
+
+      const optional = [
+        isArabic ? "مكمل قبل التمرين: يحسن التركيز والطاقة قبل التدريب." : "Pre-Workout: Enhances focus and energy before training.",
+        isArabic ? "BCAAs / EAAs: قد تساعد في التعافي خلال التمارين الشديدة (أقل أهمية إذا كان استهلاك البروتين كافي)." : "BCAAs / EAAs: May support recovery during intense sessions (less needed if total protein is high).",
+        isArabic ? "أشواغاندا: قد تقلل من التوتر وتحسن الأداء." : "Ashwagandha: May reduce stress and improve performance.",
+        isArabic ? "كولاجين: يدعم صحة المفاصل والبشرة والأوتار." : "Collagen: Supports joint, skin, and tendon health."
+      ];
+
+      const basicList = document.getElementById("basic-list");
+      const optionalList = document.getElementById("optional-list");
+
+      basicList.innerHTML = basics.map(item => `<li>${item}</li>`).join('');
+      optionalList.innerHTML = optional.map(item => `<li>${item}</li>`).join('');
+    }
+  </script>
+</body>
+</html>

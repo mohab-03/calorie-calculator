@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate Food List</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      text-align: center;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      color: var(--accent-color);
+      border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background-color: var(--box-bg);
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 213, 0.1);
+      font-size: 16px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+  <h1 id="page-title">Ultimate Food List</h1>
+
+  <div class="section">
+    <h2 id="protein-title">🍗 Protein Sources</h2>
+    <ul id="protein-list">
+      <li>Chicken breast – 165 kcal / 31g protein per 100g</li>
+      <li>Eggs – 155 kcal / 13g protein per 100g</li>
+      <li>Tuna – 132 kcal / 28g protein per 100g</li>
+      <li>Cottage cheese – 98 kcal / 11g protein per 100g</li>
+      <li>Lentils – 116 kcal / 9g protein per 100g</li>
+      <li>Greek yogurt – 59 kcal / 10g protein per 100g</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 id="carb-title">🍚 Carbohydrate Sources</h2>
+    <ul id="carb-list">
+      <li>Oats – 389 kcal / 66g carbs per 100g</li>
+      <li>Brown rice – 123 kcal / 25g carbs per 100g</li>
+      <li>Sweet potatoes – 86 kcal / 20g carbs per 100g</li>
+      <li>Bananas – 89 kcal / 23g carbs per 100g</li>
+      <li>Whole grain bread – 247 kcal / 41g carbs per 100g</li>
+      <li>Chickpeas – 164 kcal / 27g carbs per 100g</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 id="fat-title">🥑 Healthy Fat Sources</h2>
+    <ul id="fat-list">
+      <li>Avocado – 160 kcal / 15g fat per 100g</li>
+      <li>Olive oil – 884 kcal / 100g fat per 100g</li>
+      <li>Peanut butter – 588 kcal / 50g fat per 100g</li>
+      <li>Almonds – 579 kcal / 49g fat per 100g</li>
+      <li>Chia seeds – 486 kcal / 31g fat per 100g</li>
+    </ul>
+  </div>
+
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+
+  <script>
+    let isArabic = false;
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleLanguage() {
+      isArabic = !isArabic;
+
+      document.getElementById('page-title').textContent = isArabic ? 'قائمة الأطعمة النهائية' : 'Ultimate Food List';
+      document.getElementById('protein-title').textContent = isArabic ? '🍗 مصادر البروتين' : '🍗 Protein Sources';
+      document.getElementById('carb-title').textContent = isArabic ? '🍚 مصادر الكربوهيدرات' : '🍚 Carbohydrate Sources';
+      document.getElementById('fat-title').textContent = isArabic ? '🥑 مصادر الدهون الصحية' : '🥑 Healthy Fat Sources';
+
+      const proteinItems = [
+        'صدور دجاج – 165 سعر / 31جم بروتين لكل 100جم',
+        'بيض – 155 سعر / 13جم بروتين لكل 100جم',
+        'تونة – 132 سعر / 28جم بروتين لكل 100جم',
+        'جبن قريش – 98 سعر / 11جم بروتين لكل 100جم',
+        'عدس – 116 سعر / 9جم بروتين لكل 100جم',
+        'زبادي يوناني – 59 سعر / 10جم بروتين لكل 100جم'
+      ];
+      const carbItems = [
+        'شوفان – 389 سعر / 66جم كربوهيدرات لكل 100جم',
+        'أرز بني – 123 سعر / 25جم كربوهيدرات لكل 100جم',
+        'بطاطا – 86 سعر / 20جم كربوهيدرات لكل 100جم',
+        'موز – 89 سعر / 23جم كربوهيدرات لكل 100جم',
+        'خبز حبوب كاملة – 247 سعر / 41جم كربوهيدرات لكل 100جم',
+        'حمص – 164 سعر / 27جم كربوهيدرات لكل 100جم'
+      ];
+      const fatItems = [
+        'أفوكادو – 160 سعر / 15جم دهون لكل 100جم',
+        'زيت زيتون – 884 سعر / 100جم دهون لكل 100جم',
+        'زبدة فول سوداني – 588 سعر / 50جم دهون لكل 100جم',
+        'لوز – 579 سعر / 49جم دهون لكل 100جم',
+        'بذور شيا – 486 سعر / 31جم دهون لكل 100جم'
+      ];
+
+      document.getElementById('protein-list').innerHTML = proteinItems.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('carb-list').innerHTML = carbItems.map(item => `<li>${item}</li>`).join('');
+      document.getElementById('fat-list').innerHTML = fatItems.map(item => `<li>${item}</li>`).join('');
+    }
+  </script>
+</body>
+</html>

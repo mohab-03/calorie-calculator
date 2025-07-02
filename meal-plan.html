@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Build a Meal Plan</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+    }
+    .content {
+      max-width: 700px;
+      margin: auto;
+      text-align: left;
+      line-height: 1.7;
+    }
+    .content h2 {
+      color: var(--accent-color);
+      margin-top: 30px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #00c9a3;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+
+  <h1 id="main-title">How to Build a Meal Plan</h1>
+  <div class="content" id="content-box">
+    <p><strong>🧠 Step 1: Know Your Calories</strong><br>First, calculate your <a href="tdee.html">TDEE</a> to determine how many calories you need daily. Whether your goal is to lose, maintain, or gain weight – calories are king.</p>
+
+    <p><strong>🍗 Step 2: Set Your Macros</strong><br>Split your calories into protein, carbs, and fats. A good starting point: 30% protein, 40% carbs, 30% fats. Adjust based on your activity level, preference, and goals.</p>
+
+    <p><strong>🍽️ Step 3: Choose Whole Foods</strong><br>Build meals using nutrient-dense foods:
+      <ul>
+        <li>Proteins: chicken, beef, fish, eggs, Greek yogurt</li>
+        <li>Carbs: rice, potatoes, oats, fruits, vegetables</li>
+        <li>Fats: olive oil, avocado, nuts, seeds</li>
+      </ul>
+    </p>
+
+    <p><strong>🕐 Step 4: Plan Meal Timing</strong><br>Distribute meals evenly throughout the day. 3–5 meals with protein in each one helps with satiety and muscle repair.</p>
+
+    <p><strong>📦 Step 5: Prep & Track</strong><br>Prep meals in advance and track your food intake using apps like MyFitnessPal. Consistency beats perfection!</p>
+
+    <p><strong>🔁 Bonus Tip</strong><br>Be flexible! You can enjoy occasional treats – just make sure they fit your daily macros. This is called <em>Flexible Dieting</em>.</p>
+  </div>
+
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+
+  <script>
+    let isArabic = false;
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleLanguage() {
+      isArabic = !isArabic;
+      document.getElementById('main-title').textContent = isArabic ? 'كيف تبني خطة وجبات؟' : 'How to Build a Meal Plan';
+      document.getElementById('content-box').innerHTML = isArabic ? `
+        <p><strong>🧠 الخطوة 1: احسب السعرات</strong><br>أولاً احسب <a href="tdee.html">TDEE</a> لتعرف عدد السعرات التي تحتاجها يومياً. سواء كان هدفك التنشيف أو الزيادة – السعرات أولاً.</p>
+
+        <p><strong>🍗 الخطوة 2: قسّم الماكروز</strong><br>قسّم السعرات إلى بروتين، كربوهيدرات ودهون. البداية الجيدة: 30% بروتين، 40% كارب، 30% دهون. عدّل حسب نشاطك وهدفك.</p>
+
+        <p><strong>🍽️ الخطوة 3: اختر الأطعمة الطبيعية</strong><br>ابنِ وجباتك من أطعمة غنية بالمغذيات:
+          <ul>
+            <li>البروتين: دجاج، لحم، سمك، بيض، زبادي يوناني</li>
+            <li>الكربوهيدرات: أرز، بطاطس، شوفان، فواكه، خضار</li>
+            <li>الدهون: زيت زيتون، أفوكادو، مكسرات، بذور</li>
+          </ul>
+        </p>
+
+        <p><strong>🕐 الخطوة 4: وزّع الوجبات</strong><br>وزّع السعرات على 3–5 وجبات يومياً، كل وجبة فيها بروتين لدعم الشبع وبناء العضلات.</p>
+
+        <p><strong>📦 الخطوة 5: جهّز وتتبع</strong><br>حضّر الوجبات مسبقاً وتتبع استهلاكك في تطبيق مثل MyFitnessPal. الاستمرارية أهم من الكمال!</p>
+
+        <p><strong>🔁 نصيحة إضافية</strong><br>كن مرن! تقدر تاكل أشياء تحبها طالما داخل حدودك اليومية. دي اسمها <em>الدايت المرن</em>.</p>
+      ` : document.querySelector('.content').innerHTML;
+    }
+  </script>
+</body>
+</html>

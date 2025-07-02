@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is BMR?</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1, h2 {
+      color: var(--accent-color);
+    }
+    p {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #00c9a3;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+
+  <h1 id="page-title">What is BMR?</h1>
+
+  <div id="content">
+    <h2>🧠 Understanding BMR</h2>
+    <p id="p1">BMR stands for Basal Metabolic Rate. It's the amount of energy (calories) your body needs to maintain basic life functions like breathing, blood circulation, and cell production while you're at rest. Even if you did nothing all day, your body still requires calories to survive — and that’s your BMR.</p>
+
+    <h2>📊 How BMR is Calculated</h2>
+    <p id="p2">The most commonly used formula is the Mifflin-St Jeor Equation:
+      <br><br>
+      <strong>For men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) + 5<br>
+      <strong>For women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) − 161
+    </p>
+
+    <h2>🔥 Why BMR Matters</h2>
+    <p id="p3">Knowing your BMR helps you build a nutrition plan that fits your goals — whether it's fat loss, maintenance, or muscle gain. It gives you a baseline of how many calories your body needs at rest. From there, you add extra calories based on activity level, which leads to your TDEE (Total Daily Energy Expenditure).</p>
+
+    <h2>📌 Quick Tips</h2>
+    <p id="p4">
+      ✅ BMR is influenced by muscle mass — more muscle = higher BMR.<br>
+      ✅ Starving or extreme dieting can decrease your BMR.<br>
+      ✅ You can estimate BMR but for best results, combine with real tracking.
+    </p>
+
+    <p id="signature">Made by Mohab (Instagram: r4_ce)</p>
+  </div>
+
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+
+  <script>
+    let isArabic = false;
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleLanguage() {
+      isArabic = !isArabic;
+
+      document.getElementById('page-title').textContent = isArabic ? 'ما هو BMR؟' : 'What is BMR?';
+      document.getElementById('p1').textContent = isArabic
+        ? 'BMR هو معدل الأيض الأساسي، يعني عدد السعرات اللي جسمك بيحتاجها عشان يعيش بس، من غير أي حركة. جسمك بيستهلك طاقة حتى لو نايم!'
+        : "BMR stands for Basal Metabolic Rate. It's the amount of energy (calories) your body needs to maintain basic life functions...";
+
+      document.getElementById('p2').innerHTML = isArabic
+        ? '<strong>للرجال:</strong> BMR = 10 × الوزن(كجم) + 6.25 × الطول(سم) − 5 × العمر(سنة) + 5<br><strong>للنساء:</strong> BMR = 10 × الوزن(كجم) + 6.25 × الطول(سم) − 5 × العمر(سنة) − 161'
+        : '<strong>For men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) + 5<br><strong>For women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) − 161';
+
+      document.getElementById('p3').textContent = isArabic
+        ? 'معرفة BMR هتساعدك تحط خطة أكل تناسب هدفك، سواء كان خسارة دهون أو بناء عضل. ومنه بنحسب احتياجك الكامل من السعرات TDEE.'
+        : 'Knowing your BMR helps you build a nutrition plan that fits your goals — whether it\'s fat loss, maintenance, or muscle gain...';
+
+      document.getElementById('p4').innerHTML = isArabic
+        ? '✅ العضلات بتزود BMR<br>✅ الرجيم القاسي يقلل BMR<br>✅ الحساب تقريبي، والأفضل تتابع جسمك فعليًا'
+        : '✅ BMR is influenced by muscle mass — more muscle = higher BMR.<br>✅ Starving or extreme dieting can decrease your BMR.<br>✅ You can estimate BMR but for best results, combine with real tracking.';
+    }
+  </script>
+</body>
+</html>

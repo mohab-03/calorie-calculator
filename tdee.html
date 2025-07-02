@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is TDEE?</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+    }
+    .content {
+      background-color: var(--box-bg);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 0 12px rgba(0, 255, 213, 0.2);
+    }
+    .content h2 {
+      color: var(--accent-color);
+    }
+    .content p, .content ul {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .content ul {
+      padding-left: 20px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #00c9a3;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+
+  <h1 id="main-title">What is TDEE?</h1>
+  <div class="content" id="main-content">
+    <h2>Total Daily Energy Expenditure (TDEE) 🔥</h2>
+    <p>
+      TDEE is the total amount of calories you burn in a day. It includes:
+    </p>
+    <ul>
+      <li><strong>BMR (Basal Metabolic Rate):</strong> Energy used just to keep your body functioning at rest 🧠💓</li>
+      <li><strong>TEF (Thermic Effect of Food):</strong> Calories burned from digesting food 🍽️</li>
+      <li><strong>NEAT (Non-Exercise Activity Thermogenesis):</strong> Daily movements like walking, fidgeting 🚶‍♂️</li>
+      <li><strong>EAT (Exercise Activity Thermogenesis):</strong> Calories burned during workouts 🏋️‍♀️</li>
+    </ul>
+    <p>
+      Your TDEE changes based on how active you are. Calculating it helps you decide if you need to eat more (bulk) or eat less (cut) based on your goals. 🎯
+    </p>
+    <h2>Why TDEE Matters 💡</h2>
+    <ul>
+      <li><strong>Want to lose weight?</strong> Eat less than your TDEE 🥗</li>
+      <li><strong>Want to gain weight?</strong> Eat more than your TDEE 🍗</li>
+      <li><strong>Maintain your weight?</strong> Eat around your TDEE 🍽️</li>
+    </ul>
+    <p>
+      TDEE = The key to smart nutrition planning. 💪
+    </p>
+  </div>
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+  <script>
+    let isArabic = false;
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+    function toggleLanguage() {
+      isArabic = !isArabic;
+      document.getElementById('main-title').textContent = isArabic ? 'ما هو TDEE؟' : 'What is TDEE?';
+      document.getElementById('main-content').innerHTML = isArabic ? `
+        <h2>إجمالي الإنفاق اليومي للطاقة (TDEE) 🔥</h2>
+        <p>
+          TDEE هو إجمالي السعرات التي تحرقها خلال اليوم. ويشمل:
+        </p>
+        <ul>
+          <li><strong>معدل الأيض الأساسي (BMR):</strong> الطاقة التي يستخدمها الجسم أثناء الراحة 🧠💓</li>
+          <li><strong>تأثير الحرارة الناتج عن الطعام (TEF):</strong> السعرات التي تحرق أثناء الهضم 🍽️</li>
+          <li><strong>الأنشطة غير الرياضية (NEAT):</strong> الحركات اليومية كالمشي أو التحرك 🚶‍♂️</li>
+          <li><strong>التمارين الرياضية (EAT):</strong> السعرات المحروقة أثناء التمارين 🏋️‍♀️</li>
+        </ul>
+        <p>
+          TDEE يتغير حسب نشاطك اليومي. حسابه يساعدك تحدد هدفك سواء تضخيم أو تنشيف 🎯
+        </p>
+        <h2>لماذا TDEE مهم؟ 💡</h2>
+        <ul>
+          <li><strong>عايز تنزل في الوزن؟</strong> كل أقل من TDEE 🥗</li>
+          <li><strong>عايز تزيد في الوزن؟</strong> كل أكتر من TDEE 🍗</li>
+          <li><strong>تثبت وزنك؟</strong> كل قريب من TDEE 🍽️</li>
+        </ul>
+        <p>
+          TDEE = المفتاح للتخطيط الغذائي الذكي 💪
+        </p>` : document.querySelector('.content').innerHTML;
+    }
+  </script>
+</body>
+</html>
