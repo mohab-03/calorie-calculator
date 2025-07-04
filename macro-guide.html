@@ -113,9 +113,23 @@
   </div>
 
  <footer>
-  Made by Mohab (<a href="https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2" target="_blank" style="color: blue; text-decoration: underline;">@r4_ce</a>)
+  Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+  )
 </footer>
 
+<script>
+  function openInstagram() {
+    const appLink = "instagram://user?username=r4_ce";
+    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+
+    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
+    window.location = appLink;
+    setTimeout(() => {
+      window.location = webLink;
+    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
+  }
+</script>
 
   <script>
     function toggleTheme() {
