@@ -55,6 +55,15 @@
       background-color: var(--accent-color);
       color: #000;
     }
+    #diet-organizer {
+      background-color: #00ffd5;
+      color: #000;
+      animation: pulse 1.5s infinite;
+      font-size: 20px;
+      font-weight: bold;
+      border: 2px solid #00ffd5;
+      text-shadow: 1px 1px #000;
+    }
     footer {
       margin-top: 40px;
       font-size: 12px;
@@ -89,6 +98,15 @@
     .toggle-btn:hover {
       background-color: #00c9a3;
     }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 255, 213, 0.7); }
+      50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 255, 213, 0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 255, 213, 0.7); }
+    }
   </style>
 </head>
 <body>
@@ -98,6 +116,7 @@
   </div>
 
   <h1 id="main-title">Educate Yourself</h1>
+
   <div class="link-list">
     <a href="macro-guide.html" id="link1">Macro Nutrition Guide</a>
     <a href="bmr.html" id="link2">What is BMR?</a>
@@ -105,6 +124,7 @@
     <a href="meal-plan.html" id="link4">How to Build a Meal Plan</a>
     <a href="food-list.html" id="link5">Ultimate Food List</a>
     <a href="supplements.html" id="link6">Supplements Explained</a>
+    <a href="organize-diet.html" id="diet-organizer">🍽️ Organize Your Diet</a>
   </div>
 
   <footer>
@@ -120,7 +140,6 @@
 
     function toggleLanguage() {
       isArabic = !isArabic;
-
       document.getElementById('main-title').textContent = isArabic ? 'علّم نفسك' : 'Educate Yourself';
       document.getElementById('link1').textContent = isArabic ? 'دليل المغذيات الكبرى' : 'Macro Nutrition Guide';
       document.getElementById('link2').textContent = isArabic ? 'ما هو معدل الأيض الأساسي (BMR)?' : 'What is BMR?';
@@ -128,6 +147,7 @@
       document.getElementById('link4').textContent = isArabic ? 'كيف تصمم خطة وجبات؟' : 'How to Build a Meal Plan';
       document.getElementById('link5').textContent = isArabic ? 'قائمة الأطعمة النهائية' : 'Ultimate Food List';
       document.getElementById('link6').textContent = isArabic ? 'شرح المكملات الغذائية' : 'Supplements Explained';
+      document.getElementById('diet-organizer').textContent = isArabic ? '🍽️ نظّم أكلك' : '🍽️ Organize Your Diet';
     }
   </script>
 </body>

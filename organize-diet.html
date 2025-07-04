@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>organize nutrition</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+    }
+    .section {
+      background-color: var(--box-bg);
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.2);
+      max-width: 600px;
+      text-align: left;
+    }
+    .section h2 {
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+      margin-top: 5px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #controls {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+    .toggle-btn {
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #00c9a3;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
+    <button class="toggle-btn" onclick="toggleLanguage()">🇬🇧 / 🇸🇦</button>
+  </div>
+
+  <h1 id="main-title">Nutrition Strategy</h1>
+
+  <div class="section" id="bulking-section">
+    <h2 id="bulking-title">💪 Bulking Strategy</h2>
+    <ul id="bulking-list">
+      <li>Eat calorie-dense foods like rice, pasta, oats, peanut butter, and whole eggs.</li>
+      <li>Use shakes and smoothies to increase intake (e.g., whey + banana + oats).</li>
+      <li>Pre-workout: Fast-digesting carb + protein (e.g., rice + chicken).</li>
+      <li>Post-workout: Whey protein + simple carb (e.g., banana or rice).</li>
+      <li>Distribute meals across 4–5 meals/day for consistent intake.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="cutting-section">
+    <h2 id="cutting-title">🔥 Cutting Strategy</h2>
+    <ul id="cutting-list">
+      <li>Focus on filling, low-calorie foods like vegetables and lean protein.</li>
+      <li>Pre-workout: Complex carb + protein (e.g., oats + egg whites).</li>
+      <li>Post-workout: Whey protein + light carb (e.g., rice cake or banana).</li>
+      <li>Minimize fats pre/post workout for better digestion.</li>
+      <li>Stick to whole foods to feel full with fewer calories.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 id="mental-title">🧠 Mental & Motivational Tips</h2>
+    <ul id="mental-list">
+      <li id="tip1">✅ Consistency is the real key to change.</li>
+      <li id="tip2">🔥 You won’t always feel motivated, but you can always choose to be disciplined.</li>
+      <li id="tip3">🕒 Time management wins—meal prep is half the battle.</li>
+      <li id="tip4">💤 Sleep well. Muscles grow outside the gym, not inside it.</li>
+      <li id="tip5">📉 Everyone fails sometimes, but winners are the ones who get back up.</li>
+      <li id="tip6">👊 Be patient. A strong body is built daily, not in a week.</li>
+      <li id="tip7">📸 Track your progress. You’ll only see the difference when you look back.</li>
+      <li id="tip8">🎯 Set your goal and write it down. Without a goal, you’re going in circles.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Made by Mohab (Instagram: r4_ce)
+  </footer>
+
+  <script>
+    let isArabic = false;
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
+    function toggleLanguage() {
+      isArabic = !isArabic;
+
+      document.getElementById('main-title').textContent = isArabic ? 'استراتيجية التغذية' : 'Nutrition Strategy';
+      document.getElementById('bulking-title').textContent = isArabic ? '💪 استراتيجية التضخيم' : '💪 Bulking Strategy';
+      document.getElementById('cutting-title').textContent = isArabic ? '🔥 استراتيجية التنشيف' : '🔥 Cutting Strategy';
+      document.getElementById('mental-title').textContent = isArabic ? '🧠 نصائح نفسية وتحفيزية' : '🧠 Mental & Motivational Tips';
+
+      document.getElementById('bulking-list').innerHTML = isArabic ? `
+        <li>ركز على الأطعمة عالية السعرات مثل الأرز، المكرونة، الشوفان، زبدة الفول السوداني، والبيض الكامل.</li>
+        <li>استخدم العصائر لزيادة السعرات (مثل واي + موز + شوفان).</li>
+        <li>قبل التمرين: كارب سريع + بروتين (مثال: أرز + دجاج).</li>
+        <li>بعد التمرين: واي بروتين + كارب بسيط (مثل موز أو أرز).</li>
+        <li>وزع أكلك على ٤–٥ وجبات يوميًا.</li>
+      ` : `
+        <li>Eat calorie-dense foods like rice, pasta, oats, peanut butter, and whole eggs.</li>
+        <li>Use shakes and smoothies to increase intake (e.g., whey + banana + oats).</li>
+        <li>Pre-workout: Fast-digesting carb + protein (e.g., rice + chicken).</li>
+        <li>Post-workout: Whey protein + simple carb (e.g., banana or rice).</li>
+        <li>Distribute meals across 4–5 meals/day for consistent intake.</li>
+      `;
+
+      document.getElementById('cutting-list').innerHTML = isArabic ? `
+        <li>ركز على الأطعمة المشبعة والمنخفضة بالسعرات مثل الخضار والبروتينات الخالية من الدهون.</li>
+        <li>قبل التمرين: كارب معقد + بروتين (مثال: شوفان + بياض بيض).</li>
+        <li>بعد التمرين: واي بروتين + كارب خفيف (مثل موز أو كيك أرز).</li>
+        <li>قلل الدهون قبل وبعد التمرين لهضم أفضل.</li>
+        <li>تمسك بالأكل النظيف عشان تحس بالشبع بأقل سعرات.</li>
+      ` : `
+        <li>Focus on filling, low-calorie foods like vegetables and lean protein.</li>
+        <li>Pre-workout: Complex carb + protein (e.g., oats + egg whites).</li>
+        <li>Post-workout: Whey protein + light carb (e.g., rice cake or banana).</li>
+        <li>Minimize fats pre/post workout for better digestion.</li>
+        <li>Stick to whole foods to feel full with fewer calories.</li>
+      `;
+
+      document.getElementById('tip1').textContent = isArabic ? '✅ الالتزام هو مفتاح التغيير الحقيقي.' : '✅ Consistency is the real key to change.';
+      document.getElementById('tip2').textContent = isArabic ? '🔥 مش كل يوم هتحس بالحماس، بس كل يوم تقدر تختار تكون ملتزم.' : '🔥 You won’t always feel motivated, but you can always choose to be disciplined.';
+      document.getElementById('tip3').textContent = isArabic ? '🕒 نظم وقتك... إللي بيجهز أكله هو اللي بيكسب.' : '🕒 Time management wins—meal prep is half the battle.';
+      document.getElementById('tip4').textContent = isArabic ? '💤 نام كويس، لأن العضلات مش بتكبر في الجيم، بتكبر وإنت نايم.' : '💤 Sleep well. Muscles grow outside the gym, not inside it.';
+      document.getElementById('tip5').textContent = isArabic ? '📉 كلنا بنفشل أوقات، بس الناجحين هم اللي بيرجعوا تاني وميستسلموش.' : '📉 Everyone fails sometimes, but winners are the ones who get back up.';
+      document.getElementById('tip6').textContent = isArabic ? '👊 خليك صبور... الجسم القوي مش بيتبني في أسبوع، بيتبني كل يوم.' : '👊 Be patient. A strong body is built daily, not in a week.';
+      document.getElementById('tip7').textContent = isArabic ? '📸 صوّر تطورك، لأنك مش هتشوف الفرق إلا لما تبص ورا.' : '📸 Track your progress. You’ll only see the difference when you look back.';
+      document.getElementById('tip8').textContent = isArabic ? '🎯 حدد هدفك واكتبه، لأن إللي ملوش هدف بيلف في دايرة.' : '🎯 Set your goal and write it down. Without a goal, you’re going in circles.';
+    }
+  </script>
+</body>
+</html>
