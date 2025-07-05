@@ -192,7 +192,7 @@
 
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
-      return `<p><strong>🍽️ ${currentLang === "en" ? "Macros" : "العناصر الغذائية"}:</strong><br>🥩 ${currentLang === "en" ? "Protein" : "بروتين"}: ${protein}g | 🍚 ${currentLang === "en" ? "Carbs" : "كارب"}: ${carbs}g | 🥑 ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g</p>`;
+      return `<p><strong>${currentLang === "en" ? "Macros" : "العناصر الغذائية"}:</strong><br>${currentLang === "en" ? "Protein" : "بروتين"}: ${protein}g | ${currentLang === "en" ? "Carbs" : "كارب"}: ${carbs}g | ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g</p>`;
     }
 
     function displayResults() {
@@ -220,19 +220,35 @@
         </div>
         <div class="result-box">
           <h2>💪 ${currentLang === "en" ? "Bulking Calories" : "سعرات التضخيم"}</h2>
-          <ul>
-            <li>🍽️ ${currentLang === "en" ? "Light Bulk" : "تضخيم خفيف"}: ${bulkLight} kcal ${showMacros(bulkLight, data.weight, 1.8)} <br>📈 ${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.003).toFixed(2)} kg</li>
-            <li>🍗 ${currentLang === "en" ? "Moderate Bulk" : "تضخيم متوسط"}: ${bulkModerate} kcal ${showMacros(bulkModerate, data.weight, 1.8)} <br>📈 ${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.004).toFixed(2)} kg</li>
-            <li>🔥 ${currentLang === "en" ? "Aggressive Bulk" : "تضخيم قوي"}: ${bulkAggressive} kcal ${showMacros(bulkAggressive, data.weight, 1.8)} <br>📈 ${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</li>
-          </ul>
+          <div class="result-box">
+  <p><strong>${currentLang === "en" ? "Light Bulk" : "تضخيم خفيف"}:</strong> ${bulkLight} kcal</p>
+  ${showMacros(bulkLight, data.weight, 1.8)}
+  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.003).toFixed(2)} kg</p>
+  <br>
+  <p><strong>${currentLang === "en" ? "Moderate Bulk" : "تضخيم متوسط"}:</strong> ${bulkModerate} kcal</p>
+  ${showMacros(bulkModerate, data.weight, 1.8)}
+  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.004).toFixed(2)} kg</p>
+  <br>
+  <p><strong>${currentLang === "en" ? "Aggressive Bulk" : "تضخيم قوي"}:</strong> ${bulkAggressive} kcal</p>
+  ${showMacros(bulkAggressive, data.weight, 1.8)}
+  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
+</div>
         </div>
         <div class="result-box">
           <h2>🏋️‍♂️ ${currentLang === "en" ? "Cutting Calories" : "سعرات التنشيف"}</h2>
-          <ul>
-            <li>🥗 ${currentLang === "en" ? "Light Cut" : "تنشيف خفيف"}: ${cutLight} kcal ${showMacros(cutLight, data.weight, 2.0)} <br>📉 ${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</li>
-            <li>🥬 ${currentLang === "en" ? "Moderate Cut" : "تنشيف متوسط"}: ${cutModerate} kcal ${showMacros(cutModerate, data.weight, 2.0)} <br>📉 ${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.007).toFixed(2)} kg</li>
-            <li>🧨 ${currentLang === "en" ? "Aggressive Cut" : "تنشيف قوي"}: ${cutAggressive} kcal ${showMacros(cutAggressive, data.weight, 2.0)} <br>📉 ${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.009).toFixed(2)} kg</li>
-          </ul>
+          <div class="result-box">
+  <p><strong>${currentLang === "en" ? "Light Cut" : "تنشيف خفيف"}:</strong> ${cutLight} kcal</p>
+  ${showMacros(cutLight, data.weight, 2.0)}
+  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
+  <br>
+  <p><strong>${currentLang === "en" ? "Moderate Cut" : "تنشيف متوسط"}:</strong> ${cutModerate} kcal</p>
+  ${showMacros(cutModerate, data.weight, 2.0)}
+  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.007).toFixed(2)} kg</p>
+  <br>
+  <p><strong>${currentLang === "en" ? "Aggressive Cut" : "تنشيف قوي"}:</strong> ${cutAggressive} kcal</p>
+  ${showMacros(cutAggressive, data.weight, 2.0)}
+  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.009).toFixed(2)} kg</p>
+</div>
         </div>
         <a id="learn-more-btn" href="educate.html">${currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية"}</a>
         <div id="learn-more-text">${currentLang === "en" ? "Click above to get clear, simple nutrition guidance!" : "اضغط أعلاه للحصول على نصائح غذائية واضحة وبسيطة!"}</div>
