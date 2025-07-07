@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calorie & Macro Calculator - By Mohab</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MFK8KTL6SS');
+</script>
+
   <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
   <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
   <meta name="author" content="Mohab">
@@ -18,7 +29,13 @@
       --footer-bg: #00ffd5;
       --footer-text: black;
       --input-bg: #333;
+
+      /* Animated background colors */
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
     }
+
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
@@ -27,21 +44,39 @@
       --footer-bg: #dddddd;
       --footer-text: #000000;
       --input-bg: #ddd;
+
+      /* Light gradient */
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
     }
 
+    /* Animated background */
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
       text-align: center;
-      transition: background-color 0.3s, color 0.3s;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
       color: var(--accent-color);
       margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
     }
 
     form {
@@ -50,9 +85,9 @@
       border-radius: 12px;
       max-width: 400px;
       margin: 0 auto;
-      box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
       text-align: right;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, box-shadow 0.3s;
     }
 
     label {
@@ -62,7 +97,8 @@
       color: var(--accent-color);
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
@@ -70,7 +106,13 @@
       font-size: 16px;
       background-color: var(--input-bg);
       color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 255, 213, 0.4);
     }
 
     button[type="submit"] {
@@ -83,12 +125,14 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
       font-weight: bold;
     }
 
     button[type="submit"]:hover {
       background-color: #00c9a3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
     }
 
     footer {
@@ -104,7 +148,8 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    #toggle-theme, #toggle-language {
+    #toggle-theme,
+    #toggle-language {
       position: fixed;
       top: 10px;
       padding: 6px 10px;
@@ -116,25 +161,26 @@
       z-index: 999;
       font-size: 14px;
       font-weight: bold;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
     }
 
     #toggle-theme {
       right: 10px;
     }
-    #toggle-theme:hover {
-      background-color: #00c9a3;
-    }
 
     #toggle-language {
       right: 130px;
     }
-    #toggle-language:hover {
-      background-color: #00c9a3;
-    }
   </style>
 </head>
-<body>
+<body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
 
@@ -168,29 +214,38 @@
 
     <button type="submit" id="btn-calculate">Calculate</button>
   </form>
-<footer>
-  Made by Mohab (
+
+  <footer>
+    Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-  )
-</footer>
+    )
+  </footer>
 
-<script>
-  function openInstagram() {
-    const appLink = "instagram://user?username=r4_ce";
-    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+  <!-- Instagram Link Handler -->
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
 
-    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
-    window.location = appLink;
-    setTimeout(() => {
-      window.location = webLink;
-    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
-  }
-</script>
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+  </script>
 
- 
+  <!-- Theme & Language Logic -->
   <script>
     function toggleTheme() {
-      document.body.classList.toggle('light-mode');
+      document.body.classList.toggle("light-mode");
+
+      // Update button styles based on theme
+      const themeBtn = document.getElementById("toggle-theme");
+      if (document.body.classList.contains("light-mode")) {
+        themeBtn.style.backgroundColor = "#00bfa5";
+      } else {
+        themeBtn.style.backgroundColor = "#00ffd5";
+      }
     }
 
     const texts = {
@@ -240,7 +295,6 @@
 
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
-
       const t = texts[currentLang];
 
       document.getElementById('title').textContent = t.title;

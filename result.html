@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,7 +12,13 @@
       --accent-color: #00ffd5;
       --footer-bg: #00ffd5;
       --footer-text: black;
+
+      /* Gradient Colors */
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
     }
+
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
@@ -19,15 +26,41 @@
       --accent-color: #00bfa5;
       --footer-bg: #dddddd;
       --footer-text: #000000;
+
+      /* Light gradient */
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
     }
+
+    /* Animated background */
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 20px;
-      transition: background-color 0.3s, color 0.3s;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: all 0.5s ease;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
     .result-box {
       background-color: var(--box-bg);
       padding: 20px;
@@ -37,15 +70,22 @@
       margin: auto;
       box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
       margin-bottom: 20px;
+      transition: box-shadow 0.3s ease;
     }
-    h1 {
-      color: var(--accent-color);
-      margin-bottom: 20px;
+
+    .result-box:hover {
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.5);
     }
+
     p, ul {
       text-align: left;
       padding: 0 10px;
     }
+
+    label {
+      text-align: left !important;
+    }
+
     button {
       padding: 10px 20px;
       background-color: var(--accent-color);
@@ -54,9 +94,15 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
       font-weight: bold;
+      transition: all 0.3s ease;
     }
+
+    button:hover {
+      transform: scale(1.05);
+      background-color: #00c9a3;
+    }
+
     footer {
       margin-top: 40px;
       font-size: 12px;
@@ -67,16 +113,11 @@
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
+      transition: background-color 0.3s, color 0.3s;
     }
-    .tip-box {
-      margin-top: 20px;
-      font-style: italic;
-      font-size: 14px;
-      padding: 10px;
-      border-radius: 6px;
-      background-color: rgba(0, 255, 213, 0.1);
-    }
-    #toggle-theme, #toggle-language {
+
+    #toggle-theme,
+    #toggle-language {
       position: fixed;
       top: 10px;
       padding: 6px 10px;
@@ -88,66 +129,217 @@
       z-index: 999;
       font-size: 14px;
       font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
     }
-    #toggle-theme { right: 10px; }
-    #toggle-language { left: 10px; }
+
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      transform: scale(1.05);
+      background-color: #00c9a3;
+    }
+
+    #toggle-theme {
+      right: 10px;
+    }
+
+    #toggle-language {
+      left: 10px;
+    }
+
+    /* Print Button */
+    #print-pdf-btn {
+      background-color: #ff9800;
+      color: #000;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    #print-pdf-btn:hover {
+      background-color: #f57c00;
+      box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Learn More Button - New Styling */
     #learn-more-btn {
-      background-color: #00ffd5;
+      display: inline-block;
+      background: linear-gradient(45deg, #00ffd5, #00ebff);
       color: #000;
       font-size: 18px;
       font-weight: 700;
       border-radius: 12px;
       padding: 15px 25px;
-      margin-top: 30px;
+      margin-top: 10px;
       box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5);
-      transition: background-color 0.3s ease;
       text-decoration: none;
-      display: inline-block;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+
     #learn-more-btn:hover {
-      background-color: #00c9a3;
+      background: linear-gradient(45deg, #00c9a3, #00d9ff);
       box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7);
+      transform: translateY(-2px);
     }
-    #learn-more-text {
-      margin-top: 8px;
-      font-size: 14px;
-      font-style: italic;
-      color: var(--accent-color);
+
+    #learn-more-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      opacity: 0.2;
+      transition: opacity 0.3s ease;
+    }
+
+    #learn-more-btn:hover::after {
+      opacity: 0.4;
+    }
+
+    @media (max-width: 600px) {
+      #print-pdf-btn,
+      #learn-more-btn {
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      p, ul {
+        text-align: left !important;
+      }
+    }
+
+    /* Arabic Text Only Alignment */
+    .arabic-text {
+      text-align: right !important;
+      direction: rtl !important;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background-color: white !important;
+        color: black !important;
+      }
+
+      #toggle-theme,
+      #toggle-language,
+      footer,
+      #print-pdf-btn,
+      #learn-more-btn {
+        display: none;
+      }
+
+      .result-box {
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        border: none !important;
+        background-color: transparent !important;
+      }
+
+      h1 {
+        color: #000 !important;
+      }
+
+      a::after {
+        content: " (" attr(href) ")";
+        font-size: 12px;
+        color: gray;
+      }
+
+      .print-header {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+      }
+
+      .arabic-text {
+        text-align: right !important;
+        direction: rtl !important;
+      }
     }
   </style>
 </head>
-<body>
-  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+<body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
   <h1 id="title">Calorie Results</h1>
   <div id="results"></div>
+
+  <!-- Save as PDF Button -->
+  <button id="print-pdf-btn" onclick="window.print()">
+    📄 <span id="btn-print-text">Save as PDF</span>
+  </button>
+
+  <!-- Learn More Button with subtle animation -->
+  <a id="learn-more-btn" href="educate.html">
+    <span id="learn-more-btn-text">Learn More About Nutrition</span>
+  </a>
+
   <footer>
     Made by Mohab (
-      <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
     )
   </footer>
+
+  <!-- Instagram Handler -->
   <script>
     function openInstagram() {
       const appLink = "instagram://user?username=r4_ce";
       const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+
       window.location = appLink;
       setTimeout(() => {
         window.location = webLink;
       }, 1500);
     }
   </script>
+
+  <!-- Logic Script -->
   <script>
     let currentLang = "en";
 
     function toggleTheme() {
-      document.body.classList.toggle('light-mode');
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      if (document.body.classList.contains("light-mode")) {
+        themeBtn.style.backgroundColor = "#00bfa5";
+      } else {
+        themeBtn.style.backgroundColor = "#00ffd5";
+      }
     }
 
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
-      document.getElementById("toggle-language").innerText = currentLang === "en" ? "عربي" : "English";
-      document.getElementById("title").innerText = currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
+
+      // Update button texts
+      document.getElementById("toggle-language").innerText =
+        currentLang === "en" ? "عربي" : "English";
+
+      // Update title and other buttons
+      document.getElementById("title").innerText =
+        currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
+
+      document.getElementById("btn-print-text").innerText =
+        currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
+
+      document.getElementById("learn-more-btn-text").innerText =
+        currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
+
       displayResults();
     }
 
@@ -163,11 +355,9 @@
     }
 
     function calculateBMR({ weight, height, age, gender }) {
-      if (gender === 'male') {
-        return 10 * weight + 6.25 * height - 5 * age + 5;
-      } else {
-        return 10 * weight + 6.25 * height - 5 * age - 161;
-      }
+      return gender === 'male'
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
     }
 
     function getActivityMultiplier(activity) {
@@ -192,15 +382,26 @@
 
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
-      return `<p><strong>${currentLang === "en" ? "Macros" : "العناصر الغذائية"}:</strong><br>${currentLang === "en" ? "Protein" : "بروتين"}: ${protein}g | ${currentLang === "en" ? "Carbs" : "كارب"}: ${carbs}g | ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g</p>`;
+
+      return `
+        <p class="${currentLang === "ar" ? "arabic-text" : ""}">
+          <strong>${currentLang === "en" ? "Macros" : "العناصر الغذائية"}:</strong><br>
+          ${currentLang === "en" ? "Protein" : "بروتين"}: ${protein}g | 
+          ${currentLang === "en" ? "Carbs" : "كارب"}: ${carbs}g | 
+          ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
+        </p>`;
     }
 
     function displayResults() {
       const data = getQueryParams();
+
       if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
-        document.getElementById('results').innerHTML = `<p style='color:red;'>${currentLang === "en" ? "Missing or invalid data. Please go back and fill all fields." : "يوجد نقص أو خطأ في البيانات. ارجع واملأ جميع الحقول."}</p>`;
+        document.getElementById('results').innerHTML = `
+          <p style='color:red;'>${currentLang === "en" ? "Missing or invalid data. Please go back and fill all fields." : "يوجد نقص أو خطأ في البيانات. ارجع واملأ جميع الحقول."}</p>
+        `;
         return;
       }
+
       const bmr = calculateBMR(data);
       const tdee = bmr * getActivityMultiplier(data.activity);
 
@@ -212,46 +413,54 @@
       const cutModerate = Math.round(tdee * 0.8);
       const cutAggressive = Math.round(tdee * 0.7);
 
+      const today = new Date().toLocaleDateString(currentLang === "en" ? "en-US" : "ar-SA");
+
       document.getElementById('results').innerHTML = `
-        <div class="result-box">
-          <h2>⚖️ ${currentLang === "en" ? "Maintenance Calories" : "سعرات الثبات"}</h2>
+        <div class="print-header">${currentLang === "en" ? "Printed on" : "تم الطباعة في"}: ${today}</div>
+
+        <div class="result-box" style="border-left: 5px solid #00ffd5;">
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">⚖️ ${currentLang === "en" ? "Maintenance Calories" : "سعرات الثبات"}</h2>
           <p>${Math.round(tdee)} kcal</p>
           ${showMacros(tdee, data.weight, 1.9)}
         </div>
-        <div class="result-box">
-          <h2>💪 ${currentLang === "en" ? "Bulking Calories" : "سعرات التضخيم"}</h2>
-          <div class="result-box">
-  <p><strong>${currentLang === "en" ? "Light Bulk" : "تضخيم خفيف"}:</strong> ${bulkLight} kcal</p>
-  ${showMacros(bulkLight, data.weight, 1.8)}
-  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.003).toFixed(2)} kg</p>
-  <br>
-  <p><strong>${currentLang === "en" ? "Moderate Bulk" : "تضخيم متوسط"}:</strong> ${bulkModerate} kcal</p>
-  ${showMacros(bulkModerate, data.weight, 1.8)}
-  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.004).toFixed(2)} kg</p>
-  <br>
-  <p><strong>${currentLang === "en" ? "Aggressive Bulk" : "تضخيم قوي"}:</strong> ${bulkAggressive} kcal</p>
-  ${showMacros(bulkAggressive, data.weight, 1.8)}
-  <p>${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
-</div>
+
+        <div class="result-box" style="border-left: 5px solid #00ffc7;">
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">💪 ${currentLang === "en" ? "Bulking Calories" : "سعرات التضخيم"}</h2>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Light Bulk" : "تضخيم خفيف"}:</strong> ${bulkLight} kcal</p>
+            ${showMacros(bulkLight, data.weight, 1.8)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.003).toFixed(2)} kg</p>
+          </div>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Moderate Bulk" : "تضخيم متوسط"}:</strong> ${bulkModerate} kcal</p>
+            ${showMacros(bulkModerate, data.weight, 1.8)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.004).toFixed(2)} kg</p>
+          </div>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Aggressive Bulk" : "تضخيم قوي"}:</strong> ${bulkAggressive} kcal</p>
+            ${showMacros(bulkAggressive, data.weight, 1.8)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
+          </div>
         </div>
-        <div class="result-box">
-          <h2>🏋️‍♂️ ${currentLang === "en" ? "Cutting Calories" : "سعرات التنشيف"}</h2>
-          <div class="result-box">
-  <p><strong>${currentLang === "en" ? "Light Cut" : "تنشيف خفيف"}:</strong> ${cutLight} kcal</p>
-  ${showMacros(cutLight, data.weight, 2.0)}
-  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
-  <br>
-  <p><strong>${currentLang === "en" ? "Moderate Cut" : "تنشيف متوسط"}:</strong> ${cutModerate} kcal</p>
-  ${showMacros(cutModerate, data.weight, 2.0)}
-  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.007).toFixed(2)} kg</p>
-  <br>
-  <p><strong>${currentLang === "en" ? "Aggressive Cut" : "تنشيف قوي"}:</strong> ${cutAggressive} kcal</p>
-  ${showMacros(cutAggressive, data.weight, 2.0)}
-  <p>${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.009).toFixed(2)} kg</p>
-</div>
+
+        <div class="result-box" style="border-left: 5px solid #00ebff;">
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🏋️‍♂️ ${currentLang === "en" ? "Cutting Calories" : "سعرات التنشيف"}</h2>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Light Cut" : "تنشيف خفيف"}:</strong> ${cutLight} kcal</p>
+            ${showMacros(cutLight, data.weight, 2.0)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
+          </div>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Moderate Cut" : "تنشيف متوسط"}:</strong> ${cutModerate} kcal</p>
+            ${showMacros(cutModerate, data.weight, 2.0)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.007).toFixed(2)} kg</p>
+          </div>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Aggressive Cut" : "تنشيف قوي"}:</strong> ${cutAggressive} kcal</p>
+            ${showMacros(cutAggressive, data.weight, 2.0)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.009).toFixed(2)} kg</p>
+          </div>
         </div>
-        <a id="learn-more-btn" href="educate.html">${currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية"}</a>
-        <div id="learn-more-text">${currentLang === "en" ? "Click above to get clear, simple nutrition guidance!" : "اضغط أعلاه للحصول على نصائح غذائية واضحة وبسيطة!"}</div>
       `;
     }
 
