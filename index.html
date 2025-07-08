@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calorie & Macro Calculator - By Mohab</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-MFK8KTL6SS');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
   <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
   <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
   <meta name="author" content="Mohab">
@@ -68,16 +68,17 @@
       font-size: 2.5rem;
       letter-spacing: 1px;
     }
-    form {
-      background-color: var(--form-bg);
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 400px;
-      margin: 0 auto;
-      box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
-      text-align: right;
-      transition: background-color 0.3s, box-shadow 0.3s;
-    }
+   form {
+  background-color: var(--form-bg);
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
+  text-align: right;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
     label {
       display: block;
       margin: 12px 0 6px 0;
@@ -157,6 +158,43 @@
     #toggle-language {
       right: 130px;
     }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      form {
+        margin: 0 15px;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      button[type="submit"] {
+        font-size: 16px;
+      }
+
+      label,
+      input,
+      select {
+        font-size: 14px;
+      }
+
+      footer {
+        margin-top: 30px;
+        font-size: 11px;
+        padding: 4px;
+      }
+
+      #toggle-theme,
+      #toggle-language {
+        top: 8px;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+    }
   </style>
 </head>
 <body class="theme-dark">
@@ -187,13 +225,13 @@
     </select>
     <button type="submit" id="btn-calculate">Calculate</button>
   </form>
-  <!-- New paragraph about the Mifflin-St Jeor equation -->
   <p id="equation-info">This website uses the Mifflin-St Jeor equation, which is considered the most accurate equation for calculating calorie needs.</p>
   <footer>
     Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
     )
   </footer>
+
   <!-- Instagram Link Handler -->
   <script>
     function openInstagram() {
@@ -205,11 +243,11 @@
       }, 1500);
     }
   </script>
+
   <!-- Theme & Language Logic -->
   <script>
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
-      // Update button styles based on theme
       const themeBtn = document.getElementById("toggle-theme");
       if (document.body.classList.contains("light-mode")) {
         themeBtn.style.backgroundColor = "#00bfa5";
@@ -217,6 +255,7 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
+
     const texts = {
       en: {
         title: "Calorie Calculator",
@@ -261,6 +300,7 @@
         equationInfo: "يستخدم هذا الموقع معادلة Mifflin-St Jeor، والتي تُعتبر المعادلة الأكثر دقة لحساب احتياجاتك من السعرات الحرارية."
       }
     };
+
     let currentLang = 'en';
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
