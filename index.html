@@ -4,18 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calorie & Macro Calculator - By Mohab</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MFK8KTL6SS');
-  </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MFK8KTL6SS');
+
+</script>
+
   <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
   <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
   <meta name="author" content="Mohab">
   <meta name="robots" content="index, follow">
+
   <style>
     :root {
       --bg-color: #121212;
@@ -25,10 +30,13 @@
       --footer-bg: #00ffd5;
       --footer-text: black;
       --input-bg: #333;
+
+      /* Animated background colors */
       --gradient-start: #0a0a0a;
       --gradient-mid: #111;
       --gradient-end: #0d0d0d;
     }
+
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
@@ -37,10 +45,14 @@
       --footer-bg: #dddddd;
       --footer-text: #000000;
       --input-bg: #ddd;
+
+      /* Light gradient */
       --gradient-start: #f5f5f5;
       --gradient-mid: #fff;
       --gradient-end: #f7f7f7;
     }
+
+    /* Animated background */
     body {
       margin: 0;
       padding: 0;
@@ -53,11 +65,13 @@
       animation: gradientBG 15s ease infinite;
       transition: background-color 0.5s, color 0.5s;
     }
+
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     h1 {
       color: var(--accent-color);
       margin-bottom: 30px;
@@ -65,6 +79,7 @@
       font-size: 2.5rem;
       letter-spacing: 1px;
     }
+
     form {
       background-color: var(--form-bg);
       padding: 25px;
@@ -75,12 +90,14 @@
       text-align: right;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
+
     label {
       display: block;
       margin: 12px 0 6px 0;
       font-weight: bold;
       color: var(--accent-color);
     }
+
     input,
     select {
       width: 100%;
@@ -92,11 +109,13 @@
       color: var(--text-color);
       transition: all 0.3s ease;
     }
+
     input:focus,
     select:focus {
       outline: none;
       box-shadow: 0 0 8px rgba(0, 255, 213, 0.4);
     }
+
     button[type="submit"] {
       margin-top: 20px;
       width: 100%;
@@ -110,11 +129,13 @@
       transition: background-color 0.3s ease, transform 0.2s ease;
       font-weight: bold;
     }
+
     button[type="submit"]:hover {
       background-color: #00c9a3;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
     }
+
     footer {
       margin-top: 40px;
       font-size: 12px;
@@ -127,6 +148,7 @@
       margin-right: auto;
       transition: background-color 0.3s, color 0.3s;
     }
+
     #toggle-theme,
     #toggle-language {
       position: fixed;
@@ -143,14 +165,17 @@
       transition: background-color 0.3s, transform 0.2s;
       box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
     }
+
     #toggle-theme:hover,
     #toggle-language:hover {
       background-color: #00c9a3;
       transform: scale(1.05);
     }
+
     #toggle-theme {
       right: 10px;
     }
+
     #toggle-language {
       right: 130px;
     }
@@ -159,20 +184,25 @@
 <body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
   <h1 id="title">Calorie Calculator</h1>
-  <form id="calc-form" onsubmit="submitData(event)">
+  <form action="result.html" method="get" id="calc-form">
     <label for="weight" id="label-weight">Weight (kg):</label>
     <input type="number" id="weight" name="weight" min="1" max="300" required />
+
     <label for="height" id="label-height">Height (cm):</label>
     <input type="number" id="height" name="height" min="50" max="250" required />
+
     <label for="age" id="label-age">Age (years):</label>
     <input type="number" id="age" name="age" min="5" max="120" required />
+
     <label for="gender" id="label-gender">Gender:</label>
     <select id="gender" name="gender" required>
       <option value="" disabled selected id="opt-select-gender">Select gender</option>
       <option value="male" id="opt-male">Male</option>
       <option value="female" id="opt-female">Female</option>
     </select>
+
     <label for="activity" id="label-activity">Activity Level:</label>
     <select id="activity" name="activity" required>
       <option value="" disabled selected id="opt-select-activity">Select activity</option>
@@ -182,26 +212,35 @@
       <option value="active" id="opt-active">Active (5-6 days/week)</option>
       <option value="very_active" id="opt-very-active">Very Active (7 days/week)</option>
     </select>
+
     <button type="submit" id="btn-calculate">Calculate</button>
   </form>
+
   <footer>
     Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
     )
   </footer>
+
+  <!-- Instagram Link Handler -->
   <script>
     function openInstagram() {
       const appLink = "instagram://user?username=r4_ce";
       const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+
       window.location = appLink;
       setTimeout(() => {
         window.location = webLink;
       }, 1500);
     }
   </script>
+
+  <!-- Theme & Language Logic -->
   <script>
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
+
+      // Update button styles based on theme
       const themeBtn = document.getElementById("toggle-theme");
       if (document.body.classList.contains("light-mode")) {
         themeBtn.style.backgroundColor = "#00bfa5";
@@ -209,6 +248,7 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
+
     const texts = {
       en: {
         title: "Calorie Calculator",
@@ -251,55 +291,35 @@
         }
       }
     };
+
     let currentLang = 'en';
+
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
       const t = texts[currentLang];
+
       document.getElementById('title').textContent = t.title;
+
       document.getElementById('label-weight').textContent = t.labels.weight;
       document.getElementById('label-height').textContent = t.labels.height;
       document.getElementById('label-age').textContent = t.labels.age;
       document.getElementById('label-gender').textContent = t.labels.gender;
       document.getElementById('label-activity').textContent = t.labels.activity;
+
       document.getElementById('opt-select-gender').textContent = t.labels.selectGender;
       document.getElementById('opt-male').textContent = t.labels.male;
       document.getElementById('opt-female').textContent = t.labels.female;
+
       document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
       document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
       document.getElementById('opt-light').textContent = t.labels.light;
       document.getElementById('opt-moderate').textContent = t.labels.moderate;
       document.getElementById('opt-active').textContent = t.labels.active;
       document.getElementById('opt-very-active').textContent = t.labels.veryActive;
+
       document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
+
       document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    }
-  </script>
-  <script>
-    function submitData(event) {
-      event.preventDefault();
-      const formData = {
-        weight: document.getElementById('weight').value,
-        height: document.getElementById('height').value,
-        age: document.getElementById('age').value,
-        gender: document.getElementById('gender').value,
-        activity: document.getElementById('activity').value,
-      };
-      fetch('https://script.google.com/macros/s/AKfycbx-ZDdAH99VNVzmuSxHWrRt8fpW3ZtOsRsmxOpqK5l1nCr1ueBKMSc9xT-h87zSzzH0/exec', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          alert('تم حفظ البيانات بنجاح!');
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('حدث خطأ:', error);
-          alert('حدث خطأ أثناء حفظ البيانات.');
-        });
     }
   </script>
 </body>
