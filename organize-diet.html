@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>organize nutrition</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MFK8KTL6SS');
-</script> 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
 
   <style>
     :root {
@@ -123,7 +122,7 @@
     <h2 id="cutting-title">🔥 Cutting Strategy</h2>
     <ul id="cutting-list">
       <li>Focus on filling, low-calorie foods like vegetables and lean protein.</li>
-      <li>Pre-workout: Complex carb + protein (e.g., oats + egg whites).</li>
+      <li>Pre-workout: Fast-digesting carb + protein (e.g., banana + egg whites).</li>
       <li>Post-workout: Whey protein + light carb (e.g., rice cake or banana).</li>
       <li>Minimize fats pre/post workout for better digestion.</li>
       <li>Stick to whole foods to feel full with fewer calories.</li>
@@ -145,23 +144,22 @@
   </div>
 
   <footer>
-  Made by Mohab (
+    Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-  )
-</footer>
+    )
+  </footer>
 
-<script>
-  function openInstagram() {
-    const appLink = "instagram://user?username=r4_ce";
-    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
 
-    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
-    window.location = appLink;
-    setTimeout(() => {
-      window.location = webLink;
-    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
-  }
-</script>
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500); // Open website if Instagram doesn't load
+    }
+  </script>
 
   <script>
     let isArabic = false;
@@ -194,13 +192,13 @@
 
       document.getElementById('cutting-list').innerHTML = isArabic ? `
         <li>ركز على الأطعمة المشبعة والمنخفضة بالسعرات مثل الخضار والبروتينات الخالية من الدهون.</li>
-        <li>قبل التمرين: كارب معقد + بروتين (مثال: شوفان + بياض بيض).</li>
-        <li>بعد التمرين: واي بروتين + كارب خفيف (مثل موز أو كيك أرز).</li>
+        <li>قبل التمرين: كارب سريع + بروتين (مثال: موز + بياض بيض).</li>
+        <li>بعد التمرين: واي بروتين + كارب خفيف (مثل كيك أرز أو موز).</li>
         <li>قلل الدهون قبل وبعد التمرين لهضم أفضل.</li>
         <li>تمسك بالأكل النظيف عشان تحس بالشبع بأقل سعرات.</li>
       ` : `
         <li>Focus on filling, low-calorie foods like vegetables and lean protein.</li>
-        <li>Pre-workout: Complex carb + protein (e.g., oats + egg whites).</li>
+        <li>Pre-workout: Fast-digesting carb + protein (e.g., banana + egg whites).</li>
         <li>Post-workout: Whey protein + light carb (e.g., rice cake or banana).</li>
         <li>Minimize fats pre/post workout for better digestion.</li>
         <li>Stick to whole foods to feel full with fewer calories.</li>
@@ -210,10 +208,10 @@
       document.getElementById('tip2').textContent = isArabic ? '🔥 مش كل يوم هتحس بالحماس، بس كل يوم تقدر تختار تكون ملتزم.' : '🔥 You won’t always feel motivated, but you can always choose to be disciplined.';
       document.getElementById('tip3').textContent = isArabic ? '🕒 نظم وقتك... إللي بيجهز أكله هو اللي بيكسب.' : '🕒 Time management wins—meal prep is half the battle.';
       document.getElementById('tip4').textContent = isArabic ? '💤 نام كويس، لأن العضلات مش بتكبر في الجيم، بتكبر وإنت نايم.' : '💤 Sleep well. Muscles grow outside the gym, not inside it.';
-      document.getElementById('tip5').textContent = isArabic ? '📉 كلنا بنفشل أوقات، بس الناجحين هم اللي بيرجعوا تاني وميستسلموش.' : '📉 Everyone fails sometimes, but winners are the ones who get back up.';
-      document.getElementById('tip6').textContent = isArabic ? '👊 خليك صبور... الجسم القوي مش بيتبني في أسبوع، بيتبني كل يوم.' : '👊 Be patient. A strong body is built daily, not in a week.';
+      document.getElementById('tip5').textContent = isArabic ? '📉 كلنا بنفشل أوقات، بس الناجحين هم اللي بيرجعوا تاني.' : '📉 Everyone fails sometimes, but winners are the ones who get back up.';
+      document.getElementById('tip6').textContent = isArabic ? '👊 خليك صبور... الجسم القوي مش بيتبني أسبوع، بيتبني كل يوم.' : '👊 Be patient. A strong body is built daily, not in a week.';
       document.getElementById('tip7').textContent = isArabic ? '📸 صوّر تطورك، لأنك مش هتشوف الفرق إلا لما تبص ورا.' : '📸 Track your progress. You’ll only see the difference when you look back.';
-      document.getElementById('tip8').textContent = isArabic ? '🎯 حدد هدفك واكتبه، لأن إللي ملوش هدف بيلف في دايرة.' : '🎯 Set your goal and write it down. Without a goal, you’re going in circles.';
+      document.getElementById('tip8').textContent = isArabic ? '🎯 حدد هدفك واكتبه، لأن اللي ما عندهوش هدف بيلف في دائرة.' : '🎯 Set your goal and write it down. Without a goal, you’re going in circles.';
     }
   </script>
 </body>
