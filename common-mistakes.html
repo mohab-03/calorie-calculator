@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Common Nutrition Mistakes</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+
+    body.light {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f7f7f7;
+      --gradient-mid: #eaeaea;
+      --gradient-end: #dcdcdc;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text-color);
+      text-align: center;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 800px;
+      margin: auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--accent-color);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--accent-color);
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 6px 10px;
+      margin-left: 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+
+    button:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--box-bg);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.2);
+    }
+
+    h2 {
+      color: var(--accent-color);
+      margin-top: 30px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent-color);
+      font-size: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 15px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    p {
+      margin-top: 40px;
+      font-style: italic;
+      color: var(--accent-color);
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      button {
+        font-size: 0.9rem;
+        padding: 4px 8px;
+      }
+      main {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="page-title">Common Nutrition Mistakes</h1>
+    <div>
+      <button onclick="toggleTheme()">Switch Theme</button>
+      <button onclick="toggleLanguage()">العربية</button>
+    </div>
+  </header>
+
+  <main id="content"></main>
+
+  <script>
+    const content = {
+      en: {
+        pageTitle: "Common Nutrition Mistakes",
+        sections: [
+          {
+            title: "💥 Cutting Phase Mistakes",
+            items: [
+              "**Very Low Calories** – Slows metabolism, causes muscle loss and stalls fat loss.",
+              "**Cutting All Carbs** – Leads to low energy, flat muscles and poor gym performance.",
+              "**Excessive Cardio** – Burns muscle if paired with low calories.",
+              "**Repetitive Meals** – Body adapts, mood declines, results stall.",
+              "**Obsessing Over Scale** – Daily fluctuations aren’t progress. Use weekly trends and photos."
+            ]
+          },
+          {
+            title: "🍔 Bulking Phase Mistakes",
+            items: [
+              "**Too Many Calories** – Leads to fat gain, not muscle.",
+              "**Dirty Bulking** – Uncontrolled eating results in a bloated, unhealthy look.",
+              "**Not Tracking Protein** – Inadequate intake slows muscle growth.",
+              "**Skipping Cardio** – Affects heart health and fat control.",
+              "**Gaining Weight Too Fast** – Likely fat, not lean mass."
+            ]
+          },
+          {
+            title: "🛑 Maintenance Phase Mistakes",
+            items: [
+              "**Random Eating** – Without tracking, you slowly gain fat.",
+              "**Low Activity** – Lower burn = higher fat storage.",
+              "**No Clear Goal** – Leads to laziness and backsliding into old habits."
+            ]
+          },
+          {
+            title: "⚠️ Mistakes in All Phases",
+            items: [
+              "**Emotional Eating** – Eating when stressed, not hungry.",
+              "**Relying on Supplements** – They don’t fix a bad diet.",
+              "**Poor Sleep** – Slows recovery and fat loss.",
+              "**Comparing to Others** – Your body is unique.",
+              "**No Real Plan** – Intentions without tracking = failure.",
+              "**Not Using a Food Scale** – Eyeballing food leads to huge calorie errors."
+            ]
+          }
+        ],
+        footer: "Success isn’t about one perfect day. It’s about not messing up every day."
+      },
+      ar: {
+        pageTitle: "أشهر الأخطاء الشائعة في التغذية",
+        sections: [
+          {
+            title: "💥 أخطاء مرحلة التنشيف",
+            items: [
+              "**سعرات منخفضة جدًا** – تؤدي لتباطؤ الحرق وفقدان عضل وثبات الوزن.",
+              "**قطع الكارب تمامًا** – يسبب ضعف الأداء وشكل مسطح للجسم.",
+              "**كارديو مبالغ فيه** – ممكن يحرق عضل خصوصًا مع نقص الأكل.",
+              "**تكرار نفس الأكل** – الجسم يتأقلم، والمزاج يتعب.",
+              "**التركيز على الميزان** – الوزن بيتغير طبيعي. ركز على الصور والقياسات."
+            ]
+          },
+          {
+            title: "🍔 أخطاء مرحلة التضخيم",
+            items: [
+              "**سعرات كتير جدًا** – بتزود دهون مش عضل.",
+              "**أكل عشوائي** – يعمل جسم منتفخ وغير صحي.",
+              "**عدم تتبع البروتين** – يبطئ بناء العضلات.",
+              "**إهمال الكارديو** – يقلل اللياقة ويزود الدهون.",
+              "**زيادة وزن سريعة** – معناها دهون مش عضل."
+            ]
+          },
+          {
+            title: "🛑 أخطاء مرحلة الثبات",
+            items: [
+              "**أكل غير محسوب** – بيزود الوزن من غير ما تحس.",
+              "**قلة النشاط** – يقلل الحرق ويزود الدهون.",
+              "**غياب الهدف** – يخليك ترجع للعادات القديمة."
+            ]
+          },
+          {
+            title: "⚠️ أخطاء شائعة في كل المراحل",
+            items: [
+              "**الأكل العاطفي** – بتاكل وانت مش جعان فعلًا.",
+              "**الاعتماد على المكملات** – مش هتعوض دايت ضعيف.",
+              "**قلة النوم** – تبطئ الحرق والتعافي.",
+              "**المقارنة بالناس** – جسمك ليه طريقه الخاص.",
+              "**نية بدون خطة** – النية من غير متابعة = فشل.",
+              "**عدم استخدام ميزان الأكل** – التقدير بالعين بيبوظ كل حاجة."
+            ]
+          }
+        ],
+        footer: "النجاح مش في يوم مثالي، النجاح في إنك ما تغلطش كل يوم."
+      }
+    };
+
+    let currentLang = "en";
+
+    function renderContent() {
+      const lang = content[currentLang];
+      document.getElementById("page-title").textContent = lang.pageTitle;
+      document.body.setAttribute("dir", currentLang === "ar" ? "rtl" : "ltr");
+
+      const main = document.getElementById("content");
+      main.innerHTML = "";
+      main.style.textAlign = currentLang === "ar" ? "right" : "left";
+
+      lang.sections.forEach(section => {
+        const sec = document.createElement("section");
+        const h2 = document.createElement("h2");
+        h2.textContent = section.title;
+        sec.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = item;
+          ul.appendChild(li);
+        });
+        sec.appendChild(ul);
+        main.appendChild(sec);
+      });
+
+      const footer = document.createElement("p");
+      footer.textContent = lang.footer;
+      main.appendChild(footer);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      renderContent();
+    }
+
+    renderContent();
+  </script>
+</body>
+</html>

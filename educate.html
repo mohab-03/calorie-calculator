@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Educate Yourself</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MFK8KTL6SS');
-</script>
-
   <style>
     :root {
       --bg-color: #121212;
@@ -24,6 +14,7 @@
       --footer-bg: #00ffd5;
       --footer-text: black;
     }
+
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
@@ -32,6 +23,7 @@
       --footer-bg: #dddddd;
       --footer-text: #000000;
     }
+
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -40,10 +32,12 @@
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
+
     h1 {
       color: var(--accent-color);
       margin-bottom: 30px;
     }
+
     .link-list {
       display: flex;
       flex-direction: column;
@@ -51,6 +45,7 @@
       max-width: 400px;
       margin: 0 auto 40px;
     }
+
     .link-list a {
       background-color: var(--box-bg);
       color: var(--text-color);
@@ -62,10 +57,12 @@
       box-shadow: 0 0 12px rgba(0, 255, 213, 0.2);
       transition: background-color 0.3s;
     }
+
     .link-list a:hover {
       background-color: var(--accent-color);
       color: #000;
     }
+
     #diet-organizer {
       background-color: #00ffd5;
       color: #000;
@@ -75,6 +72,43 @@
       border: 2px solid #00ffd5;
       text-shadow: 1px 1px #000;
     }
+
+    #common-mistakes-btn {
+      background-color: #cc0000;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.3);
+      transition: background-color 0.3s, color 0.3s;
+      border: none;
+      animation: light-pulse 2.5s infinite;
+    }
+
+    #common-mistakes-btn:hover {
+      background-color: #e60000;
+      color: #000;
+    }
+
+    body.light-mode #common-mistakes-btn {
+      background-color: #ff4d4d;
+      color: white;
+      box-shadow: 0 0 12px rgba(255, 77, 77, 0.3);
+    }
+
+    body.light-mode #common-mistakes-btn:hover {
+      background-color: #ff1a1a;
+      color: #000;
+    }
+
+    @keyframes light-pulse {
+      0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); }
+      50% { transform: scale(1.02); box-shadow: 0 0 12px rgba(255, 0, 0, 0.3); }
+      100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); }
+    }
+
     footer {
       margin-top: 40px;
       font-size: 12px;
@@ -86,6 +120,7 @@
       margin-left: auto;
       margin-right: auto;
     }
+
     #controls {
       position: fixed;
       top: 10px;
@@ -95,6 +130,7 @@
       gap: 10px;
       z-index: 999;
     }
+
     .toggle-btn {
       padding: 6px 10px;
       background-color: var(--accent-color);
@@ -106,13 +142,11 @@
       font-weight: bold;
       transition: background-color 0.3s;
     }
+
     .toggle-btn:hover {
       background-color: #00c9a3;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(5px); }
-    }
+
     @keyframes pulse {
       0% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 255, 213, 0.7); }
       50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 255, 213, 0.9); }
@@ -135,29 +169,26 @@
     <a href="meal-plan.html" id="link4">How to Build a Meal Plan</a>
     <a href="food-list.html" id="link5">Ultimate Food List</a>
     <a href="supplements.html" id="link6">Supplements Explained</a>
+    <a href="common-mistakes.html" id="common-mistakes-btn">⚠️ Common Mistakes</a>
     <a href="organize-diet.html" id="diet-organizer">🍽️ Organize Your Diet</a>
   </div>
 
   <footer>
-  Made by Mohab (
-    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-  )
-</footer>
-
-<script>
-  function openInstagram() {
-    const appLink = "instagram://user?username=r4_ce";
-    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
-
-    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
-    window.location = appLink;
-    setTimeout(() => {
-      window.location = webLink;
-    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
-  }
-</script>
+    Made by Mohab (
+      <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
 
   <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
     let isArabic = false;
 
     function toggleTheme() {
@@ -173,6 +204,7 @@
       document.getElementById('link4').textContent = isArabic ? 'كيف تصمم خطة وجبات؟' : 'How to Build a Meal Plan';
       document.getElementById('link5').textContent = isArabic ? 'قائمة الأطعمة النهائية' : 'Ultimate Food List';
       document.getElementById('link6').textContent = isArabic ? 'شرح المكملات الغذائية' : 'Supplements Explained';
+      document.getElementById('common-mistakes-btn').textContent = isArabic ? '⚠️ أخطاء شائعة' : '⚠️ Common Mistakes';
       document.getElementById('diet-organizer').textContent = isArabic ? '🍽️ نظّم أكلك' : '🍽️ Organize Your Diet';
     }
   </script>
