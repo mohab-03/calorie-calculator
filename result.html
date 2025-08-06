@@ -1,17 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Calorie Results</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-MFK8KTL6SS');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
   <style>
     :root {
       --bg-color: #0e0e0e;
@@ -181,7 +182,7 @@
       top: 0; left: 0; bottom: 0; right: 0;
       border-radius: 12px;
       pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 253, 0.3);
       opacity: 0.2;
       transition: opacity 0.3s ease;
     }
@@ -254,7 +255,7 @@
   <h1 id="title">Calorie Results</h1>
   <div id="results"></div>
   <!-- Save as PDF Button -->
-  <button id="print-pdf-btn" onclick="window.print()">
+  <button id="print-pdf-btn" onclick="handlePrint()">
     📄 <span id="btn-print-text">Save as PDF</span>
   </button>
   <!-- Learn More Button with subtle animation -->
@@ -280,6 +281,20 @@
   <!-- Logic Script -->
   <script>
     let currentLang = "en";
+    
+    function handlePrint() {
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        alert(currentLang === "en" 
+          ? "To save as PDF: tap the share button or menu, then choose 'Print' → 'Save as PDF'." 
+          : "لحفظ كملف PDF: اضغط على زر المشاركة أو القائمة، ثم اختر 'طباعة' → 'حفظ كـ PDF'."
+        );
+      } else {
+        window.print();
+      }
+    }
+    
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -289,6 +304,7 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
+    
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
       // Update button texts
@@ -303,6 +319,7 @@
         currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
       displayResults();
     }
+    
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -313,11 +330,13 @@
         activity: params.get('activity'),
       };
     }
+    
     function calculateBMR({ weight, height, age, gender }) {
       return gender === 'male'
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
     }
+    
     function getActivityMultiplier(activity) {
       const multipliers = {
         sedentary: 1.2,
@@ -328,6 +347,7 @@
       };
       return multipliers[activity] || 1.2;
     }
+    
     function calculateMacros(calories, weight, proteinPerKg) {
       const protein = Math.round(weight * proteinPerKg);
       const proteinCals = protein * 4;
@@ -336,6 +356,7 @@
       const carbs = Math.round((calories - proteinCals - fatCals) / 4);
       return { protein, carbs, fats };
     }
+    
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
       return `
@@ -346,6 +367,7 @@
           ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
         </p>`;
     }
+    
     function displayResults() {
       const data = getQueryParams();
       if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
@@ -412,4 +434,4 @@
   </script>
 </body>
 </html>
-
+```
