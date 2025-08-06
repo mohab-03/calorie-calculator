@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calorie & Macro Calculator - By Mohab</title>
+  <title>Nutrition Calculator - By Mohab</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
   <script>
@@ -12,8 +12,8 @@
     gtag('js', new Date());
     gtag('config', 'G-MFK8KTL6SS');
   </script>
-  <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
-  <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
+  <meta name="description" content="Calculate calorie needs for humans and animals. Accurate calculations using Mifflin-St Jeor equation. Built by Mohab (Instagram: r4_ce)">
+  <meta name="keywords" content="calorie calculator, human nutrition, animal nutrition, mohab, r4_ce, fitness, pet nutrition, metabolic rate">
   <meta name="author" content="Mohab">
   <meta name="robots" content="index, follow">
   <style>
@@ -25,10 +25,9 @@
       --footer-bg: #00ffd5;
       --footer-text: black;
       --input-bg: #333;
-      /* Animated background colors */
       --gradient-start: #0a0a0a;
-      --gradient-mid: #111;
-      --gradient-end: #0d0d0d;
+      --gradient-mid: #162432;
+      --gradient-end: #0d1117;
     }
     body.light-mode {
       --bg-color: #ffffff;
@@ -38,12 +37,10 @@
       --footer-bg: #dddddd;
       --footer-text: #000000;
       --input-bg: #ddd;
-      /* Light gradient */
       --gradient-start: #f5f5f5;
-      --gradient-mid: #fff;
+      --gradient-mid: #e0f7fa;
       --gradient-end: #f7f7f7;
     }
-    /* Animated background */
     body {
       margin: 0;
       padding: 0;
@@ -61,136 +58,240 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px rgba(0, 255, 213, 0.2); }
+      50% { box-shadow: 0 0 25px rgba(0, 255, 213, 0.4); }
+      100% { box-shadow: 0 0 15px rgba(0, 255, 213, 0.2); }
+    }
+    @keyframes glow {
+      0% { border-color: rgba(0, 255, 213, 0.2); }
+      50% { border-color: rgba(0, 255, 213, 0.5); }
+      100% { border-color: rgba(0, 255, 213, 0.2); }
+    }
     h1 {
       color: var(--accent-color);
-      margin-bottom: 30px;
+      margin-bottom: 60px;
       font-weight: bold;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       letter-spacing: 1px;
+      text-shadow: 0 0 15px rgba(0, 255, 213, 0.4);
+      position: relative;
     }
-    form {
-      background-color: var(--form-bg);
-      padding: 25px;
-      border-radius: 12px;
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+      border-radius: 2px;
+    }
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      padding: 20px;
+    }
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
       width: 90%;
-      max-width: 400px;
+      max-width: 500px;
       margin: 0 auto;
-      box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
-      text-align: right;
-      transition: background-color 0.3s, box-shadow 0.3s;
     }
-    label {
-      display: block;
-      margin: 12px 0 6px 0;
-      font-weight: bold;
+    .main-btn {
+      padding: 25px 30px;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #002233, #003344);
       color: var(--accent-color);
-    }
-    input,
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      background-color: var(--input-bg);
-      color: var(--text-color);
-      transition: all 0.3s ease;
-      box-sizing: border-box;
-    }
-    input:focus,
-    select:focus {
-      outline: none;
-      box-shadow: 0 0 8px rgba(0, 255, 213, 0.4);
-    }
-    button[type="submit"] {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      font-size: 18px;
-      background-color: var(--accent-color);
-      color: #000;
-      border: none;
-      border-radius: 10px;
+      border: 1px solid;
+      border-image: linear-gradient(45deg, rgba(0, 255, 213, 0.1), rgba(0, 255, 213, 0.3), rgba(0, 255, 213, 0.1)) 1;
+      border-radius: 15px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: all 0.3s ease;
       font-weight: bold;
+      box-shadow: 0 8px 25px rgba(0, 255, 213, 0.15);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
-    button[type="submit"]:hover {
-      background-color: #00c9a3;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
+    .main-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(0, 255, 213, 0.05), rgba(0, 255, 213, 0.15), rgba(0, 255, 213, 0.05));
+      z-index: -1;
+      border-radius: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
+    .main-btn:hover::before {
+      opacity: 1;
+    }
+    .main-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 255, 213, 0.25);
+    }
+    .main-btn.active {
+      animation: pulse 2s infinite, glow 3s infinite;
+    }
+
+    /* ✅ تصميم الزرين الجديدين - أقرب للأزرار الرئيسية */
+    .learn-more-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 90%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .learn-btn {
+      padding: 16px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #000;
+      text-decoration: none;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 6px 18px rgba(0, 255, 213, 0.2);
+    }
+    .learn-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #00ffd5, #00ebff, #00d9ff, #00c9a3);
+      background-size: 200% 200%;
+      z-index: -1;
+      border-radius: 14px;
+      animation: gradient-slide 3s ease infinite;
+    }
+    @keyframes gradient-slide {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .learn-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 255, 213, 0.4);
+    }
+    .learn-btn:active {
+      transform: translateY(-1px);
+    }
+
     footer {
-      margin-top: 40px;
-      font-size: 12px;
+      margin-top: 50px;
+      font-size: 13px;
       color: var(--footer-text);
       background-color: var(--footer-bg);
-      padding: 6px;
-      border-radius: 6px;
+      padding: 8px;
+      border-radius: 8px;
       max-width: 400px;
       margin-left: auto;
       margin-right: auto;
       transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 255, 213, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      50% { transform: translateX(100%) rotate(45deg); }
+      100% { transform: translateX(200%) rotate(45deg); }
     }
     #toggle-theme,
     #toggle-language {
       position: fixed;
-      top: 10px;
-      padding: 6px 10px;
+      top: 15px;
+      padding: 8px 12px;
       background-color: var(--accent-color);
       color: #000;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 999;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
-      transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.4);
+      border: 1px solid rgba(0, 255, 213, 0.3);
+      animation: pulse 3s infinite;
     }
     #toggle-theme:hover,
     #toggle-language:hover {
       background-color: #00c9a3;
-      transform: scale(1.05);
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(0, 255, 213, 0.5);
     }
     #toggle-theme {
-      right: 10px;
+      right: 15px;
     }
     #toggle-language {
-      right: 130px;
+      right: 150px;
     }
-
-    /* Responsive Design */
     @media (max-width: 600px) {
       body {
         padding: 20px;
       }
       h1 {
-        font-size: 2rem;
-        margin-bottom: 20px;
+        font-size: 2.2rem;
+        margin-bottom: 40px;
       }
-      form {
-        margin: 0 auto;
-        padding: 20px;
-        width: 95%;
-        max-width: 400px;
+      h1::after {
+        width: 80px;
       }
-      label,
-      input,
-      select,
-      button[type="submit"] {
-        font-size: 15px;
-        line-height: 1.4;
+      .btn-container {
+        gap: 35px;
+      }
+      .main-btn {
+        padding: 20px 25px;
+        font-size: 1.2rem;
+      }
+      .learn-more-container {
+        margin-top: 15px;
+      }
+      .learn-btn {
+        font-size: 1rem;
+        padding: 14px 20px;
       }
       footer {
-        font-size: 11px;
-        margin-top: 25px;
+        font-size: 12px;
+        margin-top: 35px;
+        padding: 7px;
       }
       #toggle-theme,
       #toggle-language {
-        top: 8px;
-        padding: 4px 8px;
-        font-size: 12px;
+        top: 12px;
+        padding: 6px 10px;
+        font-size: 13px;
       }
     }
   </style>
@@ -198,136 +299,87 @@
 <body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
-  <h1 id="title">Calorie Calculator</h1>
-  <form action="result.html" method="get" id="calc-form">
-    <label for="weight" id="label-weight">Weight (kg):</label>
-    <input type="number" id="weight" name="weight" min="1" max="300" required />
+  <h1 id="title">Nutrition Calculator</h1>
+  <div class="main-container">
+    <div class="btn-container">
+      <button class="main-btn" onclick="goToHuman()">Human Calorie Calculator</button>
+      <button class="main-btn" onclick="goToAnimal()">Animal Calorie Calculator</button>
+    </div>
+  </div>
 
-    <label for="height" id="label-height">Height (cm):</label>
-    <input type="number" id="height" name="height" min="50" max="250" required />
+  <!-- ✅ زرين جديدين: أقرب للأزرار الرئيسية -->
+  <div class="learn-more-container">
+    <a href="educate.html" class="learn-btn" id="btn-learn-human">Learn About Human Nutrition</a>
+    <a href="ANIMAL-EDUCATE.HTML" class="learn-btn" id="btn-learn-animal">Learn About Animal Nutrition</a>
+  </div>
 
-    <label for="age" id="label-age">Age (years):</label>
-    <input type="number" id="age" name="age" min="5" max="120" required />
-
-    <label for="gender" id="label-gender">Gender:</label>
-    <select id="gender" name="gender" required>
-      <option value="" disabled selected id="opt-select-gender">Select gender</option>
-      <option value="male" id="opt-male">Male</option>
-      <option value="female" id="opt-female">Female</option>
-    </select>
-
-    <label for="activity" id="label-activity">Activity Level:</label>
-    <select id="activity" name="activity" required>
-      <option value="" disabled selected id="opt-select-activity">Select activity</option>
-      <option value="sedentary" id="opt-sedentary">Sedentary (0-1 days/week)</option>
-      <option value="light" id="opt-light">Light (1-2 days/week)</option>
-      <option value="moderate" id="opt-moderate">Moderate (3-4 days/week)</option>
-      <option value="active" id="opt-active">Active (5-6 days/week)</option>
-      <option value="very_active" id="opt-very-active">Very Active (7 days/week)</option>
-    </select>
-
-    <button type="submit" id="btn-calculate">Calculate</button>
-  </form>
-  <p id="equation-info">This website uses the Mifflin-St Jeor equation, which is considered the most accurate equation for calculating calorie needs.</p>
   <footer>
     Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
     )
   </footer>
 
-  <!-- Instagram Link Handler -->
   <script>
     function openInstagram() {
       const appLink = "instagram://user?username=r4_ce";
-      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
       window.location = appLink;
       setTimeout(() => {
         window.location = webLink;
       }, 1500);
     }
-  </script>
-
-  <!-- Theme & Language Logic -->
-  <script>
+    
+    function goToHuman() {
+      window.location.href = "human.html";
+    }
+    
+    function goToAnimal() {
+      window.location.href = "animal.html";
+    }
+    
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
-      if (document.body.classList.contains("light-mode")) {
-        themeBtn.style.backgroundColor = "#00bfa5";
-      } else {
-        themeBtn.style.backgroundColor = "#00ffd5";
-      }
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
     }
 
     const texts = {
       en: {
-        title: "Calorie Calculator",
-        labels: {
-          weight: "Weight (kg):",
-          height: "Height (cm):",
-          age: "Age (years):",
-          gender: "Gender:",
-          activity: "Activity Level:",
-          selectGender: "Select gender",
-          male: "Male",
-          female: "Female",
-          selectActivity: "Select activity",
-          sedentary: "Sedentary (0-1 days/week)",
-          light: "Light (1-2 days/week)",
-          moderate: "Moderate (3-4 days/week)",
-          active: "Active (5-6 days/week)",
-          veryActive: "Very Active (7 days/week)",
-          calculateBtn: "Calculate"
-        },
-        equationInfo: "This website uses the Mifflin-St Jeor equation, which is considered the most accurate equation for calculating calorie needs."
+        title: "Nutrition Calculator",
+        humanBtn: "Human Calorie Calculator",
+        animalBtn: "Animal Calorie Calculator",
+        learnHuman: "Learn About Human Nutrition",
+        learnAnimal: "Learn About Animal Nutrition"
       },
       ar: {
-        title: "حاسبة السعرات",
-        labels: {
-          weight: "الوزن (كجم):",
-          height: "الطول (سم):",
-          age: "العمر (سنوات):",
-          gender: "النوع:",
-          activity: "مستوى النشاط:",
-          selectGender: "اختر النوع",
-          male: "ذكر",
-          female: "أنثى",
-          selectActivity: "اختر النشاط",
-          sedentary: "قليل النشاط (0-1 يوم/أسبوع)",
-          light: "نشاط خفيف (1-2 يوم/أسبوع)",
-          moderate: "نشاط متوسط (3-4 أيام/أسبوع)",
-          active: "نشاط نشط (5-6 أيام/أسبوع)",
-          veryActive: "نشاط عالي (7 أيام/أسبوع)",
-          calculateBtn: "احسب"
-        },
-        equationInfo: "يستخدم هذا الموقع معادلة Mifflin-St Jeor، والتي تُعتبر المعادلة الأكثر دقة لحساب احتياجاتك من السعرات الحرارية."
+        title: "حاسبة التغذية",
+        humanBtn: "حاسبة السعرات للإنسان",
+        animalBtn: "حاسبة السعرات للحيوان",
+        learnHuman: "تعلم عن تغذية الإنسان",
+        learnAnimal: "تعلم عن تغذية الحيوان"
       }
     };
 
-    let currentLang = 'en'; // ⬅️ اللغة الافتراضية هي الإنجليزية
+    let currentLang = 'en';
 
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
       const t = texts[currentLang];
       document.getElementById('title').textContent = t.title;
-      document.getElementById('label-weight').textContent = t.labels.weight;
-      document.getElementById('label-height').textContent = t.labels.height;
-      document.getElementById('label-age').textContent = t.labels.age;
-      document.getElementById('label-gender').textContent = t.labels.gender;
-      document.getElementById('label-activity').textContent = t.labels.activity;
-      document.getElementById('opt-select-gender').textContent = t.labels.selectGender;
-      document.getElementById('opt-male').textContent = t.labels.male;
-      document.getElementById('opt-female').textContent = t.labels.female;
-      document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
-      document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
-      document.getElementById('opt-light').textContent = t.labels.light;
-      document.getElementById('opt-moderate').textContent = t.labels.moderate;
-      document.getElementById('opt-active').textContent = t.labels.active;
-      document.getElementById('opt-very-active').textContent = t.labels.veryActive;
-      document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
-      document.getElementById('equation-info').textContent = t.equationInfo;
+      document.querySelectorAll('.main-btn')[0].textContent = t.humanBtn;
+      document.querySelectorAll('.main-btn')[1].textContent = t.animalBtn;
+      document.getElementById('btn-learn-human').textContent = t.learnHuman;
+      document.getElementById('btn-learn-animal').textContent = t.learnAnimal;
       document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     }
+    
+    // تفعيل التأثير المتحرك على الأزرار الرئيسية
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.main-btn');
+      buttons.forEach(btn => {
+        btn.classList.add('active');
+      });
+    });
   </script>
 </body>
 </html>

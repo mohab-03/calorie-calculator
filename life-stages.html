@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Life Stage Nutrition Needs</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--box-bg);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.3);
+      text-align: right;
+    }
+
+    h2 {
+      color: var(--accent-color);
+      margin-top: 20px;
+      font-size: 1.8rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-right: 20px;
+      margin-top: 15px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+
+    #toggle-theme {
+      right: 10px;
+    }
+
+    #toggle-language {
+      right: 130px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background-color: #00c9a3;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body class="theme-dark" dir="ltr">
+  <!-- زر تبديل اللغة -->
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <!-- زر تبديل الثيم -->
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <h1 id="page-title">Life Stage Nutrition Needs</h1>
+
+  <div class="content-container" id="content">
+    <!-- سيتم ملؤها بالجافاسكريبت -->
+  </div>
+
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+
+    const texts = {
+      en: {
+        pageTitle: "Life Stage Nutrition Needs",
+        sections: [
+          {
+            title: "🐾 Puppy & Kitten Stage (0-1 Year)",
+            items: [
+              "<strong>High calorie needs</strong> – Growing bodies require 2-3x more energy than adults.",
+              "<strong>High protein</strong> – Essential for muscle, bone, and brain development.",
+              "<strong>Calcium & phosphorus</strong> – Critical for strong bones (ratio 1.4:1 for dogs, 1.2:1 for cats).",
+              "<strong>Frequent feeding</strong> – 3-4 meals per day to support rapid growth.",
+              "<strong>Taurine for kittens</strong> – Vital for heart and vision health."
+            ]
+          },
+          {
+            title: "🐕 Adult Stage (1-7 Years)",
+            items: [
+              "<strong>Maintenance calories</strong> – Energy intake should match energy expenditure.",
+              "<strong>Balanced diet</strong> – Protein, fats, and carbs in proper ratios.",
+              "<strong>Weight monitoring</strong> – Prevent obesity, a major health risk.",
+              "<strong>Dental health</strong> – Chew toys and dental treats help prevent gum disease.",
+              "<strong>Neutered pets need 20-30% fewer calories</strong> – Due to lower metabolism."
+            ]
+          },
+          {
+            title: "🦴 Senior Stage (7+ Years)",
+            items: [
+              "<strong>Lower calorie needs</strong> – Slower metabolism requires fewer calories.",
+              "<strong>Joint support</strong> – Add glucosamine and chondroitin for mobility.",
+              "<strong>Kidney-friendly food</strong> – Lower phosphorus for cats, easier-to-digest proteins for dogs.",
+              "<strong>Hydration focus</strong> – Older pets drink less; wet food helps.",
+              "<strong>Regular vet checkups</strong> – Early detection of age-related issues."
+            ]
+          },
+          {
+            title: "⚠️ Special Considerations",
+            items: [
+              "<strong>Gestation & Lactation</strong> – Female dogs and cats need up to 3x more calories.",
+              "<strong>Breed-specific needs</strong> – Large breed puppies need controlled growth to avoid joint issues.",
+              "<strong>Health conditions</strong> – Kidney, diabetes, or heart disease require special diets.",
+              "<strong>Overfeeding is the #1 mistake</strong> – Leads to obesity and shortened lifespan.",
+              "<strong>Always provide fresh water</strong> – Hydration is crucial at every stage."
+            ]
+          }
+        ],
+        footer: "Understanding your pet's life stage needs ensures a long, healthy, and happy life together.",
+        backLink: "← Back to Guide"
+      },
+      ar: {
+        pageTitle: "احتياجات المراحل العمرية",
+        sections: [
+          {
+            title: "🐾 مرحلة الجرو والهريرة (0-1 سنة)",
+            items: [
+              "<strong>احتياجات عالية من السعرات</strong> – الأجسام النامية تحتاج ضعف أو ثلاثة أضعاف الطاقة.",
+              "<strong>بروتين عالي</strong> – ضروري لتطور العضلات والعظام والدماغ.",
+              "<strong>الكالسيوم والفوسفور</strong> – مهم جدًا للعظام القوية (النسبة 1.4:1 للكلاب، 1.2:1 للقطط).",
+              "<strong>تغذية متكررة</strong> – 3-4 وجبات يوميًا لدعم النمو السريع.",
+              "<strong>التيروين للهريرات</strong> – ضروري لصحة القلب والعينين."
+            ]
+          },
+          {
+            title: "🐕 مرحلة البالغ (1-7 سنوات)",
+            items: [
+              "<strong>سعرات الثبات</strong> – كمية الطاقة يجب أن تساوي ما يُستخدم.",
+              "<strong>نظام متوازن</strong> – بروتين، دهون، وكربوهيدرات بنسب مناسبة.",
+              "<strong>مراقبة الوزن</strong> – السمنة خطر صحي كبير.",
+              "<strong>صحة الأسنان</strong> – الألعاب والحلوى الخاصة تمنع أمراض اللثة.",
+              "<strong>الحيوانات المخصية تحتاج 20-30٪ سعرات أقل</strong> – بسبب تباطؤ الأيض."
+            ]
+          },
+          {
+            title: "🦴 مرحلة المسن (7+ سنوات)",
+            items: [
+              "<strong>احتياجات أقل من السعرات</strong> – تباطؤ الأيض يتطلب طاقة أقل.",
+              "<strong>دعم للمفاصل</strong> – أضف الجلوكوزامين والكوندروتن لتحسين الحركة.",
+              "<strong>طعام صديق للكلى</strong> – فوسفور أقل للقطط، بروتينات أسهل هضمًا للكلاب.",
+              "<strong>التركيز على الترطيب</strong> – الكبار يشربون أقل؛ الطعام الرطب يساعد.",
+              "<strong>فحوصات بيطرية دورية</strong> – الكشف المبكر عن الأمراض المرتبطة بالعمر."
+            ]
+          },
+          {
+            title: "⚠️ اعتبارات خاصة",
+            items: [
+              "<strong>الحمل والرضاعة</strong> – الإناث تحتاج إلى ضعف أو ثلاثة أضعاف السعرات.",
+              "<strong>احتياجات حسب السلالة</strong> – الجراء من السلالات الكبيرة تحتاج نموًا متحكمًا لتجنب مشاكل المفاصل.",
+              "<strong>الحالات الصحية</strong> – أمراض الكلى، السكري، أو القلب تتطلب أنظمة خاصة.",
+              "<strong>الإفراط في الإطعام هو الخطأ رقم واحد</strong> – يؤدي للسمنة وتقصير العمر.",
+              "<strong>قدم دائمًا ماء نقي</strong> – الترطيب ضروري في كل المراحل."
+            ]
+          }
+        ],
+        footer: "فهم احتياجات مرحلة حياة حيوانك يضمن لك حياة طويلة وصحية وسعيدة معًا.",
+        backLink: "← العودة إلى الدليل"
+      }
+    };
+
+    let currentLang = "en";
+
+    function toggleLanguage() {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      const t = texts[currentLang];
+      document.getElementById("page-title").textContent = t.pageTitle;
+      document.getElementById("toggle-language").innerText = currentLang === "en" ? "عربي / English" : "عربي / English";
+      document.body.dir = currentLang === "ar" ? "rtl" : "ltr";
+      renderContent();
+    }
+
+    function renderContent() {
+      const t = texts[currentLang];
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+
+      t.sections.forEach(section => {
+        const h2 = document.createElement("h2");
+        h2.innerHTML = section.title;
+        container.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = item;
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      });
+
+      const footerP = document.createElement("p");
+      footerP.innerHTML = `<em>${t.footer}</em>`;
+      footerP.style.textAlign = currentLang === "ar" ? "right" : "left";
+      container.appendChild(footerP);
+
+      const backLink = document.createElement("a");
+      backLink.href = "ANIMAL-EDUCATE.HTML";
+      backLink.innerHTML = t.backLink;
+      backLink.style.display = "inline-block";
+      backLink.style.marginTop = "20px";
+      backLink.style.padding = "10px 20px";
+      backLink.style.backgroundColor = "var(--accent-color)";
+      backLink.style.color = "#000";
+      backLink.style.borderRadius = "8px";
+      backLink.style.fontWeight = "bold";
+      backLink.style.textDecoration = "none";
+      container.appendChild(backLink);
+    }
+
+    // تحميل المحتوى عند فتح الصفحة
+    renderContent();
+  </script>
+</body>
+</html>

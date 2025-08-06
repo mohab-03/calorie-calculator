@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Importance of Water for Pets</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--box-bg);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.3);
+      text-align: right;
+    }
+
+    h2 {
+      color: var(--accent-color);
+      margin-top: 20px;
+      font-size: 1.8rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-right: 20px;
+      margin-top: 15px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .warning {
+      background-color: rgba(0, 255, 213, 0.1);
+      border-left: 4px solid var(--accent-color);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background-color: #00c9a3;
+    }
+
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+
+    #toggle-theme {
+      right: 10px;
+    }
+
+    #toggle-language {
+      right: 130px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body class="theme-dark" dir="ltr">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <h1 id="page-title">Importance of Water for Pets</h1>
+
+  <div class="content-container" id="content">
+    <!-- سيتم ملؤها بالجافاسكريبت -->
+  </div>
+
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+
+    const texts = {
+      en: {
+        pageTitle: "Importance of Water for Pets",
+        sections: [
+          {
+            title: "💧 Why Water is Critical",
+            items: [
+              "<strong>Regulates body temperature</strong> – Especially important in hot weather and after exercise.",
+              "<strong>Supports digestion</strong> – Water helps break down food and absorb nutrients.",
+              "<strong>Flushes out toxins</strong> – Kidneys rely on water to remove waste from the bloodstream.",
+              "<strong>Lubricates joints</strong> – Keeps your pet mobile and reduces pain."
+            ]
+          },
+          {
+            title: "🐱 Water Needs for Cats",
+            items: [
+              "<strong>Cats drink very little naturally</strong> – They evolved from desert animals and get moisture from prey.",
+              "<strong>Wet food helps</strong> – Canned food is 70-80% water, which helps prevent dehydration.",
+              "<strong>Running water attracts them</strong> – Use a pet water fountain to encourage drinking.",
+              "<strong>Dehydration is dangerous</strong> – Can lead to urinary tract infections and kidney disease."
+            ]
+          },
+          {
+            title: "🐶 Water Needs for Dogs",
+            items: [
+              "<strong>Dogs need 50-70 ml per kg of body weight daily</strong> – A 10kg dog needs about 500-700ml per day.",
+              "<strong>More in heat or activity</strong> – Active dogs need up to 2x more water.",
+              "<strong>Always provide fresh water</strong> – Stale or dirty water discourages drinking.",
+              "<strong>Monitor for signs of dehydration</strong>: Dry gums, sunken eyes, and loss of skin elasticity."
+            ]
+          },
+          {
+            title: "⚠️ Signs of Dehydration",
+            items: [
+              "<strong>Dry or sticky gums</strong> – A key early sign.",
+              "<strong>Loss of skin elasticity</strong> – Pinch the skin; if it doesn't snap back, your pet is dehydrated.",
+              "<strong>Sunken eyes</strong> – A serious sign requiring immediate attention.",
+              "<strong>Lethargy and weakness</strong> – Your pet may seem unusually tired.",
+              "<strong>Panting</strong> – Especially in dogs, it's a sign of heat stress and dehydration."
+            ]
+          }
+        ],
+        warning: "⚠️ <strong>Never let your pet go without water for more than 24 hours.</strong> Even mild dehydration can cause serious health issues.",
+        footer: "Water is life. Keep your pet hydrated with fresh, clean water every day.",
+        backLink: "← Back to Guide"
+      },
+      ar: {
+        pageTitle: "أهمية الماء للحيوانات الأليفة",
+        sections: [
+          {
+            title: "💧 لماذا الماء ضروري جدًا",
+            items: [
+              "<strong>ينظم درجة حرارة الجسم</strong> – مهم جدًا في الطقس الحار وبعد التمرين.",
+              "<strong>يدعم عملية الهضم</strong> – يساعد الماء في تكسير الطعام وامتصاص العناصر الغذائية.",
+              "<strong>يزيل السموم</strong> – تعتمد الكلى على الماء لإزالة الفضلات من الدم.",
+              "<strong>يُرطّب المفاصل</strong> – يبقي حيوانك متحركًا ويقلل الألم."
+            ]
+          },
+          {
+            title: "🐱 احتياجات القطط من الماء",
+            items: [
+              "<strong>القطط لا تشرب كثيرًا بطبيعتها</strong> – نشأت من حيوانات صحراوية، وتستمد رطوبتها من فريستها.",
+              "<strong>الطعام الرطب يساعد</strong> – الطعام المعلب يحتوي على 70-80٪ ماء، ويقلل من خطر الجفاف.",
+              "<strong>الماء الجاري يجذبها</strong> – استخدم نافورة ماء لتحفيزها على الشرب.",
+              "<strong>الجفاف خطر</strong> – يمكن أن يؤدي إلى التهابات المسالك البولية وأمراض الكلى."
+            ]
+          },
+          {
+            title: "🐶 احتياجات الكلاب من الماء",
+            items: [
+              "<strong>الكلاب تحتاج 50-70 مل لكل كجم من الوزن يوميًا</strong> – كلب وزنه 10 كجم يحتاج 500-700 مل يوميًا.",
+              "<strong>يزداد في الحر أو النشاط</strong> – الكلاب النشطة تحتاج ضعف الكمية.",
+              "<strong>قدّم دائمًا ماء نقي</strong> – الماء القديم أو المتسخ يقلل من رغبتهم في الشرب.",
+              "<strong>راقب علامات الجفاف</strong>: لثة جافة، عيون غارقة، وفقدان مرونة الجلد."
+            ]
+          },
+          {
+            title: "⚠️ علامات الجفاف",
+            items: [
+              "<strong>لثة جافة أو لزجة</strong> – علامة مبكرة مهمة.",
+              "<strong>فقدان مرونة الجلد</strong> – اضغط على الجلد؛ إذا لم يعود بسرعة، فهناك جفاف.",
+              "<strong>عيون غارقة</strong> – علامة خطيرة تتطلب تدخلًا فوريًا.",
+              "<strong>خمول وضعف</strong> – قد يبدو حيوانك متعبًا بشكل غير معتاد.",
+              "<strong>التهوّر</strong> – في الكلاب، هو علامة على الإجهاد الحراري والجفاف."
+            ]
+          }
+        ],
+        warning: "⚠️ <strong>لا تترك حيوانك بدون ماء لأكثر من 24 ساعة أبدًا.</strong> حتى الجفاف البسيط يمكن أن يسبب مشاكل صحية خطيرة.",
+        footer: "الماء هو الحياة. حافظ على ترطيب حيوانك بالماء النقي النظيف يوميًا.",
+        backLink: "← العودة إلى الدليل"
+      }
+    };
+
+    let currentLang = "en";
+
+    function toggleLanguage() {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      const t = texts[currentLang];
+      document.getElementById("page-title").textContent = t.pageTitle;
+      document.getElementById("toggle-language").innerText = "عربي / English";
+      document.body.dir = currentLang === "ar" ? "rtl" : "ltr";
+      renderContent();
+    }
+
+    function renderContent() {
+      const t = texts[currentLang];
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+
+      t.sections.forEach(section => {
+        const h2 = document.createElement("h2");
+        h2.innerHTML = section.title;
+        container.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = item;
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      });
+
+      // إضافة تحذير
+      const warning = document.createElement("div");
+      warning.className = "warning";
+      warning.innerHTML = t.warning;
+      container.appendChild(warning);
+
+      // تذييل
+      const footerP = document.createElement("p");
+      footerP.innerHTML = `<em>${t.footer}</em>`;
+      footerP.style.textAlign = currentLang === "ar" ? "right" : "left";
+      container.appendChild(footerP);
+
+      // زر العودة
+      const backLink = document.createElement("a");
+      backLink.href = "ANIMAL-EDUCATE.HTML";
+      backLink.innerHTML = t.backLink;
+      backLink.className = "back-link";
+      container.appendChild(backLink);
+    }
+
+    // تحميل المحتوى
+    renderContent();
+  </script>
+</body>
+</html>

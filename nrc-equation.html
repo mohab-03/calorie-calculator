@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NRC Equation - By Mohab</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+  <meta name="description" content="Learn about the NRC equation for pet calorie calculation. The most accurate method for dogs and cats.">
+  <meta name="keywords" content="NRC equation, pet nutrition, dog calorie, cat calorie, animal nutrition, mohab, r4_ce">
+  <meta name="author" content="Mohab">
+  <meta name="robots" content="index, follow">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --form-bg: #1f1f1f;
+      --accent-color: #00ffd5;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --form-bg: #f0f0f0;
+      --accent-color: #00bfa5;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    p {
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    h2 {
+      color: var(--accent-color);
+      margin-top: 25px;
+      margin-bottom: 12px;
+      font-size: 1.5rem;
+    }
+    ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    code {
+      background-color: var(--input-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: var(--accent-color);
+    }
+    .formula {
+      background-color: var(--form-bg);
+      padding: 12px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .fun-fact {
+      background-color: rgba(0, 255, 213, 0.1);
+      border-left: 4px solid var(--accent-color);
+      padding: 12px;
+      margin: 15px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .fun-fact h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: var(--accent-color);
+      font-size: 1.2rem;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px 6px 0 0;
+      text-align: center;
+      z-index: 999;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+    #toggle-theme {
+      right: 10px;
+    }
+    #toggle-language {
+      right: 130px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .btn-back {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .btn-back:hover {
+      background-color: #00c9a3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+      }
+      .container {
+        padding: 20px;
+      }
+      p {
+        font-size: 0.95rem;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      #toggle-theme,
+      #toggle-language {
+        top: 8px;
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+      footer {
+        font-size: 11px;
+        padding: 5px;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark" dir="ltr">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  <div class="container">
+    <h1 id="title">The NRC Equation: Your Pet's Energy Blueprint</h1>
+    <p id="desc">
+      Forget guesswork! The <strong>NRC Equation</strong> is the gold standard for calculating your pet's daily calorie needs. Developed by the National Research Council (NRC), it's the same science trusted by veterinarians and pet food companies worldwide.
+    </p>
+    <h2 id="when-title">When Was It Created?</h2>
+    <p id="when-desc">
+      The NRC has been refining pet nutrition guidelines for decades. The current, most accurate version used for energy calculation was published in <strong>2006</strong> in the "Nutrient Requirements of Dogs and Cats" guide. It's the result of decades of scientific research.
+    </p>
+    <h2 id="how-title">How Does It Work?</h2>
+    <p id="how-desc">
+      The equation is surprisingly elegant. It starts with your pet's Resting Energy Requirement (RER) and then multiplies it by factors based on their lifestyle. Think of it as a recipe:
+    </p>
+    <div class="formula">
+      <p><strong id="formula1-title">Step 1: Calculate RER (Resting Energy Requirement)</strong></p>
+      <p>RER = 70 × (Weight in kg)<sup>0.75</sup></p>
+      <p><em id="formula1-desc">This is the energy needed just to keep their heart beating and brain working while at rest.</em></p>
+    </div>
+    <div class="formula">
+      <p><strong id="formula2-title">Step 2: Apply the Multipliers</strong></p>
+      <p id="formula2-equation">Total Daily Energy = RER × Activity Factor × Life Stage Factor × Neutering Factor</p>
+    </div>
+    <ul id="factors-list">
+      <li><strong>Activity Factor:</strong> From 1.2 (couch potato) to 1.6 (highly active).</li>
+      <li><strong>Life Stage Factor:</strong> Puppies/kittens need up to 3x more energy than adults!</li>
+      <li><strong>Neutering Factor:</strong> Neutered pets have a 20% lower metabolic rate.</li>
+    </ul>
+    <div class="fun-fact">
+      <h3 id="fun-fact-title">🐾 Fun Fact!</h3>
+      <p id="fun-fact-desc">A 5kg cat's RER is about 180 kcal. But a 5kg puppy's energy needs can be over 500 kcal! That's because they're building bones, muscles, and organs every single day.</p>
+    </div>
+    <h2 id="why-title">Why Is It So Accurate?</h2>
+    <p id="why-desc">
+      Unlike simple weight-based rules, the NRC equation considers your pet's unique biology and lifestyle. It's not a one-size-fits-all guess; it's a personalized calculation based on solid science. This is why it's the most accurate method available.
+    </p>
+    <p class="text-center">
+      <a href="animal.html" class="btn-back" id="back-link">Back to Animal Calculator</a>
+    </p>
+  </div>
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+
+    const texts = {
+      en: {
+        title: "The NRC Equation: Your Pet's Energy Blueprint",
+        desc: `Forget guesswork! The <strong>NRC Equation</strong> is the gold standard for calculating your pet's daily calorie needs. Developed by the National Research Council (NRC), it's the same science trusted by veterinarians and pet food companies worldwide.`,
+        whenTitle: "When Was It Created?",
+        whenDesc: "The NRC has been refining pet nutrition guidelines for decades. The current, most accurate version used for energy calculation was published in <strong>2006</strong> in the \"Nutrient Requirements of Dogs and Cats\" guide. It's the result of decades of scientific research.",
+        howTitle: "How Does It Work?",
+        howDesc: "The equation is surprisingly elegant. It starts with your pet's Resting Energy Requirement (RER) and then multiplies it by factors based on their lifestyle. Think of it as a recipe:",
+        factorsList: `<li><strong>Activity Factor:</strong> From 1.2 (couch potato) to 1.6 (highly active).</li>
+                     <li><strong>Life Stage Factor:</strong> Puppies/kittens need up to 3x more energy than adults!</li>
+                     <li><strong>Neutering Factor:</strong> Neutered pets have a 20% lower metabolic rate.</li>`,
+        funFactTitle: "🐾 Fun Fact!",
+        funFactDesc: "A 5kg cat's RER is about 180 kcal. But a 5kg puppy's energy needs can be over 500 kcal! That's because they're building bones, muscles, and organs every single day.",
+        whyTitle: "Why Is It So Accurate?",
+        whyDesc: "Unlike simple weight-based rules, the NRC equation considers your pet's unique biology and lifestyle. It's not a one-size-fits-all guess; it's a personalized calculation based on solid science. This is why it's the most accurate method available.",
+        backLink: "Back to Animal Calculator",
+        formula1Title: "Step 1: Calculate RER (Resting Energy Requirement)",
+        formula1Desc: "This is the energy needed just to keep their heart beating and brain working while at rest.",
+        formula2Title: "Step 2: Apply the Multipliers",
+        formula2Equation: "Total Daily Energy = RER × Activity Factor × Life Stage Factor × Neutering Factor",
+        langButton: "عربي"
+      },
+      ar: {
+        title: "معادلة NRC: المخطط الخاص بطاقة حيوانك الأليف",
+        desc: "اترك التخمين وراءك! <strong>معادلة NRC</strong> هي المعيار الذهبي لحساب احتياجات حيوانك الأليف اليومية من السعرات الحرارية. تم تطويرها من قبل المجلس الوطني للبحوث (NRC)، وهي نفس العلم الذي يثق به الأطباء البيطريون وشركات أغذية الحيوانات الأليفة في جميع أنحاء العالم.",
+        whenTitle: "متى تم إنشاؤها؟",
+        whenDesc: "لقد كان المجلس الوطني للبحوث (NRC) يقوم بتحسين إرشادات تغذية الحيوانات الأليفة لعقود. تم نشر النسخة الحالية، الأكثر دقة، المستخدمة في حساب الطاقة في <strong>2006</strong> في دليل \"متطلبات العناصر الغذائية للكلاب والقطط\". وهي نتيجة عقود من الأبحاث العلمية.",
+        howTitle: "كيف تعمل؟",
+        howDesc: "المعادلة أنيقة بشكل مدهش. تبدأ باحتياجات حيوانك الأليف من الطاقة أثناء الراحة (RER)، ثم تُضرب في عوامل تعتمد على نمط حياته. فكّر فيها كوصفة:",
+        factorsList: `<li><strong>عامل النشاط:</strong> من 1.2 (كسلان) إلى 1.6 (نشط جدًا).</li>
+                     <li><strong>عامل مرحلة الحياة:</strong> الجراء/الهريرات يحتاجون إلى طاقة تصل إلى 3 أضعاف البالغين!</li>
+                     <li><strong>عامل التعقيم:</strong> الحيوانات المخصية لديها معدل أيض أقل بنسبة 30% - %20.</li>`,
+        funFactTitle: "🐾 حقيقة ممتعة!",
+        funFactDesc: "احتياجات القط البالغ من الطاقة أثناء الراحة (RER) قطه بوزن 5 كجم تبلغ حوالي 180 سعرة حرارية. ولكن احتياجات الجرو البالغ من الطاقة بوزن 5 كجم يمكن أن تتجاوز 500 سعرة حرارية! وذلك لأنهم يبنون عظامًا وعضلات وأعضاء كل يوم.",
+        whyTitle: "لماذا هي دقيقة جدًا؟",
+        whyDesc: "على عكس القواعد البسيطة التي تعتمد فقط على الوزن، فإن معادلة NRC تأخذ في الاعتبار البيولوجيا الفريدة لحيوانك الأليف ونمط حياته. إنها ليست تخمينًا عامًا، بل هي حساب شخصي مبني على علم صلب. لهذا السبب، فهي الطريقة الأكثر دقة المتاحة.",
+        backLink: "العودة إلى حاسبة الحيوانات",
+        formula1Title: "الخطوة 1: احسب RER (احتياجات الطاقة أثناء الراحة)",
+        formula1Desc: "هذه هي الطاقة المطلوبة فقط للحفاظ على دقات قلبهم وعمل دماغهم أثناء الراحة.",
+        formula2Title: "الخطوة 2: تطبيق العوامل المضاعفة",
+        formula2Equation: "إجمالي الطاقة اليومية = RER × عامل النشاط × عامل مرحلة الحياة × عامل التعقيم",
+        langButton: "English"
+      }
+    };
+
+    let currentLang = 'en';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const t = texts[currentLang];
+
+      // تحديث العناصر بالـ ID
+      document.getElementById('title').innerHTML = t.title;
+      document.getElementById('desc').innerHTML = t.desc;
+      document.getElementById('when-title').innerHTML = t.whenTitle;
+      document.getElementById('when-desc').innerHTML = t.whenDesc;
+      document.getElementById('how-title').innerHTML = t.howTitle;
+      document.getElementById('how-desc').innerHTML = t.howDesc;
+      document.getElementById('factors-list').innerHTML = t.factorsList;
+      document.getElementById('fun-fact-title').innerHTML = t.funFactTitle;
+      document.getElementById('fun-fact-desc').innerHTML = t.funFactDesc;
+      document.getElementById('why-title').innerHTML = t.whyTitle;
+      document.getElementById('why-desc').innerHTML = t.whyDesc;
+      document.getElementById('back-link').innerHTML = t.backLink;
+
+      // تحديث النصوص داخل .formula
+      document.getElementById('formula1-title').innerHTML = t.formula1Title;
+      document.getElementById('formula1-desc').innerHTML = t.formula1Desc;
+      document.getElementById('formula2-title').innerHTML = t.formula2Title;
+      document.getElementById('formula2-equation').innerHTML = t.formula2Equation; // ✅ تم إضافته
+
+      // تحديث زر اللغة
+      document.getElementById('toggle-language').innerText = t.langButton;
+
+      // تحديث الاتجاه
+      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+      // تحديث محاذاة الفقرات
+      document.querySelectorAll('p').forEach(p => {
+        p.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+      });
+    }
+  </script>
+</body>
+</html>

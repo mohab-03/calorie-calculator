@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toxic Foods for Pets</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --accent-color: #00ffd5;
+      --box-bg: #1f1f1f;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --accent-color: #00bfa5;
+      --box-bg: #f0f0f0;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--box-bg);
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.3);
+      text-align: right;
+    }
+
+    h2 {
+      color: var(--accent-color);
+      margin-top: 20px;
+      font-size: 1.8rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-right: 20px;
+      margin-top: 15px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .warning {
+      background-color: rgba(255, 0, 0, 0.1);
+      border-left: 4px solid #cc0000;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+      color: #ff9999;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background-color: #00c9a3;
+    }
+
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+
+    #toggle-theme {
+      right: 10px;
+    }
+
+    #toggle-language {
+      right: 130px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body class="theme-dark" dir="ltr">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+  <h1 id="page-title">Toxic Foods for Pets</h1>
+
+  <div class="content-container" id="content">
+    <!-- سيتم ملؤها بالجافاسكريبت -->
+  </div>
+
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+
+    const texts = {
+      en: {
+        pageTitle: "Toxic Foods for Pets",
+        sections: [
+          {
+            title: "☠️ Foods Toxic to ALL Pets",
+            items: [
+              "<strong>Chocolate</strong> – Contains theobromine and caffeine, which damage the heart, kidneys, and nervous system. Dark chocolate is the most dangerous.",
+              "<strong>Grapes & Raisins</strong> – Can cause sudden kidney failure in dogs and cats, even in small amounts.",
+              "<strong>Onions, Garlic, & Chives</strong> – Destroy red blood cells, leading to anemia. All forms (raw, cooked, powder) are toxic.",
+              "<strong>Xylitol</strong> – Found in gum, toothpaste, and sugar-free products. Causes rapid insulin release, leading to hypoglycemia and liver failure."
+            ]
+          },
+          {
+            title: "🐱 Foods Dangerous for Cats",
+            items: [
+              "<strong>Milk & Dairy</strong> – Most adult cats are lactose intolerant. Causes diarrhea and stomach pain.",
+              "<strong>Raw Eggs</strong> – Contain avidin, which interferes with biotin absorption, leading to skin and coat problems.",
+              "<strong>Raw Meat & Fish</strong> – May contain harmful bacteria (Salmonella, E. coli) or parasites. Raw fish also destroys vitamin B1.",
+              "<strong>Dough with Yeast</strong> – Expands in the stomach and produces alcohol, which is toxic.",
+              "<strong>Tuna (in excess)</strong> – High in mercury and can cause malnutrition if fed regularly."
+            ]
+          },
+          {
+            title: "🐶 Foods Dangerous for Dogs",
+            items: [
+              "<strong>Alcohol</strong> – Even small amounts can cause vomiting, diarrhea, difficulty breathing, and death.",
+              "<strong>Coffee & Tea</strong> – Caffeine affects the heart and nervous system severely.",
+              "<strong>Avocado</strong> – Contains persin, which can cause vomiting and diarrhea.",
+              "<strong>Macadamia Nuts</strong> – Cause weakness, vomiting, tremors, and hyperthermia.",
+              "<strong>Fat Trimmings & Bones</strong> – Can cause pancreatitis or internal injuries from splintering."
+            ]
+          },
+          {
+            title: "⚠️ Critical Safety Tips",
+            items: [
+              "<strong>Never feed from the table</strong> – It encourages begging and leads to obesity.",
+              "<strong>Keep human food out of reach</strong> – Pets are curious and will eat anything.",
+              "<strong>Check ingredient labels</strong> – Many commercial treats contain xylitol or onion powder.",
+              "<strong>When in doubt, don't give it</strong> – If you're unsure, it's better to be safe.",
+              "<strong>Know the symptoms of poisoning</strong>: Vomiting, diarrhea, lethargy, tremors, seizures, difficulty breathing.",
+              "<strong>Call your vet immediately</strong> if you suspect poisoning. Time is critical!"
+            ]
+          }
+        ],
+        warning: "⚠️ <strong>Even small amounts of some foods can be deadly.</strong> When it comes to your pet's diet, it's better to be overly cautious.",
+        footer: "Your pet depends on you for their safety. Keep toxic foods locked away and always feed a balanced, species-appropriate diet.",
+        backLink: "← Back to Guide"
+      },
+      ar: {
+        pageTitle: "الأطعمة السامة للحيوانات الأليفة",
+        sections: [
+          {
+            title: "☠️ أطعمة سامة لجميع الحيوانات",
+            items: [
+              "<strong>الشوكولاتة</strong> – تحتوي على الثيوبيرومين والكافيين، اللذان يضران القلب والكلى والجهاز العصبي. الشوكولاتة الداكنة هي الأخطر.",
+              "<strong>العنب والزبيب</strong> – يمكن أن يسبب فشل كلوي مفاجئ في الكلاب والقطط، حتى بكميات صغيرة.",
+              "<strong>البصل، الثوم، والكراث</strong> – تدمّر كريات الدم الحمراء، وتؤدي لفقر الدم. جميع الأشكال (نيئة، مطهية، مسحوقة) سامة.",
+              "<strong>الزيليتول</strong> – يوجد في العلك، معجون الأسنان، والمنتجات الخالية من السكر. يسبب إفراز الأنسولين بسرعة، مما يؤدي لانخفاض السكر وفشل كبدى."
+            ]
+          },
+          {
+            title: "🐱 أطعمة خطرة على القطط",
+            items: [
+              "<strong>الحليب ومنتجات الألبان</strong> – معظم القطط البالغة تعاني من عدم تحمل اللاكتوز. يسبب إسهالًا وألمًا في المعدة.",
+              "<strong>البيض النيء</strong> – يحتوي على الأفيدين، الذي يعيق امتصاص البيوتين، مما يؤدي لمشاكل في الجلد والفراء.",
+              "<strong>اللحوم والأسماك النيئة</strong> – قد تحتوي على بكتيريا ضارة (السالمونيلا، الإشريكية القولونية) أو طفيليات. الأسماك النيئة تدمر أيضًا فيتامين ب1.",
+              "<strong>عجينة تحتوي على خميرة</strong> – تتوسع في المعدة وتنتج كحول، وهو سام.",
+              "<strong>التونة (بكميات كبيرة)</strong> – غنية بالزئبق، ويمكن أن تسبب سوء التغذية إذا قُدمت بانتظام."
+            ]
+          },
+          {
+            title: "🐶 أطعمة خطرة على الكلاب",
+            items: [
+              "<strong>الكحول</strong> – حتى الكمية الصغيرة يمكن أن تسبب قيءًا، إسهالًا، صعوبة في التنفس، والموت.",
+              "<strong>القهوة والشاي</strong> – الكافيين يؤثر بشدة على القلب والجهاز العصبي.",
+              "<strong>الأفوكادو</strong> – يحتوي على مادة البيرسين، التي يمكن أن تسبب قيءًا وإسهالًا.",
+              "<strong>مكسرات المكاديميا</strong> – تسبب ضعفًا، قيءًا، رعشة، وارتفاع درجة الحرارة.",
+              "<strong>الدهون والأطراف والعظام</strong> – يمكن أن تسبب التهاب البنكرياس أو إصابات داخلية من التشقق."
+            ]
+          },
+          {
+            title: "⚠️ نصائح أمان حرجة",
+            items: [
+              "<strong>لا تطعم من المائدة أبدًا</strong> – يشجع على التسول ويزيد من السمنة.",
+              "<strong>احفظ طعام الإنسان بعيدًا</strong> – الحيوانات فضولية وتأكل أي شيء.",
+              "<strong>افحص مكونات الطعام</strong> – العديد من الوجبات الخفيفة تحتوي على الزيليتول أو بودرة البصل.",
+              "<strong>إذا شككت، لا تعطه</strong> – الوقاية خير من العلاج.",
+              "<strong>اعرف أعراض التسمم</strong>: قيء، إسهال، خمول، رعشة، نوبات، صعوبة في التنفس.",
+              "<strong>اتصل بالطبيب البيطري فورًا</strong> إذا شككت في التسمم. الوقت عامل حاسم!"
+            ]
+          }
+        ],
+        warning: "⚠️ <strong>حتى الكميات الصغيرة من بعض الأطعمة يمكن أن تكون قاتلة.</strong> عندما يتعلق الأمر بنظام حيوانك الغذائي، من الأفضل أن تكون مبالغًا في الحذر.",
+        footer: "حيوانك الأليف يعتمد عليك من أجل سلامته. احفظ الأطعمة السامة بعيدًا، وقدم دائمًا نظامًا غذائيًا متوازنًا ومناسبًا لنوعه.",
+        backLink: "← العودة إلى الدليل"
+      }
+    };
+
+    let currentLang = "en";
+
+    function toggleLanguage() {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      const t = texts[currentLang];
+      document.getElementById("page-title").textContent = t.pageTitle;
+      document.getElementById("toggle-language").innerText = "عربي / English";
+      document.body.dir = currentLang === "ar" ? "rtl" : "ltr";
+      renderContent();
+    }
+
+    function renderContent() {
+      const t = texts[currentLang];
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+
+      t.sections.forEach(section => {
+        const h2 = document.createElement("h2");
+        h2.innerHTML = section.title;
+        container.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        section.items.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = item;
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      });
+
+      // إضافة تحذير مهم
+      const warning = document.createElement("div");
+      warning.className = "warning";
+      warning.innerHTML = t.warning;
+      container.appendChild(warning);
+
+      // إضافة تذييل
+      const footerP = document.createElement("p");
+      footerP.innerHTML = `<em>${t.footer}</em>`;
+      footerP.style.textAlign = currentLang === "ar" ? "right" : "left";
+      container.appendChild(footerP);
+
+      // زر العودة
+      const backLink = document.createElement("a");
+      backLink.href = "ANIMAL-EDUCATE.HTML";
+      backLink.innerHTML = t.backLink;
+      backLink.className = "back-link";
+      container.appendChild(backLink);
+    }
+
+    // تحميل المحتوى
+    renderContent();
+  </script>
+</body>
+</html>

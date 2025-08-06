@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calorie & Macro Calculator - By Mohab</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+  <meta name="description" content="Accurate calorie and macro calculator for maintenance, bulking, and cutting. Built by Mohab (Instagram: r4_ce)">
+  <meta name="keywords" content="calorie calculator, macro calculator, bulking, cutting, maintenance, mohab, r4_ce, fitness, gym, fat loss, lean bulk">
+  <meta name="author" content="Mohab">
+  <meta name="robots" content="index, follow">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --form-bg: #1f1f1f;
+      --accent-color: #00ffd5;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --form-bg: #f0f0f0;
+      --accent-color: #00bfa5;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    form {
+      background-color: var(--form-bg);
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
+      text-align: right;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    input:focus,
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 255, 213, 0.4);
+    }
+    button[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: bold;
+    }
+    button[type="submit"]:hover {
+      background-color: #00c9a3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+    #toggle-theme {
+      right: 10px;
+    }
+    #toggle-language {
+      right: 130px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      form {
+        margin: 0 auto;
+        padding: 20px;
+        width: 95%;
+        max-width: 400px;
+      }
+      label,
+      input,
+      select,
+      button[type="submit"] {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      footer {
+        font-size: 11px;
+        margin-top: 25px;
+      }
+      #toggle-theme,
+      #toggle-language {
+        top: 8px;
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  <h1 id="title">Calorie Calculator</h1>
+  <form action="result.html" method="get" id="calc-form">
+    <label for="weight" id="label-weight">Weight (kg):</label>
+    <input type="number" id="weight" name="weight" min="1" max="300" required />
+
+    <label for="height" id="label-height">Height (cm):</label>
+    <input type="number" id="height" name="height" min="50" max="250" required />
+
+    <label for="age" id="label-age">Age (years):</label>
+    <input type="number" id="age" name="age" min="5" max="120" required />
+
+    <label for="gender" id="label-gender">Gender:</label>
+    <select id="gender" name="gender" required>
+      <option value="" disabled selected id="opt-select-gender">Select gender</option>
+      <option value="male" id="opt-male">Male</option>
+      <option value="female" id="opt-female">Female</option>
+    </select>
+
+    <label for="activity" id="label-activity">Activity Level:</label>
+    <select id="activity" name="activity" required>
+      <option value="" disabled selected id="opt-select-activity">Select activity</option>
+      <option value="sedentary" id="opt-sedentary">Sedentary (0-1 days/week)</option>
+      <option value="light" id="opt-light">Light (1-2 days/week)</option>
+      <option value="moderate" id="opt-moderate">Moderate (3-4 days/week)</option>
+      <option value="active" id="opt-active">Active (5-6 days/week)</option>
+      <option value="very_active" id="opt-very-active">Very Active (7 days/week)</option>
+    </select>
+
+    <button type="submit" id="btn-calculate">Calculate</button>
+  </form>
+
+  <!-- الجملة اللي فيها الرابط -->
+  <p id="equation-info">
+    This website uses the <a href="mifflin.html" style="color: blue; text-decoration: underline;">Mifflin-St Jeor</a> equation, which is considered the most accurate equation for calculating calorie needs.
+  </p>
+
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+
+    const texts = {
+      en: {
+        title: "Calorie Calculator",
+        labels: {
+          weight: "Weight (kg):",
+          height: "Height (cm):",
+          age: "Age (years):",
+          gender: "Gender:",
+          activity: "Activity Level:",
+          selectGender: "Select gender",
+          male: "Male",
+          female: "Female",
+          selectActivity: "Select activity",
+          sedentary: "Sedentary (0-1 days/week)",
+          light: "Light (1-2 days/week)",
+          moderate: "Moderate (3-4 days/week)",
+          active: "Active (5-6 days/week)",
+          veryActive: "Very Active (7 days/week)",
+          calculateBtn: "Calculate"
+        },
+        equationInfo: `This website uses the <a href="mifflin.html" style="color: blue; text-decoration: underline;">Mifflin-St Jeor</a> equation, which is considered the most accurate equation for calculating calorie needs.`
+      },
+      ar: {
+        title: "حاسبة السعرات",
+        labels: {
+          weight: "الوزن (كجم):",
+          height: "الطول (سم):",
+          age: "العمر (سنوات):",
+          gender: "النوع:",
+          activity: "مستوى النشاط:",
+          selectGender: "اختر النوع",
+          male: "ذكر",
+          female: "أنثى",
+          selectActivity: "اختر النشاط",
+          sedentary: "قليل النشاط (0-1 يوم/أسبوع)",
+          light: "نشاط خفيف (1-2 يوم/أسبوع)",
+          moderate: "نشاط متوسط (3-4 أيام/أسبوع)",
+          active: "نشاط نشط (5-6 أيام/أسبوع)",
+          veryActive: "نشاط عالي (7 أيام/أسبوع)",
+          calculateBtn: "احسب"
+        },
+        equationInfo: `يستخدم هذا الموقع <a href="mifflin.html" style="color: blue; text-decoration: underline;">معادلة Mifflin-St Jeor</a>، والتي تُعتبر المعادلة الأكثر دقة لحساب احتياجاتك من السعرات الحرارية.`
+      }
+    };
+
+    let currentLang = 'en';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const t = texts[currentLang];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('label-weight').textContent = t.labels.weight;
+      document.getElementById('label-height').textContent = t.labels.height;
+      document.getElementById('label-age').textContent = t.labels.age;
+      document.getElementById('label-gender').textContent = t.labels.gender;
+      document.getElementById('label-activity').textContent = t.labels.activity;
+      document.getElementById('opt-select-gender').textContent = t.labels.selectGender;
+      document.getElementById('opt-male').textContent = t.labels.male;
+      document.getElementById('opt-female').textContent = t.labels.female;
+      document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
+      document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
+      document.getElementById('opt-light').textContent = t.labels.light;
+      document.getElementById('opt-moderate').textContent = t.labels.moderate;
+      document.getElementById('opt-active').textContent = t.labels.active;
+      document.getElementById('opt-very-active').textContent = t.labels.veryActive;
+      document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
+      document.getElementById('equation-info').innerHTML = t.equationInfo;
+      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    }
+  </script>
+</body>
+</html>

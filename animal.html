@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animal Calorie Calculator - By Mohab</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+  <meta name="description" content="Accurate calorie calculator for pets using the most accurate equations. Calculate needs for dogs and cats. Built by Mohab (Instagram: r4_ce)">
+  <meta name="keywords" content="pet calorie calculator, dog nutrition, cat nutrition, animal nutrition, mohab, r4_ce, pet health, dog food, cat food">
+  <meta name="author" content="Mohab">
+  <meta name="robots" content="index, follow">
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #eee;
+      --form-bg: #1f1f1f;
+      --accent-color: #00ffd5;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --input-bg: #333;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --form-bg: #f0f0f0;
+      --accent-color: #00bfa5;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --input-bg: #ddd;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    form {
+      background-color: var(--form-bg);
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
+      text-align: right;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px 0;
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+    .label-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .info-icon {
+      font-size: 12px;
+      color: #00ffd5;
+      cursor: help;
+      margin-right: 5px;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    input:focus,
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 255, 213, 0.4);
+    }
+    button[type="submit"] {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: bold;
+    }
+    button[type="submit"]:hover {
+      background-color: #00c9a3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.3);
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      background-color: #00c9a3;
+      transform: scale(1.05);
+    }
+    #toggle-theme {
+      right: 10px;
+    }
+    #toggle-language {
+      right: 130px;
+    }
+    .pet-selector {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+    .pet-btn {
+      padding: 12px 20px;
+      background-color: var(--form-bg);
+      color: var(--text-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .pet-btn.active {
+      background-color: var(--accent-color);
+      color: #000;
+    }
+    .pet-btn:hover {
+      background-color: rgba(0, 255, 213, 0.2);
+    }
+    .equation-info {
+      color: blue;
+      font-weight: bold;
+      margin: 25px 0 5px 0;
+      font-size: 1.6rem;
+      text-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .explanation {
+      font-size: 15px;
+      color: #ccc;
+      margin-top: 4px;
+      font-style: italic;
+      line-height: 1.4;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      form {
+        margin: 0 auto;
+        padding: 20px;
+        width: 95%;
+        max-width: 400px;
+      }
+      label,
+      input,
+      select,
+      button[type="submit"] {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      footer {
+        font-size: 11px;
+        margin-top: 25px;
+      }
+      #toggle-theme,
+      #toggle-language {
+        top: 8px;
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+      .pet-selector {
+        gap: 15px;
+      }
+      .pet-btn {
+        padding: 10px 15px;
+        font-size: 1rem;
+      }
+      .equation-info {
+        font-size: 1.4rem;
+      }
+      .explanation {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  <h1 id="title">Animal Calorie Calculator</h1>
+  <form action="animal-result.html" method="get" id="calc-form">
+    <div class="pet-selector">
+      <button type="button" class="pet-btn active" id="dog-btn" onclick="selectPet('dog')">🐶 Dog</button>
+      <button type="button" class="pet-btn" id="cat-btn" onclick="selectPet('cat')">🐱 Cat</button>
+    </div>
+    <label for="weight" id="label-weight">Weight (kg):</label>
+    <input type="number" id="weight" name="weight" min="0.5" max="100" step="0.1" required />
+    <label for="age" id="label-age">Age (years):</label>
+    <input type="number" id="age" name="age" min="0.1" max="25" step="0.1" required />
+    <label for="activity" id="label-activity">Activity Level:</label>
+    <select id="activity" name="activity" required>
+      <option value="" disabled selected id="opt-select-activity">Select activity</option>
+      <option value="sedentary" id="opt-sedentary">Sedentary (low activity)</option>
+      <option value="normal" id="opt-normal">Normal (average activity)</option>
+      <option value="active" id="opt-active">Active (high activity)</option>
+    </select>
+    <label for="life-stage" id="label-life-stage">Life Stage:</label>
+    <select id="life-stage" name="life_stage" required>
+      <option value="" disabled selected id="opt-select-life">Select life stage</option>
+      <option value="puppy" id="opt-puppy">Puppy/Kitten</option>
+      <option value="adult" id="opt-adult">Adult</option>
+      <option value="senior" id="opt-senior">Senior</option>
+    </select>
+    <div class="label-container">
+      <label for="neutered" id="label-neutered">Neutered/Spayed:</label>
+      <span class="info-icon" title="Neutered males or spayed females have lower metabolic rates and require fewer calories">ℹ️</span>
+    </div>
+    <select id="neutered" name="neutered" required>
+      <option value="" disabled selected id="opt-select-neutered">Select option</option>
+      <option value="yes" id="opt-yes">Yes</option>
+      <option value="no" id="opt-no">No</option>
+    </select>
+    <p class="explanation" id="neutered-explanation">Neutered (males) or spayed (females) means the animal has undergone surgery to prevent reproduction. This reduces their metabolism, so they need 20-30% fewer calories than intact animals.</p>
+    <p class="equation-info" id="equation-info" onclick="goToEquationPage()">NRC EQUATION</p>
+    <p class="explanation" id="equation-desc">The National Research Council equation is considered the most accurate method for calculating calorie needs for dogs and cats.</p>
+    <!-- ✅ الحقل المخفي الجديد لإرسال نوع الحيوان -->
+    <input type="hidden" name="pet_type" id="pet-type-input" value="dog">
+    <button type="submit" id="btn-calculate">Calculate</button>
+  </form>
+  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
+    }
+    function goToEquationPage() {
+      window.location.href = "nrc-equation.html";
+    }
+    function selectPet(petType) {
+      // Update button states
+      document.getElementById('dog-btn').classList.remove('active');
+      document.getElementById('cat-btn').classList.remove('active');
+      if (petType === 'dog') {
+        document.getElementById('dog-btn').classList.add('active');
+      } else {
+        document.getElementById('cat-btn').classList.add('active');
+      }
+      // Update form title
+      const title = document.getElementById('title');
+      if (petType === 'dog') {
+        title.textContent = texts[currentLang].title;
+      } else {
+        title.textContent = texts[currentLang].titleCat;
+      }
+      // ✅ تحديث الحقل المخفي
+      document.getElementById('pet-type-input').value = petType;
+    }
+    const texts = {
+      en: {
+        title: "Animal Calorie Calculator",
+        titleCat: "Animal Calorie Calculator",
+        labels: {
+          weight: "Weight (kg):",
+          age: "Age (years):",
+          activity: "Activity Level:",
+          lifeStage: "Life Stage:",
+          selectActivity: "Select activity",
+          selectLife: "Select life stage",
+          sedentary: "Sedentary (low activity)",
+          normal: "Normal (average activity)",
+          active: "Active (high activity)",
+          puppy: "Puppy/Kitten",
+          adult: "Adult",
+          senior: "Senior",
+          calculateBtn: "Calculate",
+          neutered: "Neutered/Spayed:",
+          selectNeutered: "Select option",
+          yes: "Yes",
+          no: "No"
+        },
+        explanations: {
+          neutered: "Neutered (males) or spayed (females) means the animal has undergone surgery to prevent reproduction. This reduces their metabolism, so they need 20-30% fewer calories than intact animals."
+        },
+        petButtons: {
+          dog: "🐶 Dog",
+          cat: "🐱 Cat"
+        },
+        equationInfo: "NRC EQUATION",
+        equationDesc: "The National Research Council equation is considered the most accurate method for calculating calorie needs for dogs and cats."
+      },
+      ar: {
+        title: "حاسبة السعرات للحيوانات",
+        titleCat: "حاسبة السعرات للحيوانات",
+        labels: {
+          weight: "الوزن (كجم):",
+          age: "العمر (سنوات):",
+          activity: "مستوى النشاط:",
+          lifeStage: "مرحلة الحياة:",
+          selectActivity: "اختر النشاط",
+          selectLife: "اختر المرحلة",
+          sedentary: "قليل النشاط (نشاط منخفض)",
+          normal: "عادي (متوسط النشاط)",
+          active: "نشط (نشاط عالي)",
+          puppy: "جرو/هريرة",
+          adult: "بالغ",
+          senior: "مسن",
+          calculateBtn: "احسب",
+          neutered: "مُخصي/مُعطّل:",
+          selectNeutered: "اختر الخيار",
+          yes: "نعم",
+          no: "لا"
+        },
+        explanations: {
+          neutered: "الحيوانات المخصية (الذكور) أو المعطلة (الإناث) تعني أن الحيوان خضع لعملية جراحية لمنع التكاثر. هذا يقلل من معدل الأيض لديهم، لذلك يحتاجون إلى 20-30٪ من السعرات الحرارية أقل من الحيوانات السليمة."
+        },
+        petButtons: {
+          dog: "🐶 كلب",
+          cat: "🐱 قط",
+        },
+        equationInfo: "معادلة NRC",
+        equationDesc: "تعتبر معادلة المجلس الوطني للبحوث الطريقة الأكثر دقة لحساب احتياجات الكلاب والقطط من السعرات الحرارية."
+      }
+    };
+    let currentLang = 'en';
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const t = texts[currentLang];
+      // Update pet buttons
+      document.getElementById('dog-btn').innerHTML = t.petButtons.dog;
+      document.getElementById('cat-btn').innerHTML = t.petButtons.cat;
+      // Update form labels
+      document.getElementById('label-weight').textContent = t.labels.weight;
+      document.getElementById('label-age').textContent = t.labels.age;
+      document.getElementById('label-activity').textContent = t.labels.activity;
+      document.getElementById('label-life-stage').textContent = t.labels.lifeStage;
+      document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
+      document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
+      document.getElementById('opt-normal').textContent = t.labels.normal;
+      document.getElementById('opt-active').textContent = t.labels.active;
+      document.getElementById('opt-select-life').textContent = t.labels.selectLife;
+      document.getElementById('opt-puppy').textContent = t.labels.puppy;
+      document.getElementById('opt-adult').textContent = t.labels.adult;
+      document.getElementById('opt-senior').textContent = t.labels.senior;
+      document.getElementById('label-neutered').textContent = t.labels.neutered;
+      document.getElementById('opt-select-neutered').textContent = t.labels.selectNeutered;
+      document.getElementById('opt-yes').textContent = t.labels.yes;
+      document.getElementById('opt-no').textContent = t.labels.no;
+      document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
+      // Update explanation text
+      document.getElementById('neutered-explanation').textContent = t.explanations.neutered;
+      // Update equation info
+      document.getElementById('equation-info').textContent = t.equationInfo;
+      document.getElementById('equation-desc').textContent = t.equationDesc;
+      // Update title based on current selection
+      const isDogSelected = document.getElementById('dog-btn').classList.contains('active');
+      if (isDogSelected) {
+        document.getElementById('title').textContent = t.title;
+      } else {
+        document.getElementById('title').textContent = t.titleCat;
+      }
+      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    }
+    // Initialize with dog selected
+    selectPet('dog');
+  </script>
+</body>
+</html>

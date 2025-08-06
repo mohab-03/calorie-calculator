@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Animal Calorie Results</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
+  <style>
+    :root {
+      --bg-color: #0e0e0e;
+      --text-color: white;
+      --box-bg: #1f1f1f;
+      --accent-color: #00ffd5;
+      --footer-bg: #00ffd5;
+      --footer-text: black;
+      --gradient-start: #0a0a0a;
+      --gradient-mid: #111;
+      --gradient-end: #0d0d0d;
+    }
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --box-bg: #f0f0f0;
+      --accent-color: #00bfa5;
+      --footer-bg: #dddddd;
+      --footer-text: #000000;
+      --gradient-start: #f5f5f5;
+      --gradient-mid: #fff;
+      --gradient-end: #f7f7f7;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--text-color);
+      background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: all 0.5s ease;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    h1 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    .result-box {
+      background-color: var(--box-bg);
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
+      margin-bottom: 20px;
+      transition: box-shadow 0.3s ease;
+    }
+    .result-box:hover {
+      box-shadow: 0 0 20px rgba(0, 255, 213, 0.5);
+    }
+    p, ul {
+      text-align: left;
+      padding: 0 10px;
+    }
+    label {
+      text-align: left !important;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      background-color: #00c9a3;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--footer-text);
+      background-color: var(--footer-bg);
+      padding: 6px;
+      border-radius: 6px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #toggle-theme,
+    #toggle-language {
+      position: fixed;
+      top: 10px;
+      padding: 6px 10px;
+      background-color: var(--accent-color);
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 999;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 255, 213, 0.3);
+    }
+    #toggle-theme:hover,
+    #toggle-language:hover {
+      transform: scale(1.05);
+      background-color: #00c9a3;
+    }
+    #toggle-theme {
+      right: 10px;
+    }
+    #toggle-language {
+      left: 10px;
+    }
+    #print-pdf-btn {
+      background-color: #ff9800;
+      color: #000;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+    #print-pdf-btn:hover {
+      background-color: #f57c00;
+      box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
+      transform: translateY(-2px);
+    }
+    #learn-more-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #00ffd5, #00ebff);
+      color: #000;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 15px 25px;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #learn-more-btn:hover {
+      background: linear-gradient(45deg, #00c9a3, #00d9ff);
+      box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 600px) {
+      #print-pdf-btn,
+      #learn-more-btn {
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+      }
+      p, ul {
+        text-align: left !important;
+      }
+    }
+    .arabic-text {
+      text-align: right !important;
+      direction: rtl !important;
+    }
+    @media print {
+      body {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+      }
+      #toggle-theme,
+      #toggle-language,
+      footer,
+      #print-pdf-btn,
+      #learn-more-btn {
+        display: none;
+      }
+      .result-box {
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        border: none !important;
+        background-color: transparent !important;
+      }
+      h1 {
+        color: var(--accent-color) !important;
+      }
+      a::after {
+        content: " (" attr(href) ")";
+        font-size: 12px;
+        color: gray;
+      }
+      .arabic-text {
+        text-align: right !important;
+        direction: rtl !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark">
+  <button id="toggle-language" onclick="toggleLanguage()">عربي</button>
+  <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+  <h1 id="title">Animal Calorie Results</h1>
+  <div id="results"></div>
+  <button id="print-pdf-btn" onclick="window.print()">
+    📄 <span id="btn-print-text">Save as PDF</span>
+  </button>
+  <a id="learn-more-btn" href="animal-educate.html">
+  <span id="learn-more-btn-text">Learn More About Pet Nutrition</span>
+</a>  <footer>
+    Made by Mohab (
+    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
+    )
+  </footer>
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+  </script>
+  <script>
+    let currentLang = "en";
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
+      const themeBtn = document.getElementById("toggle-theme");
+      if (document.body.classList.contains("light-mode")) {
+        themeBtn.style.backgroundColor = "#00bfa5";
+      } else {
+        themeBtn.style.backgroundColor = "#00ffd5";
+      }
+    }
+    function toggleLanguage() {
+      currentLang = currentLang === "en" ? "ar" : "en";
+      document.getElementById("toggle-language").innerText = currentLang === "en" ? "عربي" : "English";
+      document.getElementById("title").innerText = currentLang === "en" ? "Animal Calorie Results" : "نتائج السعرات للحيوانات";
+      document.getElementById("btn-print-text").innerText = currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
+      document.getElementById("learn-more-btn-text").innerText = currentLang === "en" ? "Learn More About Pet Nutrition" : "تعلم المزيد عن تغذية الحيوانات";
+      displayResults();
+    }
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        weight: parseFloat(params.get('weight')),
+        age: parseFloat(params.get('age')),
+        activity: params.get('activity'),
+        life_stage: params.get('life_stage'),
+        neutered: params.get('neutered'),
+        pet_type: params.get('pet_type') || 'dog'
+      };
+    }
+    function calculateRER(weight) {
+      return 70 * Math.pow(weight, 0.75);
+    }
+    function getActivityMultiplier(activity) {
+      const multipliers = {
+        sedentary: 1.2,
+        normal: 1.4,
+        active: 1.6
+      };
+      return multipliers[activity] || 1.2;
+    }
+    function getLifeStageMultiplier(lifeStage, petType) {
+      const multipliers = {
+        puppy: petType === 'dog' ? 3.0 : 2.5,
+        adult: 1.0,
+        senior: 0.8
+      };
+      return multipliers[lifeStage] || 1.0;
+    }
+    function getNeuteredMultiplier(neutered) {
+      return neutered === 'yes' ? 0.8 : 1.0;
+    }
+    function calculateMacros(calories, weight, petType, lifeStage) {
+      let proteinPerKg, fatPercentage, calciumPhosphorusRatio;
+      if (petType === 'cat') {
+        proteinPerKg = lifeStage === 'puppy' ? 6.0 : 5.5;
+        fatPercentage = 0.35;
+        calciumPhosphorusRatio = "1.2:1";
+      } else {
+        proteinPerKg = lifeStage === 'puppy' ? 3.5 : 2.5;
+        fatPercentage = 0.20;
+        calciumPhosphorusRatio = "1.4:1";
+      }
+      const protein = Math.round(weight * proteinPerKg);
+      const proteinCals = protein * 4;
+      const fatCals = calories * fatPercentage;
+      const fats = Math.round(fatCals / 9);
+      const carbs = Math.round((calories - proteinCals - fatCals) / 4);
+      return { protein, carbs, fats, calciumPhosphorusRatio };
+    }
+    function showMacros(calories, weight, petType, lifeStage) {
+      const { protein, carbs, fats, calciumPhosphorusRatio } = calculateMacros(calories, weight, petType, lifeStage);
+      return `
+        <p class="${currentLang === "ar" ? "arabic-text" : ""}">
+          <strong>${currentLang === "en" ? "Macros" : "العناصر الغذائية"}:</strong><br>
+          ${currentLang === "en" ? "Protein" : "بروتين"}: ${protein}g | 
+          ${currentLang === "en" ? "Carbs" : "كارب"}: ${carbs}g | 
+          ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g<br>
+          <strong>${currentLang === "en" ? "Key Nutrient Ratio" : "نسبة المغذيات الأساسية"}:</strong> 
+          Ca:P = ${calciumPhosphorusRatio}
+        </p>`;
+    }
+    function displayResults() {
+      const data = getQueryParams();
+      if (!data.weight || !data.age || !data.activity || !data.life_stage || !data.neutered || !data.pet_type) {
+        document.getElementById('results').innerHTML = `
+          <p style='color:red;'>${currentLang === "en" ? "Missing or invalid data. Please go back and fill all fields." : "يوجد نقص أو خطأ في البيانات. ارجع واملأ جميع الحقول."}</p>
+        `;
+        return;
+      }
+      const rer = calculateRER(data.weight);
+      const activityMultiplier = getActivityMultiplier(data.activity);
+      const lifeStageMultiplier = getLifeStageMultiplier(data.life_stage, data.pet_type);
+      const neuteredMultiplier = getNeuteredMultiplier(data.neutered);
+      const tder = rer * activityMultiplier * lifeStageMultiplier * neuteredMultiplier;
+      const maintenance = Math.round(tder);
+      const weightLoss = Math.round(tder * 0.75);
+      const weightGain = Math.round(tder * 1.15);
+      const today = new Date().toLocaleDateString(currentLang === "en" ? "en-US" : "ar-SA");
+      const specialNote = data.pet_type === 'cat' ? 
+        (currentLang === "en" ? 
+          "⚠️ Cats are obligate carnivores. They require high protein, specific amino acids like taurine, and cannot thrive on plant-based diets. Always provide fresh water." :
+          "⚠️ القطط كائنات آكلة للحوم بالكامل. تحتاج إلى بروتين عالي وأحماض أمينية محددة مثل التورين، ولا يمكنها البقاء على قيد الحياة بالاعتماد على الأنظمة النباتية. قدم دائمًا ماء نقي."
+        ) : 
+        (currentLang === "en" ? 
+          "⚠️ Dogs need a balanced diet with a proper calcium-to-phosphorus ratio (1.4:1). Avoid toxic foods like chocolate, grapes, and onions. Puppies need higher calcium for bone development." :
+          "⚠️ الكلاب تحتاج إلى نظام غذائي متوازن بنسب محددة من الكالسيوم إلى الفوسفور (1.4:1). تجنب الأطعمة السامة مثل الشوكولاتة والعنب والبصل. الجراء يحتاجون إلى كمية أعلى من الكالسيوم لتطوير العظام."
+        );
+      let resultsHTML = `
+        <div class="print-header">${currentLang === "en" ? "Printed on" : "تم الطباعة في"}: ${today}</div>
+        <div class="result-box" style="border-left: 5px solid #00ffd5;">
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">⚖️ ${currentLang === "en" ? "Maintenance Calories" : "سعرات الثبات"}</h2>
+          <p>${maintenance} kcal</p>
+          ${showMacros(maintenance, data.weight, data.pet_type, data.life_stage)}
+          <p class="arabic-text" style="font-style: italic; color: #aaa;">${specialNote}</p>
+        </div>
+        <div class="result-box" style="border-left: 5px solid #00ebff;">
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🐾 ${currentLang === "en" ? "Weight Management" : "إدارة الوزن"}</h2>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Weight Loss" : "خسارة الوزن"}:</strong> ${weightLoss} kcal</p>
+            ${showMacros(weightLoss, data.weight, data.pet_type, data.life_stage)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "For healthy weight reduction" : "لخفض الوزن بطريقة صحية"}</p>
+          </div>
+          <div class="result-box" style="margin: 10px;">
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Weight Gain" : "زيادة الوزن"}:</strong> ${weightGain} kcal</p>
+            ${showMacros(weightGain, data.weight, data.pet_type, data.life_stage)}
+            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "For healthy weight gain" : "لزيادة الوزن بطريقة صحية"}</p>
+          </div>
+        </div>
+      `;
+      if (data.life_stage === 'puppy') {
+        const growth = Math.round(tder * 1.4);
+        resultsHTML = `
+          <div class="print-header">${currentLang === "en" ? "Printed on" : "تم الطباعة في"}: ${today}</div>
+          <div class="result-box" style="border-left: 5px solid #00ffc7;">
+            <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🐾 ${currentLang === "en" ? "Growth & Development" : "النمو والتطور"}</h2>
+            <div class="result-box" style="margin: 10px;">
+              <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Puppy/Kitten Growth" : "نمو الجرو/الهريرة"}:</strong> ${growth} kcal</p>
+              ${showMacros(growth, data.weight, data.pet_type, 'puppy')}
+              <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "For optimal growth and development" : "للنمو والتطور الأمثل"}</p>
+            </div>
+          </div>
+        ` + resultsHTML;
+      }
+      document.getElementById('results').innerHTML = resultsHTML;
+    }
+    window.onload = displayResults;
+  </script>
+</body>
+</html>
