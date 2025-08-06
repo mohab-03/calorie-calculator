@@ -223,7 +223,7 @@
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Animal Calorie Results</h1>
   <div id="results"></div>
-  <button id="print-pdf-btn" onclick="window.print()">
+  <button id="print-pdf-btn" onclick="handlePrint()">
     📄 <span id="btn-print-text">Save as PDF</span>
   </button>
   <a id="learn-more-btn" href="animal-educate.html">
@@ -324,6 +324,18 @@
           <strong>${currentLang === "en" ? "Key Nutrient Ratio" : "نسبة المغذيات الأساسية"}:</strong> 
           Ca:P = ${calciumPhosphorusRatio}
         </p>`;
+    }
+    function handlePrint() {
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        alert(currentLang === "en" 
+          ? "To save as PDF: tap the share button or menu, then choose 'Print' → 'Save as PDF'." 
+          : "لحفظ كملف PDF: اضغط على زر المشاركة أو القائمة، ثم اختر 'طباعة' → 'حفظ كـ PDF'."
+        );
+      } else {
+        window.print();
+      }
     }
     function displayResults() {
       const data = getQueryParams();
