@@ -137,30 +137,6 @@
     #toggle-language {
       left: 10px;
     }
-    /* Share Button - smaller text */
-    #share-btn {
-      background-color: #4caf50;
-      color: #000;
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 12px;
-      padding: 10px 20px;
-      margin-top: 20px;
-      margin-bottom: 8px;
-      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      width: 90%;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #share-btn:hover {
-      background-color: #43a047;
-      box-shadow: 0 6px 14px rgba(76, 175, 80, 0.6);
-      transform: translateY(-2px);
-    }
     /* Print Button */
     #print-pdf-btn {
       background-color: #ff9800;
@@ -169,7 +145,7 @@
       font-weight: 700;
       border-radius: 12px;
       padding: 12px 20px;
-      margin-top: 8px;
+      margin-top: 20px;
       margin-bottom: 10px;
       box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
       transition: all 0.3s ease;
@@ -179,33 +155,63 @@
       box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
       transform: translateY(-2px);
     }
-    /* Learn More Button - New Styling */
+    /* Learn More Button - Enhanced Styling */
     #learn-more-btn {
       display: inline-block;
       background: linear-gradient(45deg, #00ffd5, #00ebff);
       color: #000;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
-      border-radius: 12px;
-      padding: 15px 25px;
-      margin-top: 10px;
-      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5);
+      border-radius: 14px;
+      padding: 18px 30px;
+      margin-top: 15px;
+      box-shadow: 0 6px 20px rgba(0, 255, 213, 0.7),
+                  0 0 30px rgba(0, 255, 213, 0.4),
+                  0 0 50px rgba(0, 235, 255, 0.3);
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      min-width: 280px;
+      letter-spacing: 0.5px;
+      font-family: 'Arial', sans-serif;
     }
     #learn-more-btn:hover {
       background: linear-gradient(45deg, #00c9a3, #00d9ff);
-      box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7);
-      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 201, 163, 0.8),
+                  0 0 40px rgba(0, 201, 163, 0.5),
+                  0 0 70px rgba(0, 217, 255, 0.4);
+      transform: translateY(-3px) scale(1.03);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    #learn-more-btn::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #00ffd5, #00ebff, #00c9a3, #00d9ff, #00ffd5);
+      background-size: 300% 300%;
+      animation: shimmer 3s linear infinite;
+      opacity: 0.4;
+      border-radius: 20px;
+      z-index: -1;
+      filter: blur(10px);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     #learn-more-btn::after {
       content: '';
       position: absolute;
       top: 0; left: 0; bottom: 0; right: 0;
-      border-radius: 12px;
+      border-radius: 14px;
       pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 253, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
       opacity: 0.2;
       transition: opacity 0.3s ease;
     }
@@ -213,11 +219,10 @@
       opacity: 0.4;
     }
     @media (max-width: 600px) {
-      #share-btn,
       #print-pdf-btn,
       #learn-more-btn {
         width: 100%;
-        font-size: 14px;
+        font-size: 18px;
         text-align: center;
       }
       p, ul {
@@ -239,7 +244,6 @@
       #toggle-language,
       footer,
       #print-pdf-btn,
-      #share-btn,
       #learn-more-btn {
         display: none;
       }
@@ -279,15 +283,11 @@
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Calorie Results</h1>
   <div id="results"></div>
-  <!-- Share Button -->
-  <button id="share-btn" onclick="handleShare()">
-    📤 <span id="btn-share-text">Share Results</span>
-  </button>
   <!-- Save as PDF Button -->
   <button id="print-pdf-btn" onclick="handlePrint()">
     📄 <span id="btn-print-text">Save as PDF</span>
   </button>
-  <!-- Learn More Button with subtle animation -->
+  <!-- Learn More Button with enhanced styling -->
   <a id="learn-more-btn" href="educate.html">
     <span id="learn-more-btn-text">Learn More About Nutrition</span>
   </a>
@@ -310,8 +310,6 @@
   <!-- Logic Script -->
   <script>
     let currentLang = "en";
-    let globalTdee = 0;
-
     function handlePrint() {
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
       if (isMobile) {
@@ -323,33 +321,6 @@
         window.print();
       }
     }
-
-    async function handleShare() {
-      const title = currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
-      const text = currentLang === "en"
-        ? `My maintenance calories: ~${Math.round(globalTdee)} kcal`
-        : `سعراتي اليومية للثبات: ~${Math.round(globalTdee)} كيلو سعرة`;
-      
-      const url = window.location.href;
-
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: title,
-            text: text,
-            url: url
-          });
-        } catch (err) {
-          console.log('مشاركة تم إلغاؤها أو حدث خطأ:', err);
-        }
-      } else {
-        alert(currentLang === "en"
-          ? "Sharing not supported on this browser. Link copied to clipboard!"
-          : "المتصفح لا يدعم المشاركة. تم نسخ الرابط إلى الحافظة!");
-        await navigator.clipboard.writeText(url);
-      }
-    }
-
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -359,22 +330,20 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
-
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
+      // Update button texts
       document.getElementById("toggle-language").innerText =
         currentLang === "en" ? "عربي" : "English";
+      // Update title and other buttons
       document.getElementById("title").innerText =
         currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
       document.getElementById("btn-print-text").innerText =
         currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
-      document.getElementById("btn-share-text").innerText =
-        currentLang === "en" ? "Share Results" : "شارك النتائج";
       document.getElementById("learn-more-btn-text").innerText =
         currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
       displayResults();
     }
-
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -385,13 +354,11 @@
         activity: params.get('activity'),
       };
     }
-
     function calculateBMR({ weight, height, age, gender }) {
       return gender === 'male'
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
     }
-
     function getActivityMultiplier(activity) {
       const multipliers = {
         sedentary: 1.2,
@@ -402,7 +369,6 @@
       };
       return multipliers[activity] || 1.2;
     }
-
     function calculateMacros(calories, weight, proteinPerKg) {
       const protein = Math.round(weight * proteinPerKg);
       const proteinCals = protein * 4;
@@ -411,7 +377,6 @@
       const carbs = Math.round((calories - proteinCals - fatCals) / 4);
       return { protein, carbs, fats };
     }
-
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
       return `
@@ -422,7 +387,6 @@
           ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
         </p>`;
     }
-
     function displayResults() {
       const data = getQueryParams();
       if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
@@ -433,7 +397,6 @@
       }
       const bmr = calculateBMR(data);
       const tdee = bmr * getActivityMultiplier(data.activity);
-      globalTdee = tdee;
       const bulkLight = Math.round(tdee * 1.1);
       const bulkModerate = Math.round(tdee * 1.2);
       const bulkAggressive = Math.round(tdee * 1.3);
