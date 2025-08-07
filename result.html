@@ -138,30 +138,39 @@
     #toggle-language {
       left: 10px;
     }
+
+    /* Container for action buttons */
+    .action-buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      align-items: center;
+    }
+
     /* Share Button */
     #share-btn {
       background-color: #4caf50;
       color: #000;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       border-radius: 12px;
-      padding: 10px 20px;
-      margin-top: 15px;
-      margin-bottom: 8px;
+      padding: 12px 20px;
       box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
-      width: 90%;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;
+      text-align: center;
     }
     #share-btn:hover {
       background-color: #43a047;
       box-shadow: 0 6px 14px rgba(76, 175, 80, 0.6);
       transform: translateY(-2px);
     }
+
     /* Print Button */
     #print-pdf-btn {
       background-color: #ff9800;
@@ -170,86 +179,87 @@
       font-weight: 700;
       border-radius: 12px;
       padding: 12px 20px;
-      margin-top: 8px;
-      margin-bottom: 10px;
       box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
       transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
     }
     #print-pdf-btn:hover {
       background-color: #f57c00;
       box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
       transform: translateY(-2px);
     }
+
     /* Learn More Button - Enhanced Styling */
     #learn-more-btn {
       display: inline-block;
       background: linear-gradient(45deg, #00ffd5, #00ebff);
       color: #000;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       border-radius: 12px;
-      padding: 12px 20px;
-      margin-top: 10px;
+      padding: 15px 25px;
       box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5),
-                  0 0 20px rgba(0, 255, 213, 0.2);
+                  0 0 20px rgba(0, 255, 213, 0.2),
+                  0 0 30px rgba(0, 235, 255, 0.1);
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      width: 90%;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
     }
     #learn-more-btn:hover {
       background: linear-gradient(45deg, #00c9a3, #00d9ff);
       box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7),
-                  0 0 25px rgba(0, 201, 163, 0.4);
+                  0 0 25px rgba(0, 201, 163, 0.4),
+                  0 0 40px rgba(0, 217, 255, 0.3);
       transform: translateY(-2px);
       text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     }
-    /* Responsive Design */
+    #learn-more-btn::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(45deg, #00ffd5, #00ebff, #00c9a3, #00d9ff, #00ffd5);
+      background-size: 300% 300%;
+      animation: shimmer 3s linear infinite;
+      opacity: 0.3;
+      border-radius: 18px;
+      z-index: -1;
+      filter: blur(8px);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #learn-more-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      opacity: 0.2;
+      transition: opacity 0.3s ease;
+    }
+    #learn-more-btn:hover::after {
+      opacity: 0.4;
+    }
+
     @media (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 15px;
-      }
-      .result-box {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 15px;
+      .action-buttons-container {
+        width: 95%;
       }
       p, ul {
-        padding: 0 8px;
-      }
-      #share-btn,
-      #print-pdf-btn,
-      #learn-more-btn {
-        width: 100%;
-        margin: 10px auto;
-        font-size: 15px;
-      }
-      #toggle-theme,
-      #toggle-language {
-        padding: 5px 8px;
-        font-size: 12px;
-      }
-      footer {
-        margin-top: 30px;
-        font-size: 11px;
-        padding: 5px;
-      }
-    }
-    @media (min-width: 601px) {
-      .result-box {
-        margin-bottom: 20px;
-      }
-      #share-btn,
-      #print-pdf-btn,
-      #learn-more-btn {
-        margin: 12px auto;
+        text-align: left !important;
       }
     }
     /* Arabic Text Only Alignment */
@@ -266,9 +276,7 @@
       #toggle-theme,
       #toggle-language,
       footer,
-      #print-pdf-btn,
-      #share-btn,
-      #learn-more-btn {
+      .action-buttons-container {
         display: none;
       }
       .result-box {
@@ -307,18 +315,25 @@
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Calorie Results</h1>
   <div id="results"></div>
-  <!-- Share Button -->
-  <button id="share-btn" onclick="handleShare()">
-    📤 <span id="btn-share-text">Share Results</span>
-  </button>
-  <!-- Save as PDF Button -->
-  <button id="print-pdf-btn" onclick="handlePrint()">
-    📄 <span id="btn-print-text">Save as PDF</span>
-  </button>
-  <!-- Learn More Button with enhanced styling -->
-  <a id="learn-more-btn" href="educate.html">
-    <span id="learn-more-btn-text">Learn More About Nutrition</span>
-  </a>
+
+  <!-- Container for action buttons - stacked vertically for better UX -->
+  <div class="action-buttons-container">
+    <!-- Share Button -->
+    <button id="share-btn" onclick="handleShare()">
+      📤 <span id="btn-share-text">Share Results</span>
+    </button>
+    
+    <!-- Print PDF Button -->
+    <button id="print-pdf-btn" onclick="handlePrint()">
+      📄 <span id="btn-print-text">Save as PDF</span>
+    </button>
+    
+    <!-- Learn More Button with enhanced styling -->
+    <a id="learn-more-btn" href="educate.html">
+      <span id="learn-more-btn-text">Learn More About Nutrition</span>
+    </a>
+  </div>
+
   <footer>
     Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
@@ -339,7 +354,6 @@
   <script>
     let currentLang = "en";
     let globalTdee = 0;
-
     function handlePrint() {
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
       if (isMobile) {
@@ -351,15 +365,12 @@
         window.print();
       }
     }
-
     async function handleShare() {
       const title = currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
       const text = currentLang === "en"
         ? `My maintenance calories: ~${Math.round(globalTdee)} kcal`
         : `سعراتي اليومية للثبات: ~${Math.round(globalTdee)} كيلو سعرة`;
-      
       const url = window.location.href;
-
       if (navigator.share) {
         try {
           await navigator.share({
@@ -377,7 +388,6 @@
         await navigator.clipboard.writeText(url);
       }
     }
-
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -387,7 +397,6 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
-
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
       document.getElementById("toggle-language").innerText =
@@ -402,7 +411,6 @@
         currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
       displayResults();
     }
-
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -413,13 +421,11 @@
         activity: params.get('activity'),
       };
     }
-
     function calculateBMR({ weight, height, age, gender }) {
       return gender === 'male'
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
     }
-
     function getActivityMultiplier(activity) {
       const multipliers = {
         sedentary: 1.2,
@@ -430,7 +436,6 @@
       };
       return multipliers[activity] || 1.2;
     }
-
     function calculateMacros(calories, weight, proteinPerKg) {
       const protein = Math.round(weight * proteinPerKg);
       const proteinCals = protein * 4;
@@ -439,7 +444,6 @@
       const carbs = Math.round((calories - proteinCals - fatCals) / 4);
       return { protein, carbs, fats };
     }
-
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
       return `
@@ -450,7 +454,6 @@
           ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
         </p>`;
     }
-
     function displayResults() {
       const data = getQueryParams();
       if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
@@ -518,4 +521,3 @@
   </script>
 </body>
 </html>
-
