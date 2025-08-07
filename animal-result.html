@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,6 +135,40 @@
     #toggle-language {
       left: 10px;
     }
+
+    /* Container for action buttons */
+    .action-buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      align-items: center;
+    }
+
+    /* Share Button */
+    #share-btn {
+      background-color: #4caf50;
+      color: #000;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 12px 20px;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+    #share-btn:hover {
+      background-color: #43a047;
+      box-shadow: 0 6px 14px rgba(76, 175, 80, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Print Button */
     #print-pdf-btn {
       background-color: #ff9800;
       color: #000;
@@ -141,16 +176,20 @@
       font-weight: 700;
       border-radius: 12px;
       padding: 12px 20px;
-      margin-top: 20px;
-      margin-bottom: 10px;
       box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
       transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
     }
     #print-pdf-btn:hover {
       background-color: #f57c00;
       box-shadow: 0 6px 14px rgba(255, 152, 0, 0.6);
       transform: translateY(-2px);
     }
+
+    /* Learn More Button - Enhanced Styling with Glow */
     #learn-more-btn {
       display: inline-block;
       background: linear-gradient(45deg, #00ffd5, #00ebff);
@@ -159,23 +198,62 @@
       font-weight: 700;
       border-radius: 12px;
       padding: 15px 25px;
-      margin-top: 10px;
-      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 255, 213, 0.5),
+                  0 0 20px rgba(0, 255, 213, 0.2),
+                  0 0 30px rgba(0, 235, 255, 0.1);
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
     }
     #learn-more-btn:hover {
       background: linear-gradient(45deg, #00c9a3, #00d9ff);
-      box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7);
+      box-shadow: 0 6px 16px rgba(0, 201, 163, 0.7),
+                  0 0 25px rgba(0, 201, 163, 0.4),
+                  0 0 40px rgba(0, 217, 255, 0.3);
       transform: translateY(-2px);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
     }
+    #learn-more-btn::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(45deg, #00ffd5, #00ebff, #00c9a3, #00d9ff, #00ffd5);
+      background-size: 300% 300%;
+      animation: shimmer 3s linear infinite;
+      opacity: 0.3;
+      border-radius: 18px;
+      z-index: -1;
+      filter: blur(8px);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #learn-more-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      opacity: 0.2;
+      transition: opacity 0.3s ease;
+    }
+    #learn-more-btn:hover::after {
+      opacity: 0.4;
+    }
+
     @media (max-width: 600px) {
-      #print-pdf-btn,
-      #learn-more-btn {
-        width: 100%;
-        font-size: 16px;
-        text-align: center;
+      .action-buttons-container {
+        width: 95%;
       }
       p, ul {
         text-align: left !important;
@@ -193,8 +271,7 @@
       #toggle-theme,
       #toggle-language,
       footer,
-      #print-pdf-btn,
-      #learn-more-btn {
+      .action-buttons-container {
         display: none;
       }
       .result-box {
@@ -223,12 +300,26 @@
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Animal Calorie Results</h1>
   <div id="results"></div>
-  <button id="print-pdf-btn" onclick="handlePrint()">
-    📄 <span id="btn-print-text">Save as PDF</span>
-  </button>
-  <a id="learn-more-btn" href="animal-educate.html">
-  <span id="learn-more-btn-text">Learn More About Pet Nutrition</span>
-</a>  <footer>
+
+  <!-- Container for action buttons - stacked vertically for better UX -->
+  <div class="action-buttons-container">
+    <!-- Share Button -->
+    <button id="share-btn" onclick="handleShare()">
+      📤 <span id="btn-share-text">Share Results</span>
+    </button>
+    
+    <!-- Print PDF Button -->
+    <button id="print-pdf-btn" onclick="handlePrint()">
+      📄 <span id="btn-print-text">Save as PDF</span>
+    </button>
+    
+    <!-- Learn More Button with enhanced styling -->
+    <a id="learn-more-btn" href="animal-educate.html">
+      <span id="learn-more-btn-text">Learn More About Pet Nutrition</span>
+    </a>
+  </div>
+
+  <footer>
     Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
     )
@@ -236,7 +327,7 @@
   <script>
     function openInstagram() {
       const appLink = "instagram://user?username=r4_ce";
-      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
       window.location = appLink;
       setTimeout(() => {
         window.location = webLink;
@@ -245,6 +336,40 @@
   </script>
   <script>
     let currentLang = "en";
+    async function handleShare() {
+      const title = currentLang === "en" ? "Animal Calorie Results" : "نتائج السعرات للحيوانات";
+      const text = currentLang === "en"
+        ? "Check my pet's calorie needs!"
+        : "تحقق من احتياجات حيواني من السعرات!";
+      const url = window.location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: title,
+            text: text,
+            url: url
+          });
+        } catch (err) {
+          console.log('مشاركة تم إلغاؤها أو حدث خطأ:', err);
+        }
+      } else {
+        alert(currentLang === "en"
+          ? "Sharing not supported. Link copied to clipboard!"
+          : "المشاركة غير مدعومة. تم نسخ الرابط.");
+        await navigator.clipboard.writeText(url);
+      }
+    }
+    function handlePrint() {
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) {
+        alert(currentLang === "en" 
+          ? "To save as PDF: tap the share button or menu, then choose 'Print' → 'Save as PDF'." 
+          : "لحفظ كملف PDF: اضغط على زر المشاركة أو القائمة، ثم اختر 'طباعة' → 'حفظ كـ PDF'."
+        );
+      } else {
+        window.print();
+      }
+    }
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -259,6 +384,7 @@
       document.getElementById("toggle-language").innerText = currentLang === "en" ? "عربي" : "English";
       document.getElementById("title").innerText = currentLang === "en" ? "Animal Calorie Results" : "نتائج السعرات للحيوانات";
       document.getElementById("btn-print-text").innerText = currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
+      document.getElementById("btn-share-text").innerText = currentLang === "en" ? "Share Results" : "شارك النتائج";
       document.getElementById("learn-more-btn-text").innerText = currentLang === "en" ? "Learn More About Pet Nutrition" : "تعلم المزيد عن تغذية الحيوانات";
       displayResults();
     }
@@ -325,18 +451,6 @@
           Ca:P = ${calciumPhosphorusRatio}
         </p>`;
     }
-    function handlePrint() {
-      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
-      
-      if (isMobile) {
-        alert(currentLang === "en" 
-          ? "To save as PDF: tap the share button or menu, then choose 'Print' → 'Save as PDF'." 
-          : "لحفظ كملف PDF: اضغط على زر المشاركة أو القائمة، ثم اختر 'طباعة' → 'حفظ كـ PDF'."
-        );
-      } else {
-        window.print();
-      }
-    }
     function displayResults() {
       const data = getQueryParams();
       if (!data.weight || !data.age || !data.activity || !data.life_stage || !data.neutered || !data.pet_type) {
@@ -369,7 +483,7 @@
           <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">⚖️ ${currentLang === "en" ? "Maintenance Calories" : "سعرات الثبات"}</h2>
           <p>${maintenance} kcal</p>
           ${showMacros(maintenance, data.weight, data.pet_type, data.life_stage)}
-          <p class="arabic-text" style="font-style: italic; color: #aaa;">${specialNote}</p>
+          <p class="${currentLang === "ar" ? "arabic-text" : ""}" style="font-style: italic; color: #aaa;">${specialNote}</p>
         </div>
         <div class="result-box" style="border-left: 5px solid #00ebff;">
           <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🐾 ${currentLang === "en" ? "Weight Management" : "إدارة الوزن"}</h2>
@@ -397,7 +511,7 @@
               <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "For optimal growth and development" : "للنمو والتطور الأمثل"}</p>
             </div>
           </div>
-        ` + resultsHTML;
+         ` + resultsHTML;
       }
       document.getElementById('results').innerHTML = resultsHTML;
     }
@@ -405,4 +519,4 @@
   </script>
 </body>
 </html>
-
+```
