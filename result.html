@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,6 +137,30 @@
     #toggle-language {
       left: 10px;
     }
+    /* Share Button - smaller text */
+    #share-btn {
+      background-color: #4caf50;
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #share-btn:hover {
+      background-color: #43a047;
+      box-shadow: 0 6px 14px rgba(76, 175, 80, 0.6);
+      transform: translateY(-2px);
+    }
     /* Print Button */
     #print-pdf-btn {
       background-color: #ff9800;
@@ -146,7 +169,7 @@
       font-weight: 700;
       border-radius: 12px;
       padding: 12px 20px;
-      margin-top: 20px;
+      margin-top: 8px;
       margin-bottom: 10px;
       box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);
       transition: all 0.3s ease;
@@ -190,10 +213,11 @@
       opacity: 0.4;
     }
     @media (max-width: 600px) {
+      #share-btn,
       #print-pdf-btn,
       #learn-more-btn {
         width: 100%;
-        font-size: 16px;
+        font-size: 14px;
         text-align: center;
       }
       p, ul {
@@ -215,6 +239,7 @@
       #toggle-language,
       footer,
       #print-pdf-btn,
+      #share-btn,
       #learn-more-btn {
         display: none;
       }
@@ -254,6 +279,10 @@
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Calorie Results</h1>
   <div id="results"></div>
+  <!-- Share Button -->
+  <button id="share-btn" onclick="handleShare()">
+    📤 <span id="btn-share-text">Share Results</span>
+  </button>
   <!-- Save as PDF Button -->
   <button id="print-pdf-btn" onclick="handlePrint()">
     📄 <span id="btn-print-text">Save as PDF</span>
@@ -281,10 +310,10 @@
   <!-- Logic Script -->
   <script>
     let currentLang = "en";
-    
+    let globalTdee = 0;
+
     function handlePrint() {
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
-      
       if (isMobile) {
         alert(currentLang === "en" 
           ? "To save as PDF: tap the share button or menu, then choose 'Print' → 'Save as PDF'." 
@@ -294,7 +323,33 @@
         window.print();
       }
     }
-    
+
+    async function handleShare() {
+      const title = currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
+      const text = currentLang === "en"
+        ? `My maintenance calories: ~${Math.round(globalTdee)} kcal`
+        : `سعراتي اليومية للثبات: ~${Math.round(globalTdee)} كيلو سعرة`;
+      
+      const url = window.location.href;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: title,
+            text: text,
+            url: url
+          });
+        } catch (err) {
+          console.log('مشاركة تم إلغاؤها أو حدث خطأ:', err);
+        }
+      } else {
+        alert(currentLang === "en"
+          ? "Sharing not supported on this browser. Link copied to clipboard!"
+          : "المتصفح لا يدعم المشاركة. تم نسخ الرابط إلى الحافظة!");
+        await navigator.clipboard.writeText(url);
+      }
+    }
+
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -304,22 +359,22 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
-    
+
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
-      // Update button texts
       document.getElementById("toggle-language").innerText =
         currentLang === "en" ? "عربي" : "English";
-      // Update title and other buttons
       document.getElementById("title").innerText =
         currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
       document.getElementById("btn-print-text").innerText =
         currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
+      document.getElementById("btn-share-text").innerText =
+        currentLang === "en" ? "Share Results" : "شارك النتائج";
       document.getElementById("learn-more-btn-text").innerText =
         currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
       displayResults();
     }
-    
+
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -330,13 +385,13 @@
         activity: params.get('activity'),
       };
     }
-    
+
     function calculateBMR({ weight, height, age, gender }) {
       return gender === 'male'
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
     }
-    
+
     function getActivityMultiplier(activity) {
       const multipliers = {
         sedentary: 1.2,
@@ -347,7 +402,7 @@
       };
       return multipliers[activity] || 1.2;
     }
-    
+
     function calculateMacros(calories, weight, proteinPerKg) {
       const protein = Math.round(weight * proteinPerKg);
       const proteinCals = protein * 4;
@@ -356,7 +411,7 @@
       const carbs = Math.round((calories - proteinCals - fatCals) / 4);
       return { protein, carbs, fats };
     }
-    
+
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
       return `
@@ -367,7 +422,7 @@
           ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
         </p>`;
     }
-    
+
     function displayResults() {
       const data = getQueryParams();
       if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
@@ -378,6 +433,7 @@
       }
       const bmr = calculateBMR(data);
       const tdee = bmr * getActivityMultiplier(data.activity);
+      globalTdee = tdee;
       const bulkLight = Math.round(tdee * 1.1);
       const bulkModerate = Math.round(tdee * 1.2);
       const bulkAggressive = Math.round(tdee * 1.3);
@@ -434,4 +490,3 @@
   </script>
 </body>
 </html>
-
