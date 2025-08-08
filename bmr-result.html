@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calorie Results</title>
+  <title>BMR Results</title>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
   <script>
@@ -313,7 +313,7 @@
 <body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي</button>
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
-  <h1 id="title">Calorie Results</h1>
+  <h1 id="title">BMR Results</h1>
   <div id="results"></div>
 
   <!-- Container for action buttons - stacked vertically for better UX -->
@@ -353,7 +353,8 @@
   <!-- Logic Script -->
   <script>
     let currentLang = "en";
-    let globalTdee = 0;
+    let globalBmr = 0;
+    
     function handlePrint() {
       const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini/i.test(navigator.userAgent);
       if (isMobile) {
@@ -365,11 +366,12 @@
         window.print();
       }
     }
+    
     async function handleShare() {
-      const title = currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
+      const title = currentLang === "en" ? "BMR Results" : "نتائج معدل الأيض الأساسي";
       const text = currentLang === "en"
-        ? `My maintenance calories: ~${Math.round(globalTdee)} kcal`
-        : `سعراتي اليومية للثبات: ~${Math.round(globalTdee)} كيلو سعرة`;
+        ? `My BMR: ~${Math.round(globalBmr)} kcal`
+        : `معدل الأيض الأساسي: ~${Math.round(globalBmr)} كيلو سعرة`;
       const url = window.location.href;
       if (navigator.share) {
         try {
@@ -388,6 +390,7 @@
         await navigator.clipboard.writeText(url);
       }
     }
+    
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
@@ -397,12 +400,13 @@
         themeBtn.style.backgroundColor = "#00ffd5";
       }
     }
+    
     function toggleLanguage() {
       currentLang = currentLang === "en" ? "ar" : "en";
       document.getElementById("toggle-language").innerText =
         currentLang === "en" ? "عربي" : "English";
       document.getElementById("title").innerText =
-        currentLang === "en" ? "Calorie Results" : "نتائج السعرات";
+        currentLang === "en" ? "BMR Results" : "نتائج معدل الأيض الأساسي";
       document.getElementById("btn-print-text").innerText =
         currentLang === "en" ? "Save as PDF" : "احفظ كـ PDF";
       document.getElementById("btn-share-text").innerText =
@@ -411,6 +415,7 @@
         currentLang === "en" ? "Learn More About Nutrition" : "تعلم المزيد عن التغذية";
       displayResults();
     }
+    
     function getQueryParams() {
       const params = new URLSearchParams(window.location.search);
       return {
@@ -418,24 +423,15 @@
         height: parseFloat(params.get('height')),
         age: parseInt(params.get('age')),
         gender: params.get('gender'),
-        activity: params.get('activity'),
       };
     }
+    
     function calculateBMR({ weight, height, age, gender }) {
       return gender === 'male'
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
     }
-    function getActivityMultiplier(activity) {
-      const multipliers = {
-        sedentary: 1.2,
-        light: 1.375,
-        moderate: 1.55,
-        active: 1.725,
-        very_active: 1.9,
-      };
-      return multipliers[activity] || 1.2;
-    }
+    
     function calculateMacros(calories, weight, proteinPerKg) {
       const protein = Math.round(weight * proteinPerKg);
       const proteinCals = protein * 4;
@@ -444,6 +440,7 @@
       const carbs = Math.round((calories - proteinCals - fatCals) / 4);
       return { protein, carbs, fats };
     }
+    
     function showMacros(calories, weight, proteinPerKg) {
       const { protein, carbs, fats } = calculateMacros(calories, weight, proteinPerKg);
       return `
@@ -454,69 +451,45 @@
           ${currentLang === "en" ? "Fats" : "دهون"}: ${fats}g
         </p>`;
     }
+    
     function displayResults() {
       const data = getQueryParams();
-      if (!data.weight || !data.height || !data.age || !data.gender || !data.activity) {
+      if (!data.weight || !data.height || !data.age || !data.gender) {
         document.getElementById('results').innerHTML = `
           <p style='color:red;'>${currentLang === "en" ? "Missing or invalid data. Please go back and fill all fields." : "يوجد نقص أو خطأ في البيانات. ارجع واملأ جميع الحقول."}</p>
         `;
         return;
       }
+      
       const bmr = calculateBMR(data);
-      const tdee = bmr * getActivityMultiplier(data.activity);
-      globalTdee = tdee;
-      const bulkLight = Math.round(tdee * 1.1);
-      const bulkModerate = Math.round(tdee * 1.2);
-      const bulkAggressive = Math.round(tdee * 1.3);
-      const cutLight = Math.round(tdee * 0.9);
-      const cutModerate = Math.round(tdee * 0.8);
-      const cutAggressive = Math.round(tdee * 0.7);
+      globalBmr = bmr;
+      
       const today = new Date().toLocaleDateString(currentLang === "en" ? "en-US" : "ar-SA");
+      
       document.getElementById('results').innerHTML = `
         <div class="print-header">${currentLang === "en" ? "Printed on" : "تم الطباعة في"}: ${today}</div>
         <div class="result-box" style="border-left: 5px solid #00ffd5;">
-          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">⚖️ ${currentLang === "en" ? "Maintenance Calories" : "سعرات الثبات"}</h2>
-          <p>${Math.round(tdee)} kcal</p>
-          ${showMacros(tdee, data.weight, 1.9)}
-        </div>
-        <div class="result-box" style="border-left: 5px solid #00ffc7;">
-          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">💪 ${currentLang === "en" ? "Bulking Calories" : "سعرات التضخيم"}</h2>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Light Bulk" : "تضخيم خفيف"}:</strong> ${bulkLight} kcal</p>
-            ${showMacros(bulkLight, data.weight, 1.8)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.003).toFixed(2)} kg</p>
-          </div>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Moderate Bulk" : "تضخيم متوسط"}:</strong> ${bulkModerate} kcal</p>
-            ${showMacros(bulkModerate, data.weight, 1.8)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.004).toFixed(2)} kg</p>
-          </div>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Aggressive Bulk" : "تضخيم قوي"}:</strong> ${bulkAggressive} kcal</p>
-            ${showMacros(bulkAggressive, data.weight, 1.8)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly gain" : "الزيادة المتوقعة أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
-          </div>
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">⚖️ ${currentLang === "en" ? "Basal Metabolic Rate (BMR)" : "معدل الأيض الأساسي (BMR)"}</h2>
+          <p>${Math.round(bmr)} kcal</p>
+          ${showMacros(bmr, data.weight, 1.6)}
+          <p class="${currentLang === "ar" ? "arabic-text" : ""}"><em>${currentLang === "en" 
+            ? "This is the number of calories your body needs to maintain basic life functions at complete rest." 
+            : "هذا هو عدد السعرات الحرارية التي يحتاجها جسمك للحفاظ على الوظائف الحيوية الأساسية في حالة الراحة التامة."}</em></p>
         </div>
         <div class="result-box" style="border-left: 5px solid #00ebff;">
-          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🏋️‍♂️ ${currentLang === "en" ? "Cutting Calories" : "سعرات التنشيف"}</h2>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Light Cut" : "تنشيف خفيف"}:</strong> ${cutLight} kcal</p>
-            ${showMacros(cutLight, data.weight, 2.0)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.005).toFixed(2)} kg</p>
-          </div>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Moderate Cut" : "تنشيف متوسط"}:</strong> ${cutModerate} kcal</p>
-            ${showMacros(cutModerate, data.weight, 2.0)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.007).toFixed(2)} kg</p>
-          </div>
-          <div class="result-box" style="margin: 10px;">
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}"><strong>${currentLang === "en" ? "Aggressive Cut" : "تنشيف قوي"}:</strong> ${cutAggressive} kcal</p>
-            ${showMacros(cutAggressive, data.weight, 2.0)}
-            <p class="${currentLang === "ar" ? "arabic-text" : ""}">${currentLang === "en" ? "Expected weekly loss" : "النزول المتوقع أسبوعيًا"}: ${(data.weight * 0.009).toFixed(2)} kg</p>
-          </div>
+          <h2 class="${currentLang === "ar" ? "arabic-text" : ""}">🧮 ${currentLang === "en" ? "BMR Equation" : "معادلة معدل الأيض"}</h2>
+          <p class="${currentLang === "ar" ? "arabic-text" : ""}">
+            <strong>${currentLang === "en" ? "Mifflin-St Jeor Equation" : "معادلة ميفلين-سانت جور"}:</strong><br>
+            ${currentLang === "en" ? "BMR = 10 × weight (kg) + 6.25 × height (cm) - 5 × age (y) + S" : "BMR = 10 × الوزن (كجم) + 6.25 × الطول (سم) - 5 × العمر (سنوات) + S"}<br>
+            ${currentLang === "en" ? "Where S = +5 for men, -161 for women" : "حيث S = +5 للرجال، -161 للنساء"}
+          </p>
+          <p class="${currentLang === "ar" ? "arabic-text" : ""}"><em>${currentLang === "en" 
+            ? "This equation is considered the most accurate for calculating BMR." 
+            : "تُعتبر هذه المعادلة الأكثر دقة لحساب معدل الأيض الأساسي."}</em></p>
         </div>
       `;
     }
+    
     window.onload = displayResults;
   </script>
 </body>

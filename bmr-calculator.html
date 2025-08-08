@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,10 +61,21 @@
     }
     h1 {
       color: var(--accent-color);
-      margin-bottom: 30px;
+      margin-bottom: 15px;
       font-weight: bold;
       font-size: 2.5rem;
       letter-spacing: 1px;
+    }
+    .bmr-title {
+      margin-top: 40px;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+    .bmr-title .highlight {
+      color: #00ffd5;
+      text-decoration: underline;
+      font-weight: bold;
     }
     form {
       background-color: var(--form-bg);
@@ -73,7 +85,6 @@
       max-width: 400px;
       margin: 0 auto;
       box-shadow: 0 0 25px rgba(0, 255, 213, 0.5);
-      text-align: right;
       transition: background-color 0.3s, box-shadow 0.3s;
     }
     label {
@@ -81,6 +92,7 @@
       margin: 12px 0 6px 0;
       font-weight: bold;
       color: var(--accent-color);
+      text-align: left;
     }
     input,
     select {
@@ -163,7 +175,11 @@
       }
       h1 {
         font-size: 2rem;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+      }
+      .bmr-title {
+        font-size: 1.3rem;
+        margin-top: 30px;
       }
       form {
         margin: 0 auto;
@@ -191,11 +207,17 @@
     }
   </style>
 </head>
-<body class="theme-dark">
+<body class="theme-dark" dir="ltr">
   <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
   <button id="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
   <h1 id="title">Calorie Calculator</h1>
-  <form action="result.html" method="get" id="calc-form">
+
+  <!-- BMR باللون الأزرق وتحته خط -->
+  <div class="bmr-title">
+    <a href="bmr.html" class="highlight">BMR</a> (Basal Metabolic Rate)
+  </div>
+
+  <form id="calc-form">
     <label for="weight" id="label-weight">Weight (kg):</label>
     <input type="number" id="weight" name="weight" min="1" max="300" required />
 
@@ -210,16 +232,6 @@
       <option value="" disabled selected id="opt-select-gender">Select gender</option>
       <option value="male" id="opt-male">Male</option>
       <option value="female" id="opt-female">Female</option>
-    </select>
-
-    <label for="activity" id="label-activity">Activity Level:</label>
-    <select id="activity" name="activity" required>
-      <option value="" disabled selected id="opt-select-activity">Select activity</option>
-      <option value="sedentary" id="opt-sedentary">Sedentary (0-1 days/week)</option>
-      <option value="light" id="opt-light">Light (1-2 days/week)</option>
-      <option value="moderate" id="opt-moderate">Moderate (3-4 days/week)</option>
-      <option value="active" id="opt-active">Active (5-6 days/week)</option>
-      <option value="very_active" id="opt-very-active">Very Active (7 days/week)</option>
     </select>
 
     <button type="submit" id="btn-calculate">Calculate</button>
@@ -252,6 +264,7 @@
       themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
     }
 
+    // النصوص باللغتين
     const texts = {
       en: {
         title: "Calorie Calculator",
@@ -260,16 +273,9 @@
           height: "Height (cm):",
           age: "Age (years):",
           gender: "Gender:",
-          activity: "Activity Level:",
           selectGender: "Select gender",
           male: "Male",
           female: "Female",
-          selectActivity: "Select activity",
-          sedentary: "Sedentary (0-1 days/week)",
-          light: "Light (1-2 days/week)",
-          moderate: "Moderate (3-4 days/week)",
-          active: "Active (5-6 days/week)",
-          veryActive: "Very Active (7 days/week)",
           calculateBtn: "Calculate"
         },
         equationInfo: `This website uses the <a href="mifflin.html" style="color: blue; text-decoration: underline;">Mifflin-St Jeor</a> equation, which is considered the most accurate equation for calculating calorie needs.`
@@ -281,46 +287,79 @@
           height: "الطول (سم):",
           age: "العمر (سنوات):",
           gender: "النوع:",
-          activity: "مستوى النشاط:",
           selectGender: "اختر النوع",
           male: "ذكر",
           female: "أنثى",
-          selectActivity: "اختر النشاط",
-          sedentary: "قليل النشاط (0-1 يوم/أسبوع)",
-          light: "نشاط خفيف (1-2 يوم/أسبوع)",
-          moderate: "نشاط متوسط (3-4 أيام/أسبوع)",
-          active: "نشاط نشط (5-6 أيام/أسبوع)",
-          veryActive: "نشاط عالي (7 أيام/أسبوع)",
           calculateBtn: "احسب"
         },
-        equationInfo: `يستخدم هذا الموقع <a href="mifflin.html" style="color: blue; text-decoration: underline;">معادلة Mifflin-St Jeor</a>، والتي تُعتبر المعادلة الأكثر دقة لحساب احتياجاتك من السعرات الحرارية.`
+        equationInfo: `يستخدم هذا الموقع <a href="mifflin.html" style="color: blue; text-decoration: underline;">معادلة ميفلين-سانت جور</a>، والتي تُعتبر المعادلة الأكثر دقة لحساب احتياجاتك من السعرات الحرارية.`
       }
     };
 
+    // اللغة الافتراضية: الإنجليزية
     let currentLang = 'en';
 
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
       const t = texts[currentLang];
+      
+      // Update text content
       document.getElementById('title').textContent = t.title;
       document.getElementById('label-weight').textContent = t.labels.weight;
       document.getElementById('label-height').textContent = t.labels.height;
       document.getElementById('label-age').textContent = t.labels.age;
       document.getElementById('label-gender').textContent = t.labels.gender;
-      document.getElementById('label-activity').textContent = t.labels.activity;
       document.getElementById('opt-select-gender').textContent = t.labels.selectGender;
       document.getElementById('opt-male').textContent = t.labels.male;
       document.getElementById('opt-female').textContent = t.labels.female;
-      document.getElementById('opt-select-activity').textContent = t.labels.selectActivity;
-      document.getElementById('opt-sedentary').textContent = t.labels.sedentary;
-      document.getElementById('opt-light').textContent = t.labels.light;
-      document.getElementById('opt-moderate').textContent = t.labels.moderate;
-      document.getElementById('opt-active').textContent = t.labels.active;
-      document.getElementById('opt-very-active').textContent = t.labels.veryActive;
       document.getElementById('btn-calculate').textContent = t.labels.calculateBtn;
       document.getElementById('equation-info').innerHTML = t.equationInfo;
-      document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      
+      // Only change text alignment, not direction
+      if (currentLang === 'ar') {
+        document.getElementById('label-weight').style.textAlign = 'right';
+        document.getElementById('label-height').style.textAlign = 'right';
+        document.getElementById('label-age').style.textAlign = 'right';
+        document.getElementById('label-gender').style.textAlign = 'right';
+      } else {
+        document.getElementById('label-weight').style.textAlign = 'left';
+        document.getElementById('label-height').style.textAlign = 'left';
+        document.getElementById('label-age').style.textAlign = 'left';
+        document.getElementById('label-gender').style.textAlign = 'left';
+      }
     }
+
+    // Start with English
+    document.addEventListener('DOMContentLoaded', function() {
+      // Keep the page in English by default
+      // No need to call toggleLanguage() here
+    });
+
+    // Handle form submission to redirect to bmr-result.html with query parameters
+    document.getElementById('calc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const weight = document.getElementById('weight').value;
+      const height = document.getElementById('height').value;
+      const age = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      
+      // Validate form
+      if (!weight || !height || !age || !gender) {
+        alert(currentLang === 'en' ? 'Please fill in all fields' : 'من فضلك املأ جميع الحقول');
+        return;
+      }
+      
+      // Create query parameters
+      const params = new URLSearchParams();
+      params.append('weight', weight);
+      params.append('height', height);
+      params.append('age', age);
+      params.append('gender', gender);
+      
+      // Redirect to bmr-result.html with parameters
+      window.location.href = `bmr-result.html?${params.toString()}`;
+    });
   </script>
 </body>
 </html>

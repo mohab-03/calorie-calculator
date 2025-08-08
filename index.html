@@ -99,10 +99,18 @@
     .btn-container {
       display: flex;
       flex-direction: column;
-      gap: 50px;
+      gap: 70px; /* مسافة بين الزرين */
       width: 90%;
       max-width: 500px;
       margin: 0 auto;
+    }
+    .btn-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      min-height: 70px; /* يضمن أن الحاوية تحتفظ بالارتفاع نفسه */
+      align-items: flex-start;
     }
     .main-btn {
       padding: 25px 30px;
@@ -119,6 +127,8 @@
       position: relative;
       overflow: hidden;
       z-index: 1;
+      width: 100%;
+      max-width: 440px;
     }
     .main-btn::before {
       content: "";
@@ -144,7 +154,7 @@
       animation: pulse 2s infinite, glow 3s infinite;
     }
 
-    /* ✅ تصميم الزرين الجديدين - أقرب للأزرار الرئيسية */
+    /* تصميم الزرين الجديدين */
     .learn-more-container {
       margin-top: 20px;
       display: flex;
@@ -302,12 +312,23 @@
   <h1 id="title">Nutrition Calculator</h1>
   <div class="main-container">
     <div class="btn-container">
-      <button class="main-btn" onclick="goToHuman()">Human Calorie Calculator</button>
-      <button class="main-btn" onclick="goToAnimal()">Animal Calorie Calculator</button>
+      <!-- زر الإنسان -->
+      <div class="btn-wrapper">
+        <button class="main-btn" onclick="goToHuman()">Human Calorie Calculator</button>
+        <a href="bmr-calculator.html" 
+           style="position: absolute; top: 100%; right: 30px; font-size: 0.85rem; color: blue; 
+                  text-decoration: underline; margin-top: 5px;">
+          BMR Calculator
+        </a>
+      </div>
+      <!-- زر الحيوان -->
+      <div class="btn-wrapper">
+        <button class="main-btn" onclick="goToAnimal()">Animal Calorie Calculator</button>
+      </div>
     </div>
   </div>
 
-  <!-- ✅ زرين جديدين: أقرب للأزرار الرئيسية -->
+  <!-- زرين تعليمي -->
   <div class="learn-more-container">
     <a href="educate.html" class="learn-btn" id="btn-learn-human">Learn About Human Nutrition</a>
     <a href="animal-educate.html" class="learn-btn" id="btn-learn-animal">Learn About Animal Nutrition</a>

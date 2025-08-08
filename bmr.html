@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +48,17 @@
       margin: 0 auto 20px;
       line-height: 1.6;
       text-align: left;
+    }
+    .arabic-text {
+      text-align: right !important;
+      direction: rtl !important;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 2.0;
+    }
+    .tdee-link {
+      color: blue !important;
+      text-decoration: underline !important;
+      cursor: pointer;
     }
     footer {
       margin-top: 40px;
@@ -104,7 +116,7 @@
     </p>
 
     <h2>🔥 Why BMR Matters</h2>
-    <p id="p3">Knowing your BMR helps you build a nutrition plan that fits your goals — whether it's fat loss, maintenance, or muscle gain. It gives you a baseline of how many calories your body needs at rest. From there, you add extra calories based on activity level, which leads to your TDEE (Total Daily Energy Expenditure).</p>
+    <p id="p3">Knowing your BMR helps you build a nutrition plan that fits your goals — whether it's fat loss, maintenance, or muscle gain. It gives you a baseline of how many calories your body needs at rest. From there, you add extra calories based on activity level, which leads to your <a href="tdee.html" class="tdee-link">TDEE</a> (Total Daily Energy Expenditure).</p>
 
     <h2>📌 Quick Tips</h2>
     <p id="p4">
@@ -112,28 +124,26 @@
       ✅ Starving or extreme dieting can decrease your BMR.<br>
       ✅ You can estimate BMR but for best results, combine with real tracking.
     </p>
-
-    <p id="signature">Made by Mohab (Instagram: r4_ce)</p>
   </div>
 
   <footer>
-  Made by Mohab (
+    Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-  )
-</footer>
+    )
+  </footer>
 
-<script>
-  function openInstagram() {
-    const appLink = "instagram://user?username=r4_ce";
-    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
 
-    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
-    window.location = appLink;
-    setTimeout(() => {
-      window.location = webLink;
-    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
-  }
-</script>
+      // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500); // 1.5 ثانية لو التطبيق مش موجود
+    }
+  </script>
 
   <script>
     let isArabic = false;
@@ -145,22 +155,31 @@
     function toggleLanguage() {
       isArabic = !isArabic;
 
-      document.getElementById('page-title').textContent = isArabic ? 'ما هو BMR؟' : 'What is BMR?';
-      document.getElementById('p1').textContent = isArabic
-        ? 'BMR هو معدل الأيض الأساسي، يعني عدد السعرات اللي جسمك بيحتاجها عشان يعيش بس، من غير أي حركة. جسمك بيستهلك طاقة حتى لو نايم!'
-        : "BMR stands for Basal Metabolic Rate. It's the amount of energy (calories) your body needs to maintain basic life functions...";
+      document.getElementById('page-title').textContent = isArabic ? 'ما هو معدل الأيض الأساسي (BMR)؟' : 'What is BMR?';
+      
+      const p1 = document.getElementById('p1');
+      p1.textContent = isArabic 
+        ? 'معدل الأيض الأساسي (BMR) هو كمية الطاقة (السعرات الحرارية) التي يحتاجها جسمك للحفاظ على الوظائف الحيوية الأساسية مثل التنفس، وتدفق الدم، وإنتاج الخلايا أثناء الراحة التامة. حتى لو لم تفعل أي شيء طوال اليوم، فإن جسمك لا يزال يحتاج إلى سعرات حرارية للبقاء على قيد الحياة - وهذا هو معدل الأيض الأساسي.' 
+        : "BMR stands for Basal Metabolic Rate. It's the amount of energy (calories) your body needs to maintain basic life functions like breathing, blood circulation, and cell production while you're at rest. Even if you did nothing all day, your body still requires calories to survive — and that’s your BMR.";
+      p1.className = isArabic ? 'arabic-text' : '';
 
-      document.getElementById('p2').innerHTML = isArabic
-        ? '<strong>للرجال:</strong> BMR = 10 × الوزن(كجم) + 6.25 × الطول(سم) − 5 × العمر(سنة) + 5<br><strong>للنساء:</strong> BMR = 10 × الوزن(كجم) + 6.25 × الطول(سم) − 5 × العمر(سنة) − 161'
+      const p2 = document.getElementById('p2');
+      p2.innerHTML = isArabic 
+        ? '<strong>للرجال:</strong> BMR = 10 × الوزن (كجم) + 6.25 × الطول (سم) - 5 × العمر (سنة) + 5<br><strong>للنساء:</strong> BMR = 10 × الوزن (كجم) + 6.25 × الطول (سم) - 5 × العمر (سنة) - 161'
         : '<strong>For men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) + 5<br><strong>For women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age(y) − 161';
+      p2.className = isArabic ? 'arabic-text' : '';
 
-      document.getElementById('p3').textContent = isArabic
-        ? 'معرفة BMR هتساعدك تحط خطة أكل تناسب هدفك، سواء كان خسارة دهون أو بناء عضل. ومنه بنحسب احتياجك الكامل من السعرات TDEE.'
-        : 'Knowing your BMR helps you build a nutrition plan that fits your goals — whether it\'s fat loss, maintenance, or muscle gain...';
+      const p3 = document.getElementById('p3');
+      p3.innerHTML = isArabic 
+        ? 'معرفة معدل الأيض الأساسي (BMR) تساعدك على بناء خطة تغذية تناسب أهدافك - سواء كان فقدان الدهون، أو الحفاظ على الوزن، أو بناء العضلات. فهو يمنحك أساسًا لعدد السعرات الحرارية التي يحتاجها جسمك أثناء الراحة. ومن هناك، يمكنك إضافة سعرات حرارية إضافية بناءً على مستوى نشاطك، مما يؤدي إلى <a href="tdee.html" class="tdee-link">TDEE</a> (إجمالي استهلاكك اليومي من الطاقة).'
+        : 'Knowing your BMR helps you build a nutrition plan that fits your goals — whether it\'s fat loss, maintenance, or muscle gain. It gives you a baseline of how many calories your body needs at rest. From there, you add extra calories based on activity level, which leads to your <a href="tdee.html" class="tdee-link">TDEE</a> (Total Daily Energy Expenditure).';
+      p3.className = isArabic ? 'arabic-text' : '';
 
-      document.getElementById('p4').innerHTML = isArabic
-        ? '✅ العضلات بتزود BMR<br>✅ الرجيم القاسي يقلل BMR<br>✅ الحساب تقريبي، والأفضل تتابع جسمك فعليًا'
+      const p4 = document.getElementById('p4');
+      p4.innerHTML = isArabic 
+        ? '✅ تؤثر كتلة العضلات على معدل الأيض الأساسي - كلما زادت العضلات زاد معدل الأيض الأساسي<br>✅ يمكن أن يقل معدل الأيض الأساسي بسبب التجويع أو اتباع نظام غذائي قاسي<br>✅ يمكنك تقدير معدل الأيض الأساسي، ولكن للحصول على أفضل النتائج، اجمع بين الحسابات والمتابعة الفعلية لجسمك'
         : '✅ BMR is influenced by muscle mass — more muscle = higher BMR.<br>✅ Starving or extreme dieting can decrease your BMR.<br>✅ You can estimate BMR but for best results, combine with real tracking.';
+      p4.className = isArabic ? 'arabic-text' : '';
     }
   </script>
 </body>
