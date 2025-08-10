@@ -99,7 +99,7 @@
     .btn-container {
       display: flex;
       flex-direction: column;
-      gap: 70px; /* مسافة بين الزرين */
+      gap: 70px;
       width: 90%;
       max-width: 500px;
       margin: 0 auto;
@@ -109,7 +109,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      min-height: 70px; /* يضمن أن الحاوية تحتفظ بالارتفاع نفسه */
+      min-height: 70px;
       align-items: flex-start;
     }
     .main-btn {
@@ -153,8 +153,6 @@
     .main-btn.active {
       animation: pulse 2s infinite, glow 3s infinite;
     }
-
-    /* تصميم الزرين الجديدين */
     .learn-more-container {
       margin-top: 20px;
       display: flex;
@@ -205,7 +203,6 @@
     .learn-btn:active {
       transform: translateY(-1px);
     }
-
     footer {
       margin-top: 50px;
       font-size: 13px;
@@ -261,50 +258,50 @@
       transform: scale(1.08);
       box-shadow: 0 6px 16px rgba(0, 255, 213, 0.5);
     }
-    #toggle-theme {
-      right: 15px;
+    #toggle-theme { right: 15px; }
+    #toggle-language { right: 150px; }
+
+    /* إعلان سبورتر */
+    .supplement-ad {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    color: #000;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    max-width: 260px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+  }
+
+  .supplement-ad a {
+    color: #000;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .supplement-ad .discount-code {
+    background: #000;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .supplement-ad {
+      right: 5px;
+      font-size: 14px;
+      max-width: 200px;
     }
-    #toggle-language {
-      right: 150px;
-    }
-    @media (max-width: 600px) {
-      body {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 2.2rem;
-        margin-bottom: 40px;
-      }
-      h1::after {
-        width: 80px;
-      }
-      .btn-container {
-        gap: 35px;
-      }
-      .main-btn {
-        padding: 20px 25px;
-        font-size: 1.2rem;
-      }
-      .learn-more-container {
-        margin-top: 15px;
-      }
-      .learn-btn {
-        font-size: 1rem;
-        padding: 14px 20px;
-      }
-      footer {
-        font-size: 12px;
-        margin-top: 35px;
-        padding: 7px;
-      }
-      #toggle-theme,
-      #toggle-language {
-        top: 12px;
-        padding: 6px 10px;
-        font-size: 13px;
-      }
-    }
-  </style>
+  }  </style>
 </head>
 <body class="theme-dark">
   <button id="toggle-language" onclick="toggleLanguage()">عربي / English</button>
@@ -312,32 +309,37 @@
   <h1 id="title">Nutrition Calculator</h1>
   <div class="main-container">
     <div class="btn-container">
-      <!-- زر الإنسان -->
       <div class="btn-wrapper">
         <button class="main-btn" onclick="goToHuman()">Human Calorie Calculator</button>
         <a href="bmr-calculator.html" 
-           style="position: absolute; top: 100%; right: 30px; font-size: 0.85rem; color: blue; 
-                  text-decoration: underline; margin-top: 5px;">
+           style="position: absolute; top: 100%; right: 30px; font-size: 0.85rem; color: blue; text-decoration: underline; margin-top: 5px;">
           BMR Calculator
         </a>
       </div>
-      <!-- زر الحيوان -->
       <div class="btn-wrapper">
         <button class="main-btn" onclick="goToAnimal()">Animal Calorie Calculator</button>
       </div>
     </div>
   </div>
-
-  <!-- زرين تعليمي -->
   <div class="learn-more-container">
     <a href="educate.html" class="learn-btn" id="btn-learn-human">Learn About Human Nutrition</a>
     <a href="animal-educate.html" class="learn-btn" id="btn-learn-animal">Learn About Animal Nutrition</a>
   </div>
 
+  <div class="supplement-ad">
+  <p>
+    💪 <strong>ارتقِ بأدائك مع أفضل المكملات الغذائية في العالم</strong>  
+    مضمونة وموثوقة 100% من <a href="https://www.sporter.com/ar/" target="_blank">موقع سبورتر</a>.
+    <br><br>
+    🏆 احصل على <strong>خصم 10%</strong> باستخدام كود الخصم:  
+    <span class="discount-code">SPR-MOHAB10</span>
+    <br>
+    ⏳ الفرصة بين إيديك… اطلب الآن واستثمر في قوتك!
+  </p>
+</div>
+
   <footer>
-    Made by Mohab (
-    <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-    )
+    Made by Mohab (<a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>)
   </footer>
 
   <script>
@@ -345,44 +347,20 @@
       const appLink = "instagram://user?username=r4_ce";
       const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
       window.location = appLink;
-      setTimeout(() => {
-        window.location = webLink;
-      }, 1500);
+      setTimeout(() => { window.location = webLink; }, 1500);
     }
-    
-    function goToHuman() {
-      window.location.href = "human.html";
-    }
-    
-    function goToAnimal() {
-      window.location.href = "animal.html";
-    }
-    
+    function goToHuman() { window.location.href = "human.html"; }
+    function goToAnimal() { window.location.href = "animal.html"; }
     function toggleTheme() {
       document.body.classList.toggle("light-mode");
       const themeBtn = document.getElementById("toggle-theme");
       themeBtn.style.backgroundColor = document.body.classList.contains("light-mode") ? "#00bfa5" : "#00ffd5";
     }
-
     const texts = {
-      en: {
-        title: "Nutrition Calculator",
-        humanBtn: "Human Calorie Calculator",
-        animalBtn: "Animal Calorie Calculator",
-        learnHuman: "Learn About Human Nutrition",
-        learnAnimal: "Learn About Animal Nutrition"
-      },
-      ar: {
-        title: "حاسبة التغذية",
-        humanBtn: "حاسبة السعرات للإنسان",
-        animalBtn: "حاسبة السعرات للحيوان",
-        learnHuman: "تعلم عن تغذية الإنسان",
-        learnAnimal: "تعلم عن تغذية الحيوان"
-      }
+      en: { title: "Nutrition Calculator", humanBtn: "Human Calorie Calculator", animalBtn: "Animal Calorie Calculator", learnHuman: "Learn About Human Nutrition", learnAnimal: "Learn About Animal Nutrition" },
+      ar: { title: "حاسبة التغذية", humanBtn: "حاسبة السعرات للإنسان", animalBtn: "حاسبة السعرات للحيوان", learnHuman: "تعلم عن تغذية الإنسان", learnAnimal: "تعلم عن تغذية الحيوان" }
     };
-
     let currentLang = 'en';
-
     function toggleLanguage() {
       currentLang = currentLang === 'en' ? 'ar' : 'en';
       const t = texts[currentLang];
@@ -393,13 +371,8 @@
       document.getElementById('btn-learn-animal').textContent = t.learnAnimal;
       document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     }
-    
-    // تفعيل التأثير المتحرك على الأزرار الرئيسية
     document.addEventListener('DOMContentLoaded', function() {
-      const buttons = document.querySelectorAll('.main-btn');
-      buttons.forEach(btn => {
-        btn.classList.add('active');
-      });
+      document.querySelectorAll('.main-btn').forEach(btn => btn.classList.add('active'));
     });
   </script>
 </body>
