@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -166,6 +167,18 @@
       margin-left: auto;
       margin-right: auto;
     }
+    
+    .arabic-text {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: right;
+      direction: rtl;
+      line-height: 2;
+    }
+    
+    .english-text {
+      text-align: left;
+      direction: ltr;
+    }
   </style>
 </head>
 <body class="theme-dark" dir="ltr">
@@ -309,7 +322,7 @@
       currentLang = currentLang === "en" ? "ar" : "en";
       const t = texts[currentLang];
       document.getElementById("page-title").textContent = t.pageTitle;
-      document.getElementById("toggle-language").innerText = "عربي / English";
+      document.getElementById("toggle-language").innerText = currentLang === "ar" ? "English / عربي" : "عربي / English";
       document.body.dir = currentLang === "ar" ? "rtl" : "ltr";
       renderContent();
     }
@@ -322,12 +335,22 @@
       t.sections.forEach(section => {
         const h2 = document.createElement("h2");
         h2.innerHTML = section.title;
+        if (currentLang === "ar") {
+          h2.className = "arabic-text";
+        } else {
+          h2.className = "english-text";
+        }
         container.appendChild(h2);
 
         const ul = document.createElement("ul");
         section.items.forEach(item => {
           const li = document.createElement("li");
           li.innerHTML = item;
+          if (currentLang === "ar") {
+            li.className = "arabic-text";
+          } else {
+            li.className = "english-text";
+          }
           ul.appendChild(li);
         });
         container.appendChild(ul);
@@ -337,12 +360,23 @@
       const warning = document.createElement("div");
       warning.className = "warning";
       warning.innerHTML = t.warning;
+      if (currentLang === "ar") {
+        warning.className += " arabic-text";
+      } else {
+        warning.className += " english-text";
+      }
       container.appendChild(warning);
 
       // تذييل
       const footerP = document.createElement("p");
       footerP.innerHTML = `<em>${t.footer}</em>`;
-      footerP.style.textAlign = currentLang === "ar" ? "right" : "left";
+      if (currentLang === "ar") {
+        footerP.className = "arabic-text";
+        footerP.style.textAlign = "right";
+      } else {
+        footerP.className = "english-text";
+        footerP.style.textAlign = "left";
+      }
       container.appendChild(footerP);
 
       // زر العودة
@@ -350,6 +384,13 @@
       backLink.href = "ANIMAL-EDUCATE.HTML";
       backLink.innerHTML = t.backLink;
       backLink.className = "back-link";
+      if (currentLang === "ar") {
+        backLink.className += " arabic-text";
+        backLink.style.textAlign = "right";
+      } else {
+        backLink.className += " english-text";
+        backLink.style.textAlign = "left";
+      }
       container.appendChild(backLink);
     }
 

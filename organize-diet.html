@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +98,12 @@
     .toggle-btn:hover {
       background-color: #00c9a3;
     }
+    .arabic-text {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: right;
+      direction: rtl;
+      line-height: 2;
+    }
   </style>
 </head>
 <body>
@@ -152,7 +159,7 @@
   <script>
     function openInstagram() {
       const appLink = "instagram://user?username=r4_ce";
-      const webLink = " https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
 
       window.location = appLink;
       setTimeout(() => {
@@ -163,6 +170,27 @@
 
   <script>
     let isArabic = false;
+    
+    // Store original English content
+    const originalTitle = document.getElementById('main-title').textContent;
+    const originalBulkingTitle = document.getElementById('bulking-title').textContent;
+    const originalCuttingTitle = document.getElementById('cutting-title').textContent;
+    const originalMentalTitle = document.getElementById('mental-title').textContent;
+    
+    const originalBulkingList = document.getElementById('bulking-list').innerHTML;
+    const originalCuttingList = document.getElementById('cutting-list').innerHTML;
+    
+    // Store original text for each tip
+    const originalTips = {
+      tip1: document.getElementById('tip1').textContent,
+      tip2: document.getElementById('tip2').textContent,
+      tip3: document.getElementById('tip3').textContent,
+      tip4: document.getElementById('tip4').textContent,
+      tip5: document.getElementById('tip5').textContent,
+      tip6: document.getElementById('tip6').textContent,
+      tip7: document.getElementById('tip7').textContent,
+      tip8: document.getElementById('tip8').textContent
+    };
 
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
@@ -171,47 +199,68 @@
     function toggleLanguage() {
       isArabic = !isArabic;
 
-      document.getElementById('main-title').textContent = isArabic ? 'استراتيجية التغذية' : 'Nutrition Strategy';
-      document.getElementById('bulking-title').textContent = isArabic ? '💪 استراتيجية التضخيم' : '💪 Bulking Strategy';
-      document.getElementById('cutting-title').textContent = isArabic ? '🔥 استراتيجية التنشيف' : '🔥 Cutting Strategy';
-      document.getElementById('mental-title').textContent = isArabic ? '🧠 نصائح نفسية وتحفيزية' : '🧠 Mental & Motivational Tips';
+      if (isArabic) {
+        document.getElementById('main-title').textContent = 'استراتيجية التغذية';
+        document.getElementById('bulking-title').textContent = '💪 استراتيجية التضخيم';
+        document.getElementById('cutting-title').textContent = '🔥 استراتيجية التنشيف';
+        document.getElementById('mental-title').textContent = '🧠 نصائح نفسية وتحفيزية';
 
-      document.getElementById('bulking-list').innerHTML = isArabic ? `
-        <li>ركز على الأطعمة عالية السعرات مثل الأرز، المكرونة، الشوفان، زبدة الفول السوداني، والبيض الكامل.</li>
-        <li>استخدم العصائر لزيادة السعرات (مثل واي + موز + شوفان).</li>
-        <li>قبل التمرين: كارب سريع + بروتين (مثال: أرز + دجاج).</li>
-        <li>بعد التمرين: واي بروتين + كارب بسيط (مثل موز أو أرز).</li>
-        <li>وزع أكلك على ٤–٥ وجبات يوميًا.</li>
-      ` : `
-        <li>Eat calorie-dense foods like rice, pasta, oats, peanut butter, and whole eggs.</li>
-        <li>Use shakes and smoothies to increase intake (e.g., whey + banana + oats).</li>
-        <li>Pre-workout: Fast-digesting carb + protein (e.g., rice + chicken).</li>
-        <li>Post-workout: Whey protein + simple carb (e.g., banana or rice).</li>
-        <li>Distribute meals across 4–5 meals/day for consistent intake.</li>
-      `;
+        document.getElementById('bulking-list').innerHTML = `
+          <li class="arabic-text">ركز على الأطعمة عالية السعرات مثل الأرز، المكرونة، الشوفان، زبدة الفول السوداني، والبيض الكامل.</li>
+          <li class="arabic-text">استخدم العصائر لزيادة السعرات (مثل واي + موز + شوفان).</li>
+          <li class="arabic-text">قبل التمرين: كارب سريع + بروتين (مثال: أرز + دجاج).</li>
+          <li class="arabic-text">بعد التمرين: واي بروتين + كارب بسيط (مثل موز أو أرز).</li>
+          <li class="arabic-text">وزع أكلك على ٤–٥ وجبات يوميًا.</li>
+        `;
 
-      document.getElementById('cutting-list').innerHTML = isArabic ? `
-        <li>ركز على الأطعمة المشبعة والمنخفضة بالسعرات مثل الخضار والبروتينات الخالية من الدهون.</li>
-        <li>قبل التمرين: كارب سريع + بروتين (مثال: موز + بياض بيض).</li>
-        <li>بعد التمرين: واي بروتين + كارب خفيف (مثل كيك أرز أو موز).</li>
-        <li>قلل الدهون قبل وبعد التمرين لهضم أفضل.</li>
-        <li>تمسك بالأكل النظيف عشان تحس بالشبع بأقل سعرات.</li>
-      ` : `
-        <li>Focus on filling, low-calorie foods like vegetables and lean protein.</li>
-        <li>Pre-workout: Fast-digesting carb + protein (e.g., banana + egg whites).</li>
-        <li>Post-workout: Whey protein + light carb (e.g., rice cake or banana).</li>
-        <li>Minimize fats pre/post workout for better digestion.</li>
-        <li>Stick to whole foods to feel full with fewer calories.</li>
-      `;
+        document.getElementById('cutting-list').innerHTML = `
+          <li class="arabic-text">ركز على الأطعمة المشبعة والمنخفضة بالسعرات مثل الخضار والبروتينات الخالية من الدهون.</li>
+          <li class="arabic-text">قبل التمرين: كارب سريع + بروتين (مثال: موز + بياض بيض).</li>
+          <li class="arabic-text">بعد التمرين: واي بروتين + كارب خفيف (مثل كيك أرز أو موز).</li>
+          <li class="arabic-text">قلل الدهون قبل وبعد التمرين لهضم أفضل.</li>
+          <li class="arabic-text">تمسك بالأكل النظيف عشان تحس بالشبع بأقل سعرات.</li>
+        `;
 
-      document.getElementById('tip1').textContent = isArabic ? '✅ الالتزام هو مفتاح التغيير الحقيقي.' : '✅ Consistency is the real key to change.';
-      document.getElementById('tip2').textContent = isArabic ? '🔥 مش كل يوم هتحس بالحماس، بس كل يوم تقدر تختار تكون ملتزم.' : '🔥 You won’t always feel motivated, but you can always choose to be disciplined.';
-      document.getElementById('tip3').textContent = isArabic ? '🕒 نظم وقتك... إللي بيجهز أكله هو اللي بيكسب.' : '🕒 Time management wins—meal prep is half the battle.';
-      document.getElementById('tip4').textContent = isArabic ? '💤 نام كويس، لأن العضلات مش بتكبر في الجيم، بتكبر وإنت نايم.' : '💤 Sleep well. Muscles grow outside the gym, not inside it.';
-      document.getElementById('tip5').textContent = isArabic ? '📉 كلنا بنفشل أوقات، بس الناجحين هم اللي بيرجعوا تاني.' : '📉 Everyone fails sometimes, but winners are the ones who get back up.';
-      document.getElementById('tip6').textContent = isArabic ? '👊 خليك صبور... الجسم القوي مش بيتبني أسبوع، بيتبني كل يوم.' : '👊 Be patient. A strong body is built daily, not in a week.';
-      document.getElementById('tip7').textContent = isArabic ? '📸 صوّر تطورك، لأنك مش هتشوف الفرق إلا لما تبص ورا.' : '📸 Track your progress. You’ll only see the difference when you look back.';
-      document.getElementById('tip8').textContent = isArabic ? '🎯 حدد هدفك واكتبه، لأن اللي ما عندهوش هدف بيلف في دائرة.' : '🎯 Set your goal and write it down. Without a goal, you’re going in circles.';
+        // Apply Arabic styling to all mental tips
+        const mentalTips = document.querySelectorAll('#mental-list li');
+        mentalTips.forEach((tip, index) => {
+          tip.className = 'arabic-text';
+        });
+
+        document.getElementById('tip1').textContent = '✅ الالتزام هو مفتاح التغيير الحقيقي.';
+        document.getElementById('tip2').textContent = '🔥 مش كل يوم هتحس بالحماس، بس كل يوم تقدر تختار تكون ملتزم.';
+        document.getElementById('tip3').textContent = '🕒 نظم وقتك... إللي بيجهز أكله هو اللي بيكسب.';
+        document.getElementById('tip4').textContent = '💤 نام كويس، لأن العضلات مش بتكبر في الجيم، بتكبر وإنت نايم.';
+        document.getElementById('tip5').textContent = '📉 كلنا بنفشل أوقات، بس الناجحين هم اللي بيرجعوا تاني.';
+        document.getElementById('tip6').textContent = '👊 خليك صبور... الجسم القوي مش بيتبني أسبوع، بيتبني كل يوم.';
+        document.getElementById('tip7').textContent = '📸 صوّر تطورك، لأنك مش هتشوف الفرق إلا لما تبص ورا.';
+        document.getElementById('tip8').textContent = '🎯 حدد هدفك واكتبه، لأن اللي ما عندهوش هدف بيلف في دائرة.';
+      } else {
+        // Restore original English content
+        document.getElementById('main-title').textContent = originalTitle;
+        document.getElementById('bulking-title').textContent = originalBulkingTitle;
+        document.getElementById('cutting-title').textContent = originalCuttingTitle;
+        document.getElementById('mental-title').textContent = originalMentalTitle;
+        
+        document.getElementById('bulking-list').innerHTML = originalBulkingList;
+        document.getElementById('cutting-list').innerHTML = originalCuttingList;
+        
+        // Restore original text for each tip and remove Arabic styling
+        document.getElementById('tip1').textContent = originalTips.tip1;
+        document.getElementById('tip2').textContent = originalTips.tip2;
+        document.getElementById('tip3').textContent = originalTips.tip3;
+        document.getElementById('tip4').textContent = originalTips.tip4;
+        document.getElementById('tip5').textContent = originalTips.tip5;
+        document.getElementById('tip6').textContent = originalTips.tip6;
+        document.getElementById('tip7').textContent = originalTips.tip7;
+        document.getElementById('tip8').textContent = originalTips.tip8;
+        
+        // Remove Arabic class from all mental tips
+        const mentalTips = document.querySelectorAll('#mental-list li');
+        mentalTips.forEach((tip) => {
+          tip.className = '';
+        });
+      }
     }
   </script>
 </body>

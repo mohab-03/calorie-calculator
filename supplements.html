@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supplements Guide</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MFK8KTL6SS');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFK8KTL6SS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFK8KTL6SS');
+  </script>
 
   <style>
     :root {
@@ -89,6 +88,37 @@
       margin-right: auto;
       text-align: center;
     }
+    .arabic-text {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: right;
+      direction: rtl;
+      line-height: 2;
+    }
+    /* مربع سبورتر */
+    .sporter-box {
+      background: rgba(255, 204, 0, 0.1);
+      border: 1px solid #ffcc00;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 25px auto;
+      max-width: 800px;
+      color: #eee;
+      font-size: 1rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .sporter-box code {
+      background: #000;
+      color: #ffcc00;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .sporter-box a {
+      color: #00ffd5;
+      font-weight: bold;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -121,59 +151,107 @@
     </ul>
   </div>
 
- <footer>
-  Made by Mohab (
+  <!-- مربع سبورتر - يدعم الترجمة -->
+  <div class="section sporter-box" id="sporter-section">
+    <p id="sporter-text">
+      Want the best supplements? 💪<br>
+      Get <strong>10% OFF</strong> at <strong>Sporter</strong> with code: 
+      <code>SPR-MOHAB10</code><br>
+      <a href="https://www.sporter.com" target="_blank">Click here</a>
+    </p>
+  </div>
+
+  <footer>
+    Made by Mohab (
     <a href="#" onclick="openInstagram()" style="color: blue; text-decoration: underline;">@r4_ce</a>
-  )
-</footer>
+    )
+  </footer>
 
-<script>
-  function openInstagram() {
-    const appLink = "instagram://user?username=r4_ce";
-    const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
-
-    // يحاول يفتح التطبيق، ولو ما اشتغل يفتح الموقع بعد شويه
-    window.location = appLink;
-    setTimeout(() => {
-      window.location = webLink;
-    }, 1500); // 1.5 ثانية لو التطبيق مش موجود
-  }
-</script>
+  <script>
+    function openInstagram() {
+      const appLink = "instagram://user?username=r4_ce";
+      const webLink = "https://www.instagram.com/r4_ce?igsh=Z2x3NWJxOG52cjN2";
+      window.location = appLink;
+      setTimeout(() => {
+        window.location = webLink;
+      }, 1500);
+    }
+  </script>
 
   <script>
     let isArabic = false;
+
+    // حفظ النصوص الأصلية
+    const originalTitle = document.getElementById('main-title').textContent;
+    const originalBasicsTitle = document.getElementById('basics').querySelector('h2').textContent;
+    const originalOptionalTitle = document.getElementById('optional').querySelector('h2').textContent;
+    const originalBasicList = document.getElementById('basic-list').innerHTML;
+    const originalOptionalList = document.getElementById('optional-list').innerHTML;
+
+    // نصوص سبورتر
+    const sporterTexts = {
+      en: `Want the best supplements? 💪<br>
+           Get <strong>10% OFF</strong> at <strong>Sporter</strong> with code: 
+           <code>SPR-MOHAB10</code><br>
+           <a href="https://www.sporter.com" target="_blank">Click here</a>`,
+      ar: `عايز تاخد أفضل المكملات؟ 💪<br>
+           خد <strong>خصم 10%</strong> من <strong>سبورتر</strong> بالكود: 
+           <code>SPR-MOHAB10</code><br>
+           <a href="https://www.sporter.com" target="_blank">انقر هنا</a>`
+    };
+
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
     }
+
     function toggleLanguage() {
       isArabic = !isArabic;
-      document.getElementById("main-title").innerText = isArabic ? "شرح المكملات الغذائية" : "Supplements Explained";
-      document.getElementById("basics").querySelector("h2").innerText = isArabic ? "المكملات الأساسية 💊" : "Essential Supplements 💊";
-      document.getElementById("optional").querySelector("h2").innerText = isArabic ? "مكملات اختيارية لكنها مفيدة 🚀" : "Optional but Helpful 🚀";
 
-      const basics = [
-        isArabic ? "بروتين باودر: يساعدك في تلبية احتياجاتك اليومية من البروتين بسهولة." : "Protein Powder: Helps meet daily protein needs easily.",
-        isArabic ? "كرياتين مونوهيدرات: يزيد من القوة والكتلة العضلية. آمن ومدروس علميًا." : "Creatine Monohydrate: Boosts strength and muscle mass. Safe and well-researched.",
-        isArabic ? "أوميغا-3 (زيت السمك): يدعم القلب والمخ والمفاصل." : "Omega-3 (Fish Oil): Supports heart, brain, and joints.",
-        isArabic ? "فيتامينات متعددة: تغطي نقص الفيتامينات والمعادن اليومية." : "Multivitamin: Covers daily micronutrient gaps.",
-        isArabic ? "فيتامين D3: مهم جدًا إذا كنت لا تتعرض لأشعة الشمس." : "Vitamin D3: Especially important if you don’t get enough sun.",
-        isArabic ? "مغنيسيوم: يساعد في النوم والتعافي وإنتاج الطاقة." : "Magnesium: Helps with sleep, muscle recovery, and energy production.",
-        isArabic ? "زنك: يعزز المناعة وصحة الهرمونات." : "Zinc: Supports immunity and hormone health."
-      ];
+      if (isArabic) {
+        document.getElementById("main-title").innerText = "شرح المكملات الغذائية";
+        document.getElementById("basics").querySelector("h2").innerText = "المكملات الأساسية 💊";
+        document.getElementById("optional").querySelector("h2").innerText = "مكملات اختيارية لكنها مفيدة 🚀";
 
-      const optional = [
-        isArabic ? "مكمل قبل التمرين: يحسن التركيز والطاقة قبل التدريب." : "Pre-Workout: Enhances focus and energy before training.",
-        isArabic ? "BCAAs / EAAs: قد تساعد في التعافي خلال التمارين الشديدة (أقل أهمية إذا كان استهلاك البروتين كافي)." : "BCAAs / EAAs: May support recovery during intense sessions (less needed if total protein is high).",
-        isArabic ? "أشواغاندا: قد تقلل من التوتر وتحسن الأداء." : "Ashwagandha: May reduce stress and improve performance.",
-        isArabic ? "كولاجين: يدعم صحة المفاصل والبشرة والأوتار." : "Collagen: Supports joint, skin, and tendon health."
-      ];
+        const basics = [
+          "بروتين باودر: يساعدك في تلبية احتياجاتك اليومية من البروتين بسهولة.",
+          "كرياتين مونوهيدرات: يزيد من القوة والكتلة العضلية. آمن ومدروس علميًا.",
+          "أوميغا-3 (زيت السمك): يدعم القلب والمخ والمفاصل.",
+          "فيتامينات متعددة: تغطي نقص الفيتامينات والمعادن اليومية.",
+          "فيتامين D3: مهم جدًا إذا كنت لا تتعرض لأشعة الشمس.",
+          "مغنيسيوم: يساعد في النوم والتعافي وإنتاج الطاقة.",
+          "زنك: يعزز المناعة وصحة الهرمونات."
+        ];
 
-      const basicList = document.getElementById("basic-list");
-      const optionalList = document.getElementById("optional-list");
+        const optional = [
+          "مكمل قبل التمرين: يحسن التركيز والطاقة قبل التدريب.",
+          "BCAAs / EAAs: قد تساعد في التعافي خلال التمارين الشديدة (أقل أهمية إذا كان استهلاك البروتين كافي).",
+          "أشواغاندا: قد تقلل من التوتر وتحسن الأداء.",
+          "كولاجين: يدعم صحة المفاصل والبشرة والأوتار."
+        ];
 
-      basicList.innerHTML = basics.map(item => `<li>${item}</li>`).join('');
-      optionalList.innerHTML = optional.map(item => `<li>${item}</li>`).join('');
+        const basicList = document.getElementById("basic-list");
+        const optionalList = document.getElementById("optional-list");
+
+        basicList.innerHTML = basics.map(item => `<li class="arabic-text">${item}</li>`).join('');
+        optionalList.innerHTML = optional.map(item => `<li class="arabic-text">${item}</li>`).join('');
+
+        // تغيير نص سبورتر للعربي
+        document.getElementById("sporter-text").innerHTML = sporterTexts.ar;
+      } else {
+        // الرجوع للإنجليزي
+        document.getElementById("main-title").innerText = originalTitle;
+        document.getElementById("basics").querySelector("h2").innerText = originalBasicsTitle;
+        document.getElementById("optional").querySelector("h2").innerText = originalOptionalTitle;
+        document.getElementById("basic-list").innerHTML = originalBasicList;
+        document.getElementById("optional-list").innerHTML = originalOptionalList;
+        document.getElementById("sporter-text").innerHTML = sporterTexts.en;
+      }
     }
+
+    // تحميل النص الإنجليزي أولًا
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById("sporter-text").innerHTML = sporterTexts.en;
+    });
   </script>
 </body>
 </html>

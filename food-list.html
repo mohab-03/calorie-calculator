@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,6 +96,11 @@
       font-size: 14px;
       font-weight: bold;
     }
+    .arabic-text {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: right;
+      direction: rtl;
+    }
   </style>
 </head>
 <body>
@@ -160,6 +166,16 @@
 
   <script>
     let isArabic = false;
+    
+    // Store original English content
+    const originalTitle = document.getElementById('page-title').textContent;
+    const originalProteinTitle = document.getElementById('protein-title').textContent;
+    const originalCarbTitle = document.getElementById('carb-title').textContent;
+    const originalFatTitle = document.getElementById('fat-title').textContent;
+    
+    const originalProteinList = document.getElementById('protein-list').innerHTML;
+    const originalCarbList = document.getElementById('carb-list').innerHTML;
+    const originalFatList = document.getElementById('fat-list').innerHTML;
 
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
@@ -168,38 +184,50 @@
     function toggleLanguage() {
       isArabic = !isArabic;
 
-      document.getElementById('page-title').textContent = isArabic ? 'قائمة الأطعمة النهائية' : 'Ultimate Food List';
-      document.getElementById('protein-title').textContent = isArabic ? '🍗 مصادر البروتين' : '🍗 Protein Sources';
-      document.getElementById('carb-title').textContent = isArabic ? '🍚 مصادر الكربوهيدرات' : '🍚 Carbohydrate Sources';
-      document.getElementById('fat-title').textContent = isArabic ? '🥑 مصادر الدهون الصحية' : '🥑 Healthy Fat Sources';
+      if (isArabic) {
+        document.getElementById('page-title').textContent = 'قائمة الأطعمة النهائية';
+        document.getElementById('protein-title').textContent = '🍗 مصادر البروتين';
+        document.getElementById('carb-title').textContent = '🍚 مصادر الكربوهيدرات';
+        document.getElementById('fat-title').textContent = '🥑 مصادر الدهون الصحية';
 
-      const proteinItems = [
-        'صدور دجاج – 165 سعر / 31جم بروتين لكل 100جم',
-        'بيض – 155 سعر / 13جم بروتين لكل 100جم',
-        'تونة – 132 سعر / 28جم بروتين لكل 100جم',
-        'جبن قريش – 98 سعر / 11جم بروتين لكل 100جم',
-        'عدس – 116 سعر / 9جم بروتين لكل 100جم',
-        'زبادي يوناني – 59 سعر / 10جم بروتين لكل 100جم'
-      ];
-      const carbItems = [
-        'شوفان – 389 سعر / 66جم كربوهيدرات لكل 100جم',
-        'أرز بني – 123 سعر / 25جم كربوهيدرات لكل 100جم',
-        'بطاطا – 86 سعر / 20جم كربوهيدرات لكل 100جم',
-        'موز – 89 سعر / 23جم كربوهيدرات لكل 100جم',
-        'خبز حبوب كاملة – 247 سعر / 41جم كربوهيدرات لكل 100جم',
-        'حمص – 164 سعر / 27جم كربوهيدرات لكل 100جم'
-      ];
-      const fatItems = [
-        'أفوكادو – 160 سعر / 15جم دهون لكل 100جم',
-        'زيت زيتون – 884 سعر / 100جم دهون لكل 100جم',
-        'زبدة فول سوداني – 588 سعر / 50جم دهون لكل 100جم',
-        'لوز – 579 سعر / 49جم دهون لكل 100جم',
-        'بذور شيا – 486 سعر / 31جم دهون لكل 100جم'
-      ];
+        const proteinItems = [
+          'صدور دجاج – 165 سعر / 31جم بروتين لكل 100جم',
+          'بيض – 155 سعر / 13جم بروتين لكل 100جم',
+          'تونة – 132 سعر / 28جم بروتين لكل 100جم',
+          'جبن قريش – 98 سعر / 11جم بروتين لكل 100جم',
+          'عدس – 116 سعر / 9جم بروتين لكل 100جم',
+          'زبادي يوناني – 59 سعر / 10جم بروتين لكل 100جم'
+        ];
+        const carbItems = [
+          'شوفان – 389 سعر / 66جم كربوهيدرات لكل 100جم',
+          'أرز بني – 123 سعر / 25جم كربوهيدرات لكل 100جم',
+          'بطاطا – 86 سعر / 20جم كربوهيدرات لكل 100جم',
+          'موز – 89 سعر / 23جم كربوهيدرات لكل 100جم',
+          'خبز حبوب كاملة – 247 سعر / 41جم كربوهيدرات لكل 100جم',
+          'حمص – 164 سعر / 27جم كربوهيدرات لكل 100جم'
+        ];
+        const fatItems = [
+          'أفوكادو – 160 سعر / 15جم دهون لكل 100جم',
+          'زيت زيتون – 884 سعر / 100جم دهون لكل 100جم',
+          'زبدة فول سوداني – 588 سعر / 50جم دهون لكل 100جم',
+          'لوز – 579 سعر / 49جم دهون لكل 100جم',
+          'بذور شيا – 486 سعر / 31جم دهون لكل 100جم'
+        ];
 
-      document.getElementById('protein-list').innerHTML = proteinItems.map(item => `<li>${item}</li>`).join('');
-      document.getElementById('carb-list').innerHTML = carbItems.map(item => `<li>${item}</li>`).join('');
-      document.getElementById('fat-list').innerHTML = fatItems.map(item => `<li>${item}</li>`).join('');
+        document.getElementById('protein-list').innerHTML = proteinItems.map(item => `<li class="arabic-text">${item}</li>`).join('');
+        document.getElementById('carb-list').innerHTML = carbItems.map(item => `<li class="arabic-text">${item}</li>`).join('');
+        document.getElementById('fat-list').innerHTML = fatItems.map(item => `<li class="arabic-text">${item}</li>`).join('');
+      } else {
+        // Restore original English content
+        document.getElementById('page-title').textContent = originalTitle;
+        document.getElementById('protein-title').textContent = originalProteinTitle;
+        document.getElementById('carb-title').textContent = originalCarbTitle;
+        document.getElementById('fat-title').textContent = originalFatTitle;
+        
+        document.getElementById('protein-list').innerHTML = originalProteinList;
+        document.getElementById('carb-list').innerHTML = originalCarbList;
+        document.getElementById('fat-list').innerHTML = originalFatList;
+      }
     }
   </script>
 </body>
