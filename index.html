@@ -208,17 +208,31 @@
 
     /* مربع سبورتر */
     .sporter-box {
-      max-width: 520px;
-      margin: 30px auto;
-      padding: 16px;
       background: rgba(255, 204, 0, 0.1);
       border: 1px solid #ffcc00;
       border-radius: 12px;
-      font-size: 1.05rem;
-      line-height: 1.7;
+      padding: 16px;
+      margin: 30px auto;
+      max-width: 520px;
       color: #eee;
+      font-size: 1rem;
+      line-height: 1.7;
       text-align: center;
-      display: none;
+    }
+    .sporter-box code {
+      background: #000;
+      color: #ffcc00;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-weight: bold;
+      white-space: nowrap;
+      font-size: 1.1rem;
+      display: inline-block;
+    }
+    .sporter-box a {
+      color: #00ffd5;
+      font-weight: bold;
+      text-decoration: underline;
     }
 
     footer {
@@ -307,6 +321,14 @@
         font-size: 1rem;
         padding: 14px 20px;
       }
+      .sporter-box {
+        font-size: 0.95rem;
+        padding: 14px 12px;
+      }
+      .sporter-box code {
+        font-size: 1.05rem;
+        padding: 4px 6px;
+      }
       footer {
         font-size: 12px;
         margin-top: 35px;
@@ -349,15 +371,13 @@
     <a href="animal-educate.html" class="learn-btn" id="btn-learn-animal">Learn About Animal Nutrition</a>
   </div>
 
-  <!-- مربع سبورتر - يظهر في منتصف الصفحة -->
-  <div id="sporter-box" class="sporter-box">
-    <p style="margin: 0; font-size: 0.95rem;">
-      <span id="sporter-text">
-        Want the best supplements? 💪<br>
-        Get <strong>10% OFF</strong> at <strong>Sporter</strong> with code: 
-        <code style="background: #000; color: #ffcc00; padding: 5px 8px; border-radius: 6px; font-weight: bold;">SPR-MOHAB10</code><br>
-        <a href="https://www.sporter.com" target="_blank" style="color: #00ffd5; font-weight: bold; text-decoration: underline;">Click here</a>
-      </span>
+  <!-- مربع سبورتر - موحد مع باقي الصفحات -->
+  <div class="sporter-box" id="sporter-section">
+    <p id="sporter-text">
+      Want the best supplements? 💪<br>
+      Get <strong>10% OFF</strong> at <strong>Sporter</strong> with code: 
+      <code>SPR-MOHAB10</code><br>
+      <a href="https://www.sporter.com" target="_blank">Click here</a>
     </p>
   </div>
 
@@ -401,8 +421,8 @@
         learnAnimal: "Learn About Animal Nutrition",
         sporterText: `Want the best supplements? 💪<br>
                       Get <strong>10% OFF</strong> at <strong>Sporter</strong> with code: 
-                      <code style="background: #000; color: #ffcc00; padding: 5px 8px; border-radius: 6px; font-weight: bold;">SPR-MOHAB10</code><br>
-                      <a href="https://www.sporter.com" target="_blank" style="color: #00ffd5; font-weight: bold; text-decoration: underline;">Click here</a>`
+                      <code>SPR-MOHAB10</code><br>
+                      <a href="https://www.sporter.com" target="_blank">Click here</a>`
       },
       ar: {
         title: "حاسبة التغذية",
@@ -412,8 +432,8 @@
         learnAnimal: "تعلم عن تغذية الحيوان",
         sporterText: `عايز تاخد أفضل المكملات؟ 💪<br>
                       خد <strong>خصم 10%</strong> من <strong>سبورتر</strong> بالكود: 
-                      <code style="background: #000; color: #ffcc00; padding: 5px 8px; border-radius: 6px; font-weight: bold;">SPR-MOHAB10</code><br>
-                      <a href="https://www.sporter.com" target="_blank" style="color: #00ffd5; font-weight: bold; text-decoration: underline;">انقر هنا</a>`
+                      <code>SPR-MOHAB10</code><br>
+                      <a href="https://www.sporter.com" target="_blank">انقر هنا</a>`
       }
     };
 
@@ -430,12 +450,9 @@
       document.getElementById('sporter-text').innerHTML = t.sporterText;
       document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     }
-
-    // عرض مربع سبورتر بعد تحميل الصفحة
+    
+    // تفعيل التأثير المتحرك على الأزرار الرئيسية
     document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('sporter-box').style.display = 'block';
-      
-      // تفعيل التأثير المتحرك على الأزرار الرئيسية
       const buttons = document.querySelectorAll('.main-btn');
       buttons.forEach(btn => {
         btn.classList.add('active');

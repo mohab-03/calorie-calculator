@@ -113,11 +113,28 @@
       padding: 5px 8px;
       border-radius: 6px;
       font-weight: bold;
+      white-space: nowrap; /* ⚠️ منع الانقسام */
+      display: inline-block;
+      min-width: 100px;
     }
     .sporter-box a {
       color: #00ffd5;
       font-weight: bold;
       text-decoration: underline;
+    }
+    /* تحسين العرض في الموبايل */
+    @media (max-width: 480px) {
+      .sporter-box {
+        padding: 14px 12px;
+        font-size: 0.95rem;
+      }
+      .sporter-box p {
+        margin: 0;
+      }
+      .sporter-box code {
+        font-size: 1.05rem;
+        padding: 4px 6px;
+      }
     }
   </style>
 </head>
